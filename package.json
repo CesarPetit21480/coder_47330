@@ -8,6 +8,17 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "cesar",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CesarPetit21480/coder_47330.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CesarPetit21480/coder_47330/issues"
+  },
+  "homepage": "https://github.com/CesarPetit21480/coder_47330#readme",
+  "dependencies": {
+    "uuid": "^9.0.1"
+  }
 }
