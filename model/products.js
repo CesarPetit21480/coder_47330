@@ -1,28 +1,24 @@
-import { Product } from "./product";
+import { Product } from "./product.js";
 
 export class Products {
+  _listProduct = {};
 
-    _listProduct = {};
+  constructor() {
+    this._listProduct = {};
+  }
 
-    constructor (){
-        _listProduct = {}
-    
-    } 
+  addProduct = (_title, _description, _price, _thumbnail, _code, _stock,_id) => {
+    const product = new Product(
+      _title,
+      _description,
+      _price,
+      _thumbnail,
+      _code, 
+      _stock,
+      _id
+    );
+    const id = product.getId();
 
-    addProduct = (_title,_description,_price,_thumnail,_code,_stock)=>{
-        const product = new Product(_title,_description,_price,_thumnail,_stock);
-        
-    };
-
-
-    getCode = ()=>{
-
-        
-    }
-
-
-
-
-
+    this._listProduct[id] = product;
+  };
 }
-
