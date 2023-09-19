@@ -5,19 +5,7 @@
     price = "";
     thumbnail = "";   
     stock = 0;
-    id = 0;
-    #idCounter = 0;
-
-    #generateId() {
-      return ++this.#idCounter;
-    }
-
-    getId(){
-      return this.id;
-    }
-
-    // getProductbyId(_id){
-    // }    
+    id = "";
 
     constructor(_title,_description,_price,_thumbnail,_code,_stock,_id){
         this.title = _title;
@@ -26,6 +14,6 @@
         this.thumbnail = _thumbnail;
         this.code = _code;
         this.stock = _stock;
-        this.id = this.#generateId();
+        this.id = _id;
     }
   }
