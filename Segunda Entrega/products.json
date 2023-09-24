@@ -1,0 +1,20 @@
+[
+	{
+		"title": "Naranja",
+		"description": "naranja Deliciosa",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc123",
+		"stock": 25,
+		"id": 1
+	},
+	{
+		"title": "pera",
+		"description": "naranja Deliciosa",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc123",
+		"stock": 25,
+		"id": 2
+	}
+]
