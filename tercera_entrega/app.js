@@ -3,6 +3,7 @@ import { ProductsManager, Product } from "./model/productManager.js";
 
 const path = "./products.json";
 const app = express();
+app.use(express.urlencoded({extended: true}));
 const productManager = new ProductsManager(path);
 
 // creo Productos
