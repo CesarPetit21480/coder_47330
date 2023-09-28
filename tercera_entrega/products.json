@@ -1,0 +1,65 @@
+[
+	{
+		"title": "Naranja",
+		"description": "Naranja Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc121",
+		"stock": 25,
+		"id": 1
+	},
+	{
+		"title": "Mandarina",
+		"description": "Mandarina Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc122",
+		"stock": 40,
+		"id": 2
+	},
+	{
+		"title": "Manzana",
+		"description": "Manzana Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc123",
+		"stock": 80,
+		"id": 3
+	},
+	{
+		"title": "Kiwi",
+		"description": "Kiwi Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc124",
+		"stock": 10,
+		"id": 4
+	},
+	{
+		"title": "Pomelo",
+		"description": "Pomelo Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc125",
+		"stock": 20,
+		"id": 5
+	},
+	{
+		"title": "Pelon",
+		"description": "Pelon Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc126",
+		"stock": 50,
+		"id": 6
+	},
+	{
+		"title": "Uvas",
+		"description": "Uvas Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc127",
+		"stock": 150,
+		"id": 7
+	}
+]

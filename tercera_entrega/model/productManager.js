@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 
-class Product {
+export class Product {
   constructor(_title, _description, _price, _thumbnail, _code, _stock, _id) {
     this.title = _title;
     this.description = _description;
@@ -12,7 +12,7 @@ class Product {
   }
 }
 
-class ProductsManager {
+export class ProductsManager {
   constructor(_path) {
     this._listado = [];
     this.path = _path;
@@ -46,7 +46,7 @@ class ProductsManager {
   async getProductById(id) {
     try {
       const productos = await getJSONFromFile(this.path);
-      const producto = productos.find((p) => p.id === id);
+      const producto = productos.find((p) => p.id === parseInt(id));
       if (!producto) throw new Error(`id Inexistente`);
       return producto;
     } catch (error) {
@@ -113,25 +113,17 @@ const saveJSONToFile = async (path, data) => {
   }
 };
 
-const testCrear = async () => {
-  const path = "./products.json";
+ const testCrear = async (productoNuevo) => {
+ 
 
   try {
     // Genero Nuevo Productos
 
     const productManager = new ProductsManager(path);
-    const prroductoNuevo = new Product(
-      "Naranja",
-      "Naranja Rica",
-      2500,
-      "sin imagen",
-      "abc124",
-      25
-    );
-
+    
     // testing add products
 
-    await productManager.createProduct(prroductoNuevo);
+    await productManager.createProduct(productoNuevo);
 
     // Traigo todos los productos Archivo
 
@@ -231,8 +223,8 @@ const testMostrar = async () => {
   }
 };
 
-testCrear();
-testBuscar();
-testActualizar();
-testEliminar();
-testMostrar();
+// testCrear();
+// testBuscar();
+// testActualizar();
+// testEliminar();
+// testMostrar();
