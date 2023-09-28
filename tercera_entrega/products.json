@@ -61,5 +61,34 @@
 		"code": "abc127",
 		"stock": 150,
 		"id": 7
+	},
+	{
+		"title": "Durazno",
+		"description": "Duraznos Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc128",
+		"stock": 150,
+		"id": 8
+	},
+
+	{
+		"title": "Sandia",
+		"description": "Sandia Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc128",
+		"stock": 20,
+		"id": 9
+	},
+
+	{
+		"title": "Melon",
+		"description": "Melon Rica",
+		"price": 2500,
+		"thumbnail": "sin imagen",
+		"code": "abc129",
+		"stock": 20,
+		"id": 10
 	}
 ]
