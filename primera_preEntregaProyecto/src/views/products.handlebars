@@ -1,0 +1,44 @@
+<head>
+
+   <link rel="stylesheet" href="css/product.css" />
+
+</head>
+
+
+<div>
+  <h1> LISTA PRODUCTOS 🤓🤓🤓 </h1>
+
+
+  {{#if hasLimit }}
+
+  {{#each productsLimit}}
+    <div>
+      <article>
+        <p><strong>id: </strong>{{this.id}}</p>
+        <p><strong>Nombre: </strong>{{this.title}}</p>
+        <p><strong>Descripcion: </strong>{{this.description}}</p>
+        <p><strong>Precio: </strong>{{this.price}}</p>
+        <p><strong>thumbnail: </strong>{{this.thumbnail}}</p>
+        <p><strong>Codigo: </strong>{{this.code}}</p>
+        <p><strong>stock: </strong>{{this.stock}}</p>
+      </article>
+    </div>
+  {{/each}}
+ {{else}}
+
+ {{#each products}}
+    <div>
+      <article>
+        <p><strong>id: </strong>{{this.id}}</p>
+        <p><strong>Nombre: </strong>{{this.title}}</p>
+        <p><strong>Descripcion: </strong>{{this.description}}</p>
+        <p><strong>Precio: </strong>{{this.price}}</p>
+        <p><strong>thumbnail: </strong>{{this.thumbnail}}</p>
+        <p><strong>Codigo: </strong>{{this.code}}</p>
+        <p><strong>stock: </strong>{{this.stock}}</p>
+      </article>
+    </div>
+  {{/each}}
+   {{/if}}
+
+</div>

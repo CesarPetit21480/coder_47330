@@ -1,27 +1,32 @@
-import express, { json } from "express";
+import express from "express";
 import morgan from "morgan";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { __dirname } from './utils.js';
 import productRouter from "./routes/product.routes.js"
-
-
+import handlebars from 'express-handlebars';
 
 const app = express();
-const ___fileName = fileURLToPath(import.meta.url)
-const ___dirname = path.dirname(___fileName);
+
 const port = 8080;
 
 
 // middelware app
 app.use(morgan("dev"));
-app.use(json());
+app.use(express.json());
 app.use(express.urlencoded({extended:true}))
-app.use(express.static(path.join(___dirname,'../public')))
+app.use(express.static(path.join(__dirname,'../public')))
 
-app.use('/api',productRouter);
 
+// configurar plantilla
+app.engine('handlebars', handlebars.engine());
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'handlebars');
+app.use('/',productRouter);
   
-
-app.listen(port,()=>{
-    console.log(`server listen http://localhost:${port}`)
-})
+app.use((error, req, res, next) => {
+    const message = `😨 Ah ocurrido un error desconocido: ${error.message}`;
+    console.log(message);
+    res.status(500).json({ status: 'error', message });
+  });
+  
+  export default app;

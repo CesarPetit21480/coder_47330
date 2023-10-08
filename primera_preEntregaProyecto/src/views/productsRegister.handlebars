@@ -1,0 +1,46 @@
+
+
+<div>
+  <h1 style=margin: 0;>INGRESE UN NUEVO PRODUCTO 😊</h1>
+
+  <article>
+
+    <form action="/product" method="post">
+
+      <label>Nombre Producto</label>
+      <input required type="text" name="title" placeholder="Nombre Producto" />
+      <label>Descripcion</label>
+      <input
+        required
+        type="text"
+        name="description"
+        placeholder="Descripcion"
+      />
+      <label>Codigo</label>
+      <input required type="text" name="code" placeholder="codigo" />
+      <label>Precio</label>
+      <input required type="text" name="price" placeholder="Precio" />
+      <label>Estado</label>
+      <input
+        required
+        type="text"
+        name="status"
+        placeholder="Estado"
+        value="true"
+      />
+      <label>Stock</label>
+      <input required type="text" name="stock" placeholder="Stock" />
+      <label>Categoria</label>
+      <input required type="text" name="category" placeholder="Categoria" />
+
+      <label for="file">Imagen Producto
+        <input type="file" id="file" name="thumbnails" />
+      </label>
+
+      <input required type="submit" value="Enviar" />
+
+    </form>
+
+  </article>
+
+</div>
