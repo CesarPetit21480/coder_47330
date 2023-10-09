@@ -7,7 +7,7 @@ const cartManager = new CartManager(path);
 
 router.get("/cart", async (req, res) => {
   const carrito = await cartManager.get();
-  res.status(200).json(carrito);
+  res.render('cart',carrito)
 });
 
 
