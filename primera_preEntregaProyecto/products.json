@@ -1,16 +1,5 @@
 [
 	{
-		"id": "b1862dc6-81b9-4d4e-9450-d3396e33565f",
-		"thumbnails": [],
-		"title": "Manzana",
-		"description": "Manzana Deliciosa",
-		"code": "MMM-111",
-		"price": "2500",
-		"status": "true",
-		"stock": "85",
-		"category": "FRUTAS"
-	},
-	{
 		"id": "c0d57743-0feb-4586-8a21-bac1e4550c36",
 		"thumbnails": [],
 		"title": "Naranja",
@@ -96,5 +85,38 @@
 		"status": "true",
 		"stock": "100",
 		"category": "VERDURAS"
+	},
+	{
+		"id": "9bb595b0-d94f-45d9-acd4-c5124e7811d9",
+		"thumbnails": [],
+		"title": "Tomate",
+		"description": "Tomate perito gran oferta",
+		"code": "TOM-001",
+		"price": "1234",
+		"status": "true",
+		"stock": "24",
+		"category": "VERDURAS"
+	},
+	{
+		"id": "18bc5b09-dabc-4cc3-96ea-83c83eec78ac",
+		"thumbnails": [],
+		"title": "Lechuga Criolla",
+		"description": "Lechuga perito gran oferta",
+		"code": "LECH-001",
+		"price": "23434",
+		"status": "true",
+		"stock": "245",
+		"category": "VERDURAS"
+	},
+	{
+		"id": "fb43665d-3beb-450b-9e91-efbc234d40a4",
+		"thumbnails": [],
+		"title": "Manzana Roja",
+		"description": "Manzana Roja Moño Azul",
+		"code": "MAN-002",
+		"price": "3455",
+		"status": "true",
+		"stock": "234",
+		"category": "FRUTAS"
 	}
 ]

@@ -69,15 +69,29 @@ router.put("/product/update/id/:id", async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
-  console.log(body)
-
   const productoActualizado = await productsManager.updateProductById(id, body);
 
   res.json({
     status: "success",
-    message: "Usuario Actualizado Correctamente Correctamente 🚀",
+    message: "Producto Actualizado Correctamente Correctamente 🚀",
     payload: productoActualizado,
   });
+});
+
+router.delete("/product/delete/id/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const productoEliminar = await productsManager.deleteProductByid(id)
+    res.json({
+      status: "success",
+      message: "Producto Eliminado Correctamente Correctamente 🚀",
+      payload: productoEliminar,
+    });
+
+  } catch (error) {
+    res.status(500).json({ status: 'error', error });
+  }
 });
 
 export default router;
