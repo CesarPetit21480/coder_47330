@@ -19,22 +19,23 @@ export class ProductsManager {
   }
 
   async createProduct(newProduct) {
-    const { title, description, price, thumbnail, code, stock } = newProduct;
+    const { id,title, description,code, price, status, stock,category } = newProduct;
 
     if (
       title === undefined ||
       description === undefined ||
-      price === undefined ||
-      thumbnail === undefined ||
+      price === undefined ||    
       code === undefined ||
-      stock === undefined
+      stock === undefined,
+      status === undefined ||
+      category === undefined
     ) {
       throw new Error("Todos los campos son obligatorios.");
     }
 
     const products = await getJSONFromFile(this.path);
-    const _id = (await this.getUltimoId()) + 1;
-    newProduct = { ...newProduct, id: _id };
+    //const _id = (await this.getUltimoId()) + 1;
+    //newProduct = { ...newProduct, id: _id };
     products.push(newProduct);
     await saveJSONToFile(this.path, products);
   }
@@ -46,7 +47,7 @@ export class ProductsManager {
   async getProductById(id) {
     try {
       const productos = await getJSONFromFile(this.path);
-      const producto = productos.find((p) => p.id === parseInt(id));
+      const producto = productos.find((p) => p.id === (id));
       if (!producto) throw new Error(`id Inexistente`);
       return producto;
     } catch (error) {
