@@ -48,7 +48,7 @@ router.post("/product", (req, res) => {
 
   const newProduct = {
     id: uuidv4(),
-    thumbnails : [],
+    thumbnails: [],
     ...body,
   };
 
@@ -58,6 +58,25 @@ router.post("/product", (req, res) => {
     status: "success",
     message: "Usuario Creado Correctamente 🚀",
     payload: newProduct,
+  });
+});
+
+// router.get("/updateProduct", (req, res) => {
+//   res.render("productsUpdate");
+// });
+
+router.put("/product/update/id/:id", async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+
+  console.log(body)
+
+  const productoActualizado = await productsManager.updateProductById(id, body);
+
+  res.json({
+    status: "success",
+    message: "Usuario Actualizado Correctamente Correctamente 🚀",
+    payload: productoActualizado,
   });
 });
 

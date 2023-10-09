@@ -89,33 +89,10 @@
 	},
 	{
 		"id": "fb3f46b5-cf03-4571-84ad-b6daba2c060b",
-		"thumbnails": [],
-		"title": "CHOCLO",
-		"description": "CHOCLO AMARILLO",
-		"code": "CHO-111",
-		"price": "123",
-		"status": "true",
-		"stock": "100",
-		"category": "VERDURAS"
-	},
-	{
-		"id": "385b394a-ddaf-4e28-82fa-513be0066ef5",
-		"thumbnails": [],
-		"title": "MORRON",
-		"description": "MORRON AMARILLO",
+		"title": "ZAPALLO CABUTIA",
+		"description": "ZAPALLO AMARILLO",
 		"code": "MOA-111",
-		"price": "2500",
-		"status": "true",
-		"stock": "100",
-		"category": "VERDURAS"
-	},
-	{
-		"id": "9df7aca6-2ebe-4d0a-9af1-b6c31e7e96f4",
-		"thumbnails": [],
-		"title": "MORRON",
-		"description": "MORRON VERDE",
-		"code": "MOV-111",
-		"price": "2500",
+		"price": "3800",
 		"status": "true",
 		"stock": "100",
 		"category": "VERDURAS"

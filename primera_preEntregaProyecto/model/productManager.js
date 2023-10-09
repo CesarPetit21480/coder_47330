@@ -19,16 +19,16 @@ export class ProductsManager {
   }
 
   async createProduct(newProduct) {
-    const { id,title, description,code, price, status, stock,category } = newProduct;
+    const { id, title, description, code, price, status, stock, category } =
+      newProduct;
 
     if (
-      title === undefined ||
-      description === undefined ||
-      price === undefined ||    
-      code === undefined ||
-      stock === undefined,
-      status === undefined ||
-      category === undefined
+      (title === undefined ||
+        description === undefined ||
+        price === undefined ||
+        code === undefined ||
+        stock === undefined,
+      status === undefined || category === undefined)
     ) {
       throw new Error("Todos los campos son obligatorios.");
     }
@@ -47,7 +47,7 @@ export class ProductsManager {
   async getProductById(id) {
     try {
       const productos = await getJSONFromFile(this.path);
-      const producto = productos.find((p) => p.id === (id));
+      const producto = productos.find((p) => p.id === id);
       if (!producto) throw new Error(`id Inexistente`);
       return producto;
     } catch (error) {
@@ -58,7 +58,7 @@ export class ProductsManager {
   async updateProductById(id, productoActualizado) {
     const productos = await getJSONFromFile(this.path);
     let producto = productos.find((p) => p.id === id);
-    producto = { ...productoActualizado, id: producto.id };
+    producto = { id: producto.id, ...productoActualizado };
 
     const index = productos.findIndex((p) => p.id === id);
     if (index !== -1) {
@@ -82,7 +82,7 @@ export class ProductsManager {
 
   async getUltimoId() {
     const productos = await getJSONFromFile(this.path);
-   
+
     if (productos.length === 0) return 0;
 
     const ultimoRegistro = productos.length - 1;
@@ -114,14 +114,12 @@ const saveJSONToFile = async (path, data) => {
   }
 };
 
- const testCrear = async (productoNuevo) => {
- 
-
+const testCrear = async (productoNuevo) => {
   try {
     // Genero Nuevo Productos
 
     const productManager = new ProductsManager(path);
-    
+
     // testing add products
 
     await productManager.createProduct(productoNuevo);
