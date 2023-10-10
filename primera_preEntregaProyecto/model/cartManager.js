@@ -10,11 +10,13 @@ export class CartManager {
   }
 
   async createCart(newCart) {
-    
-    const { id } = newCart;
+    const { id, productos } = newCart;
+    const existenDuplicados = await tieneDuplicados(productos); 
 
-    if (id === undefined) {
-      throw new Error("Todos los campos son obligatorios.");
+    if (id === undefined || existenDuplicados) {
+      throw new Error(
+        "Todos los campos son obligatorios. o existen productos repetidos"
+      );
     }
     const carts = await getJSONFromFile(this.path);
     carts.push(newCart);
@@ -65,7 +67,20 @@ export class CartManager {
   }
 }
 
-const getJSONFromFile = async (path) => {
+const tieneDuplicados = async(arr) => {
+  const valoresUnicos = new Set();
+
+  for (const objeto of arr) {
+    if (valoresUnicos.has(objeto.id)) {
+      return true;
+    }
+    valoresUnicos.add(objeto.id);
+  }
+
+  return false;
+};
+
+const getJSONFromFile = async (path) => { 
   try {
     await fs.access(path);
   } catch (error) {

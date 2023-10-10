@@ -66,19 +66,20 @@ router.post("/cart/create", async (req, res) => {
       payload: nuevoCarrito,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
-      message: `Error en la operacion 😫`,
+      message: `Error en la operacion 😫 ${error}`,
+      
     });
   }
 });
 
-router.post('/cart/add/cid/:cid/pid/:pid', async (req, res) => {
-
+router.post("/cart/add/cid/:cid/pid/:pid", async (req, res) => {
   console.log("entre");
   const { cid, pid } = req.params;
   const body = req.body;
 
-  const {quantity} = body;
+  const { quantity } = body;
 
   const carrito = await cartManager.updateCarrito(cid, pid, quantity);
 
