@@ -25,7 +25,6 @@ router.get("/products", async (req, res) => {
 
 router.get("/products/id/:id", async (req, res) => {
   const { id } = req.params;
-
   const products = [];
 
   try {

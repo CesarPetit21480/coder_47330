@@ -3,7 +3,6 @@ import { Router } from "express";
 import { ProductsManager } from "../../model/productManager.js";
 import { v4 as uuidv4 } from "uuid";
 
-
 const router = Router();
 const pathCart = "./carts.json";
 const pathProd = "./products.json";
@@ -13,12 +12,24 @@ const listProductosCarrito = [];
 
 router.get("/cart", async (req, res) => {
   const carrito = await cartManager.get();
-  res.render("cart", carrito);
+  console.log(carrito);
+  res.render("cart", { carrito });
 });
 
-router.get("/cart", async (req, res) => {
-  const carrito = await cartManager.get();
-  res.render("cart", carrito);
+router.get("/cart/id/:id", async (req, res) => {
+  const { id } = req.params;
+  const carrito = [];
+  const carritoById = await cartManager.getCartById(id);
+  carrito.push(carritoById);
+
+  if (!carritoById) {
+    res.status(500).json({
+      message: `No existe el id de Carrito`,
+      payload: id,
+    });
+  }
+
+  res.render("cart", { carrito });
 });
 
 router.post("/cart/create", async (req, res) => {
@@ -53,13 +64,35 @@ router.post("/cart/create", async (req, res) => {
       status: "success",
       message: "Carrito Generado Correctamente Correctamente 🚀",
       payload: nuevoCarrito,
-    }); 
+    });
   } catch (error) {
-
     res.status(500).json({
-      message: `Error en la operacion 😫`,     
+      message: `Error en la operacion 😫`,
     });
   }
+});
+
+router.post('/cart/add/cid/:cid/pid/:pid', async (req, res) => {
+
+  console.log("entre");
+  const { cid, pid } = req.params;
+  const body = req.body;
+
+  const {quantity} = body;
+
+  const carrito = await cartManager.updateCarrito(cid, pid, quantity);
+
+  if (!carrito)
+    res.status(500).json({
+      message: `Id Carrito Inexistente`,
+      payload: `id Carrito ${cid}`,
+    });
+
+  res.json({
+    status: "success",
+    message: "Producto Actualizado Correctamente Correctamente en Carrito 🚀",
+    payload: carrito,
+  });
 });
 
 export default router;

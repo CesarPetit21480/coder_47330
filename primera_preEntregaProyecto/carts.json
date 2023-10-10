@@ -4,7 +4,7 @@
 		"productos": [
 			{
 				"id": "18bc5b09-dabc-4cc3-96ea-83c83eec78ac",
-				"quantity": 100
+				"quantity": 300
 			},
 			{
 				"id": "fb43665d-3beb-450b-9e91-efbc234d40a4",
@@ -13,6 +13,14 @@
 			{
 				"id": "9bb595b0-d94f-45d9-acd4-c5124e7811d9",
 				"quantity": 300
+			},
+			{
+				"id": "25",
+				"quantity": 300
+			},
+			{
+				"id": "18bc5b09-dabc-4cc3-96ea-83c83eecCESAR",
+				"quantity": 200
 			}
 		]
 	},
@@ -47,6 +55,23 @@
 			{
 				"id": "9bb595b0-d94f-45d9-acd4-c5124e7811d9",
 				"quantity": 300
+			}
+		]
+	},
+	{
+		"id": "ceb1b3b2-899d-45bb-b738-a076fbdddc6e",
+		"producto": [
+			{
+				"id": "c0d57743-0feb-4586-8a21-bac1e4550c36",
+				"quantity": 150
+			},
+			{
+				"id": "21514e21-7a09-4370-9dac-50b544cc5357",
+				"quantity": 25
+			},
+			{
+				"id": "200fb31d-20b3-4c55-8d6e-76218b439324",
+				"quantity": 30
 			}
 		]
 	}
