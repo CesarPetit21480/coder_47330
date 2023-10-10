@@ -44,15 +44,13 @@ export class ProductsManager {
     return getJSONFromFile(this.path);
   }
 
-  async getProductById(id) {
-    try {
+  async getProductById(id) {    
       const productos = await getJSONFromFile(this.path);
-      const producto = productos.find((p) => p.id === id);
-      if (!producto) throw new Error(`id Inexistente`);
+      const producto = productos.find((p) => p.id === id);  
+      if (!producto)
+        return undefined;
       return producto;
-    } catch (error) {
-      throw new Error(`No de Pudo Procesar la Solicitud ${error} `);
-    }
+   
   }
 
   async updateProductById(id, productoActualizado) {
