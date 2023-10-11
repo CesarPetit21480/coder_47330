@@ -12,7 +12,6 @@ const listProductosCarrito = [];
 
 router.get("/cart", async (req, res) => {
   const carrito = await cartManager.get();
-  console.log(carrito);
   res.render("cart", { carrito });
 });
 
