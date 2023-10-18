@@ -1,0 +1,78 @@
+[
+	{
+		"id": "a2447d38-6107-4678-891c-c26ea910bad7",
+		"thumbnails": [],
+		"title": "PAPA",
+		"description": "papa NEGRA",
+		"code": "PNO-111",
+		"price": "23",
+		"status": "true",
+		"stock": "100",
+		"category": "VERDURAS"
+	},
+	{
+		"id": "57863ac3-1c2a-4c54-9780-4074c112e64a",
+		"thumbnails": [],
+		"title": "BATATA",
+		"description": "BATATA DULCE",
+		"code": "BAT-111",
+		"price": "23",
+		"status": "true",
+		"stock": "100",
+		"category": "VERDURAS"
+	},
+	{
+		"id": "fb3f46b5-cf03-4571-84ad-b6daba2c060b",
+		"title": "ZAPALLO CABUTIA",
+		"description": "ZAPALLO AMARILLO",
+		"code": "MOA-111",
+		"price": "3800",
+		"status": "true",
+		"stock": "100",
+		"category": "VERDURAS"
+	},
+	{
+		"id": "9bb595b0-d94f-45d9-acd4-c5124e7811d9",
+		"thumbnails": [],
+		"title": "Tomate",
+		"description": "Tomate perito gran oferta",
+		"code": "TOM-001",
+		"price": "1234",
+		"status": "true",
+		"stock": "24",
+		"category": "VERDURAS"
+	},
+	{
+		"id": "18bc5b09-dabc-4cc3-96ea-83c83eec78ac",
+		"thumbnails": [],
+		"title": "Lechuga Criolla",
+		"description": "Lechuga perito gran oferta",
+		"code": "LECH-001",
+		"price": "23434",
+		"status": "true",
+		"stock": "245",
+		"category": "VERDURAS"
+	},
+	{
+		"id": "fb43665d-3beb-450b-9e91-efbc234d40a4",
+		"thumbnails": [],
+		"title": "Manzana Roja",
+		"description": "Manzana Roja Moño Azul",
+		"code": "MAN-002",
+		"price": "3455",
+		"status": "true",
+		"stock": "234",
+		"category": "FRUTAS"
+	},
+	{
+		"title": "manzana",
+		"description": "Mansana Verde para tortas",
+		"price": "2500",
+		"thumbnails": [],
+		"code": "maz-5555",
+		"stock": "25",
+		"status": true,
+		"category": "FRUTAS",
+		"id": "9ce1c572-6540-4d71-b522-7ec2e1855825"
+	}
+]
