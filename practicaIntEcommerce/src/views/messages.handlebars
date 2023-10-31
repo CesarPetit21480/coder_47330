@@ -1,0 +1,20 @@
+<div>
+  <h1>MESSAGE</h1>
+
+    <form action="/api/message" method="POST">
+       <input type="text" placeholder="Escribe tu Correo" name="user" required>
+    <input type="text"  placeholder="Escribe tu mensaje" name="mesagge" required>
+    <input type="submit" value="Enviar 📨">
+  </form>
+  
+  {{#each msg}}
+  <div>
+    <article>
+      <p><strong>user: </strong>{{this.user}}</p>
+      <p><strong>message: </strong>{{this.mesagge}}</p>    
+    </article>
+  </div>
+  {{/each}}
+
+</div>
+
