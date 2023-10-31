@@ -1,16 +1,5 @@
 [
 	{
-		"id": "a2447d38-6107-4678-891c-c26ea910bad7",
-		"thumbnails": [],
-		"title": "PAPA",
-		"description": "papa NEGRA",
-		"code": "PNO-111",
-		"price": "23",
-		"status": "true",
-		"stock": "100",
-		"category": "VERDURAS"
-	},
-	{
 		"id": "57863ac3-1c2a-4c54-9780-4074c112e64a",
 		"thumbnails": [],
 		"title": "BATATA",
@@ -74,5 +63,16 @@
 		"status": true,
 		"category": "FRUTAS",
 		"id": "9ce1c572-6540-4d71-b522-7ec2e1855825"
+	},
+	{
+		"title": "Morron Amarillo",
+		"description": "Morron amarillo ideal para salsas",
+		"price": "1500",
+		"thumbnails": [],
+		"code": "MA-888",
+		"stock": "200",
+		"status": true,
+		"category": "VERDURAS",
+		"id": "c06af309-9c5f-4871-a92a-3dff0fba810d"
 	}
 ]

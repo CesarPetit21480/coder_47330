@@ -1,68 +1,48 @@
 <div>
 
   <h2 class="text-center">INGRESAR PRODUCTOS 📨</h2>
- <hr>
+  <hr>
 
   <form id="form-product">
-    <input
-      type="text"
-      id="form-tittle"
-      placeholder=" Ingrese Titulo"
-      required
-    />
-    <input
-      type="text"
-      id="form-description"
-      placeholder="Ingrese Descripcion"
-      required
-    />
+    <input type="text" id="form-tittle" placeholder=" Ingrese Titulo" required />
+    <input type="text" id="form-description" placeholder="Ingrese Descripcion" required />
     <input type="text" id="form-code" placeholder="Ingrese Codigo" required />
     <input type="text" id="form-price" placeholder="Ingrese Precio" required />
     <input type="text" id="form-stock" placeholder="Ingrese Stock" required />
-    <input
-      type="text"
-      id="form-category"
-      placeholder="Ingrese categoria"
-      required
-    />
+    <input type="text" id="form-category" placeholder="Ingrese categoria" required />
     <input class="bg-dark" type="submit" value="Enviar 📨" />
   </form>
 
   <h2 class="text-center">QUITAR PRODUCTOS 🗑️</h2>
- <hr>
+  <hr>
 
-   <form id="form-product-quitar">
+  <form id="form-product-quitar">
 
- <input
-      type="text"
-      id="id-product"
-      placeholder=" id Producto"
-      required
-    />
-       <input id="btn_quitar" class="bg-dark" type="button" value="Quitar 🗑️" />
+    <input type="text" id="id-product" placeholder=" id Producto" required />
+    <input id="btn_quitar" class="bg-dark" type="button" value="Quitar 🗑️" />
 
-   </form>
+  </form>
 
   <div class="d-flex justify-content-between flex-wrap align-content-center ">
 
-  {{#each products}}
+    {{#each products}}
 
-        <div class="card text-center text-white bg-dark bg-gradient cardStyle ">
-          <div class="card-header">
-             {{this.id}}
-           </div>
-      <div class="card-body">
-          <h5 class="card-title">Stock  {{this.title}}</h5>
-        <h5 class="card-title">Stock {{this.stock}}</h5>
-         <h5 class="card-title"> Price {{this.price}}</h5>
-         <p class="card-text text-warning">{{this.description}}</p>  
-       </div>
-     <div class="card-footer text-info">
-       {{this.category}}
-     </div>
+    <div class="card text-center text-white bg-dark bg-gradient cardStyle ">
+      <div class="card-header me-2">
+        {{this.id}}
       </div>
+      <div class="card-body">
+        <h5 class="card-title">Stock {{this.title}}</h5>
+        <h5 class="card-title">Stock {{this.stock}}</h5>
+        <h5 class="card-title"> Price {{this.price}}</h5>
+        <p class="card-text text-warning">{{this.description}}</p>
+      </div>
+      <div class="card-footer text-info">
+        {{this.category}}
+      </div>
+    </div>
 
-  {{/each}}
+    {{/each}}
 
 
   </div>

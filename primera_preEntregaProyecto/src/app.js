@@ -25,10 +25,10 @@ app.set('view engine', 'handlebars');
 app.use('/api',productRouter);
 app.use('/api',cartRouter);
   
-app.use((error, req, res, next) => {
-    const message = `😨 Ah ocurrido un error desconocido: ${error.message}`;
-    console.log(message);
-    res.status(500).json({ status: 'error', message });
-  });
+// app.use((error, req, res, next) => {
+//     const message = `😨 Ah ocurrido un error desconocido: ${error.message}`;
+//     console.log(message);
+//     res.status(500).json({ status: 'error', message });
+//   });
   
   export default app;
