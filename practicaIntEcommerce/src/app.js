@@ -2,7 +2,8 @@ import express from 'express';
 import handlebars from 'express-handlebars';
 import { __dirname } from './utils.js';
 import  ProductRouter  from './routers/api/products.router.js';
-import messageRouterView from './routers/views/message.router.js';
+import messageViewRouter from './routers/views/message.router.js';
+import CartRoutes from './routers/api/cart.router.js';
 import path from 'path'
 import morgan from 'morgan';
 
@@ -20,9 +21,9 @@ app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'handlebars');
 
 // router
-
 app.use('/api', ProductRouter);
-app.use('/api', messageRouterView);
+app.use('/api', messageViewRouter);
+app.use('/api', CartRoutes);
 
 
 

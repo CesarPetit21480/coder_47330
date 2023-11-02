@@ -1,20 +1,24 @@
 <div>
-  <h1>MESSAGE</h1>
+  <h1>MENSAJES DESDE BASE</h1>
 
-    <form action="/api/message" method="POST">
+    <form method="POST">
        <input type="text" placeholder="Escribe tu Correo" name="user" required>
-    <input type="text"  placeholder="Escribe tu mensaje" name="mesagge" required>
-    <input type="submit" value="Enviar 📨">
+    <input type="text"  placeholder="Escribe tu mensaje" name="message" required>
+    <input id="enviar" type="submit" value="Enviar 📨">
   </form>
   
   {{#each msg}}
   <div>
     <article>
       <p><strong>user: </strong>{{this.user}}</p>
-      <p><strong>message: </strong>{{this.mesagge}}</p>    
+      <p><strong>message: </strong>{{this.message}}</p>    
     </article>
   </div>
   {{/each}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="/js/index.js"></script>
+ 
 
 </div>
+
 

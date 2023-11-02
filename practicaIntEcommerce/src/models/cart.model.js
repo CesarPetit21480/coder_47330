@@ -1,17 +1,19 @@
 import mongoose, { Schema } from "mongoose";
 
 
-const Product = new Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    price: { type: Number, required: true },
-    code: { type: String, required: true },
-    stock: { type: String, required: true },
-    category: { type: String, required: true },
+const ProductsItemSchema = new mongoose.Schema({
+  course: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
 }, { _id: false });
 
+
 const cartSchema = new mongoose.Schema({
-    productos: [{ type: Product, required: true }]
+  fecha: { type: String, required: true },
+  products: { type: [ProductsItemSchema], default: [] }
 }, { timestamps: true });
+
+
+cartSchema.pre('find', function () {
+  this.populate('products.product');
+});
 
 export default mongoose.model("Carts", cartSchema);
