@@ -17,8 +17,10 @@ export default class CartManager {
 
     static async create(data) {    
 
+        console.log(data);
+
         const message = await cartModel.create(data);
-        console.log('Cart  creado correctamente 🚀🚀');
+        console.log('Cart creado correctamente 🚀🚀');
         return message;
     }  
 

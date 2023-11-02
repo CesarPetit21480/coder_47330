@@ -1,12 +1,12 @@
 <div>
     <h1>🛒 CARRITO DE COMPRAS 🛒</h1>
     {{#each carrito}}
-    <p><strong>numero carrito: </strong>{{this.id}}</p>
+    <p><strong>numero carrito: </strong>{{this._id}}</p>
     <div style="border: solid 1px; margin: 2px; padding: 20px">
-        {{#each this.productos}}
+        {{#each this.products}}
         <div style="background-color: rgb(159, 240, 163);  padding-left:10px">
-            <p><strong>id Producto: </strong>{{this.id}}</p>
-            <p><strong>Cantidad Pedido: </strong>{{this.quantity}}</p>
+            <p><strong>id Producto: </strong>{{this.product._id}}</p>
+            <p><strong>Cantidad Pedido: </strong>{{this.product.stock}}</p>
         </div>
         {{/each}}
     </div>

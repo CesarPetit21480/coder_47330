@@ -8,7 +8,11 @@ const listProductosCarrito = [];
 
 router.get("/cart", async (req, res) => {
     const carrito = await CartManager.get();
-    res.render("cart", { carrito });
+ 
+
+    res.render('cart', { carrito: carrito.map(s => s.toJSON()) });   
+
+    
 });
 
 router.get("/cart/id/:id", async (req, res) => {
@@ -23,6 +27,8 @@ router.get("/cart/id/:id", async (req, res) => {
             payload: id,
         });
     }
+
+
 
     res.render("cart", { carrito });
 });
@@ -53,8 +59,12 @@ router.post("/cart/create", async (req, res) => {
         //     payload: productosNoEncontrados,
         //   });
         // }
+
+
+
         const nuevoCarrito = {
-            fecha: '2023-11-02'
+            fecha: '2023-11-02',
+            products : [{product:_id}]
            
         };
         CartManager.create(nuevoCarrito)

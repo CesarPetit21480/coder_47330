@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 
 const ProductsItemSchema = new mongoose.Schema({
-  course: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+  product: { type: mongoose.Schema.Types.ObjectId, ref: 'products' },
 }, { _id: false });
 
 
