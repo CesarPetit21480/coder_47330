@@ -1,0 +1,164 @@
+[
+    {
+        "title": "Manzana",
+        "description": "Manzana fresca y jugosa",
+        "price": 1.0,
+        "code": "FRUTA001",
+        "stock": 100,
+        "category": "Frutas",
+        "thumbnails": ["manzana.jpg"]
+    },
+    {
+        "title": "Banana",
+        "description": "Banana madura y deliciosa",
+        "price": 0.5,
+        "code": "FRUTA002",
+        "stock": 150,
+        "category": "Frutas",
+        "thumbnails": ["banana.jpg"]
+    },
+    {
+        "title": "Zanahoria",
+        "description": "Zanahoria fresca y crujiente",
+        "price": 0.75,
+        "code": "VERDURA001",
+        "stock": 75,
+        "category": "Verduras",
+        "thumbnails": ["zanahoria.jpg"]
+    },
+    {
+        "title": "Uva",
+        "description": "Uvas frescas y jugosas",
+        "price": 1.2,
+        "code": "FRUTA003",
+        "stock": 80,
+        "category": "Frutas",
+        "thumbnails": ["uva.jpg"]
+    },
+    {
+        "title": "Pepino",
+        "description": "Pepino crujiente y refrescante",
+        "price": 0.9,
+        "code": "VERDURA002",
+        "stock": 60,
+        "category": "Verduras",
+        "thumbnails": ["pepino.jpg"]
+    },
+    {
+        "title": "Naranja",
+        "description": "Naranja jugosa y llena de vitamina C",
+        "price": 1.1,
+        "code": "FRUTA004",
+        "stock": 120,
+        "category": "Frutas",
+        "thumbnails": ["naranja.jpg"]
+    },
+    {
+        "title": "Calabacín",
+        "description": "Calabacín fresco y versátil",
+        "price": 0.8,
+        "code": "VERDURA003",
+        "stock": 70,
+        "category": "Verduras",
+        "thumbnails": ["calabacin.jpg"]
+    },
+    {
+        "title": "Pera",
+        "description": "Pera jugosa y dulce",
+        "price": 1.0,
+        "code": "FRUTA005",
+        "stock": 90,
+        "category": "Frutas",
+        "thumbnails": ["pera.jpg"]
+    },
+    {
+        "title": "Espinaca",
+        "description": "Espinacas frescas y ricas en nutrientes",
+        "price": 0.7,
+        "code": "VERDURA004",
+        "stock": 80,
+        "category": "Verduras",
+        "thumbnails": ["espinaca.jpg"]
+    },
+    {
+        "title": "Kiwi",
+        "description": "Kiwi tropical y saludable",
+        "price": 1.2,
+        "code": "FRUTA006",
+        "stock": 60,
+        "category": "Frutas",
+        "thumbnails": ["kiwi.jpg"]
+    },
+    {
+        "title": "Pimiento",
+        "description": "Pimiento fresco y sabroso",
+        "price": 0.9,
+        "code": "VERDURA005",
+        "stock": 70,
+        "category": "Verduras",
+        "thumbnails": ["pimiento.jpg"]
+    },
+    {
+        "title": "Mango",
+        "description": "Mango maduro y exótico",
+        "price": 1.3,
+        "code": "FRUTA007",
+        "stock": 50,
+        "category": "Frutas",
+        "thumbnails": ["mango.jpg"]
+    },
+    {
+        "title": "Tomate",
+        "description": "Tomate fresco y versátil",
+        "price": 0.7,
+        "code": "VERDURA006",
+        "stock": 90,
+        "category": "Verduras",
+        "thumbnails": ["tomate.jpg"]
+    },
+    {
+        "title": "Papaya",
+        "description": "Papaya fresca y tropical",
+        "price": 1.5,
+        "code": "FRUTA008",
+        "stock": 40,
+        "category": "Frutas",
+        "thumbnails": ["papaya.jpg"]
+    },
+    {
+        "title": "Brócoli",
+        "description": "Brócoli fresco y saludable",
+        "price": 0.8,
+        "code": "VERDURA007",
+        "stock": 60,
+        "category": "Verduras",
+        "thumbnails": ["brocoli.jpg"]
+    },
+    {
+        "title": "Sandía",
+        "description": "Sandía refrescante y jugosa",
+        "price": 1.0,
+        "code": "FRUTA009",
+        "stock": 70,
+        "category": "Frutas",
+        "thumbnails": ["sandia.jpg"]
+    },
+    {
+        "title": "Cebolla",
+        "description": "Cebolla fresca y aromática",
+        "price": 0.6,
+        "code": "VERDURA008",
+        "stock": 80,
+        "category": "Verduras",
+        "thumbnails": ["cebolla.jpg"]
+    },
+    {
+        "title": "Fresa",
+        "description": "Fresas frescas y dulces",
+        "price": 1.2,
+        "code": "FRUTA010",
+        "stock": 100,
+        "category": "Frutas",
+        "thumbnails": ["fresa.jpg"]
+    }
+]
