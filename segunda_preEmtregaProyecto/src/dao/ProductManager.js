@@ -7,12 +7,20 @@ export default class ProductManager {
 
     static async get(query = {}) {
 
-        const { limit, page, sort, criterio } = query
+        const { limit, page, sort, field, valueField } = query;
+        let value = (field === 'price' || field === 'stock') ? Number(valueField) : valueField;
+        const queryObject = {};
+        queryObject[field] = value;
 
-        const result = await ProductModel.find({})
-        .limit(limit)
-        .skip((page - 1) * limit)
-        .sort({price : sort})  
+
+
+        console.log(queryObject);
+
+
+        const result = await ProductModel.find(queryObject)
+            .limit(limit)
+            .skip((page - 1) * limit)
+            .sort({ price: sort })
 
         return result;
     }

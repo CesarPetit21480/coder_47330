@@ -3,13 +3,14 @@ import ProductManager from '../../dao/ProductManager.js';
 const router = Router();
 
 router.get('/products', async (req, res) => {
-  const { page = 1, limit = 10 , sort = 1 , criterio = {} } = req.query;
+  const { page = 1, limit = 10, sort = 1, field, valueField } = req.query;
 
   const query = {
     page,
     limit,
-    sort,
-    criterio,
+    sort,  
+    field,
+    valueField
   }
   const product = await ProductManager.get(query);
   res.status(200).json(product);
