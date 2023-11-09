@@ -35,6 +35,7 @@ router.get("/cart/id/:id", async (req, res) => {
 
 router.post("/cart/create", async (req, res) => {
     const { body } = req;
+    console.log(body);
 
     try {
         const { _id } = body;

@@ -3,12 +3,33 @@
     {{#each carrito}}
     <p><strong>numero carrito: </strong>{{this._id}}</p>
     <div style="border: solid 1px; margin: 2px; padding: 20px">
-        {{#each this.products}}
-        <div style="background-color: rgb(159, 240, 163);  padding-left:10px">
-            <p><strong>id Producto: </strong>{{this.product._id}}</p>
-            <p><strong>Cantidad Pedido: </strong>{{this.product.stock}}</p>
-        </div>
-        {{/each}}
+        <table role="grid">
+              <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Stock</th>             
+                </tr>
+            </thead>
+        
+        <tbody>
+            {{#each this.products}}              
+                <tr>
+                
+                    <td>{{this.product._id}}</td>
+                    <td>{{this.product.title}}</td>
+                    <td>{{this.product.description}}</td>
+                    <td>{{this.product.price}}</td>
+                    <td>{{this.product.category}}</td>
+                    <td>{{this.product.stock}}</td>
+                </tr>    
+          
+            {{/each}}
+    </tbody>
+          </table>
     </div>
 </div>
 <hr>

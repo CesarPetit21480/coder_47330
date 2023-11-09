@@ -8,12 +8,11 @@ const listProductosCarrito = [];
 
 router.get("/cart", async (req, res) => {
     const carrito = await CartManager.get();
- 
 
-    res.render('cart', { carrito: carrito.map(s => s.toJSON()) });   
-
-    
+    const carrMapping = carrito.map(s => s.toJSON());
+    res.render('cart', { carrito: carrito.map(s => s.toJSON()) });
 });
+
 
 router.get("/cart/id/:id", async (req, res) => {
     const { id } = req.params;
@@ -27,9 +26,6 @@ router.get("/cart/id/:id", async (req, res) => {
             payload: id,
         });
     }
-
-
-
     res.render("cart", { carrito });
 });
 
@@ -37,35 +33,12 @@ router.post("/cart/create", async (req, res) => {
     const { body } = req;
 
     try {
-        const { _id } = body;
-        // const productosNoEncontrados = [];
-        // const idProductos = [];    
-
-        // for (let i = 0; i < productosCarrito.length; i++) {
-        //   const productoEncontrado = await ProductsManager.getById(
-        //     productosCarrito[i].id
-        //   );
-
-        //   if (!productoEncontrado)
-        //     productosNoEncontrados.push(productosCarrito[i].id);
-        //   else{
-        //     idProductos.push(productosCarrito[i]._id)
-        //   }
-        // }
-
-        // if (productosNoEncontrados.length > 0) {
-        //   res.status(500).json({
-        //     message: `Los Productos no son parte del Stock`,
-        //     payload: productosNoEncontrados,
-        //   });
-        // }
-
-
+        const { productId } = body;
 
         const nuevoCarrito = {
-            fecha: '2023-11-02',
-            products : [{product:_id}]
-           
+            fecha: new Date(),
+            products: [{ product: productId }]
+
         };
         CartManager.create(nuevoCarrito)
 
@@ -83,14 +56,14 @@ router.post("/cart/create", async (req, res) => {
     }
 });
 
-router.post("/cart/add/cid/:cid/pid/:pid", async (req, res) => {
+router.put("/cart/update", async (req, res) => {
 
-    const { cid, pid } = req.params;
+    const { cid, pid } = req.query;
     const body = req.body;
 
     const { quantity } = body;
 
-    const carrito = await cartManager.updateCarrito(cid, pid, quantity);
+    const carrito = await CartManager.updateById(cid, pid);
 
     if (!carrito)
         res.status(500).json({
@@ -105,4 +78,24 @@ router.post("/cart/add/cid/:cid/pid/:pid", async (req, res) => {
     });
 });
 
+
+router.delete("/cart/:cid/product/:pid", async (req, res) => {
+
+
+    const { cid, pid } = req.params;
+    const carrito = await CartManager.deleteProductCartByid(cid, pid);
+
+    if (!carrito)
+        res.status(500).json({
+            message: `Id Carrito Inexistente`,
+            payload: `id Carrito ${cid}`,
+        });
+
+    res.json({
+        status: "success",
+        message: "Producto Borrado Correctamente Correctamente en Carrito 🚀",
+        payload: carrito,
+    });
+
+});
 export default router;

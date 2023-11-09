@@ -5,26 +5,20 @@ import { Exception } from '../utils.js';
 export default class ProductManager {
 
 
-    static async get(query = {}) {
+    static async get(opts = {}, criteria = {},) {   
 
-        const { limit, page, sort, field, valueField } = query;
-        let value = (field === 'price' || field === 'stock') ? Number(valueField) : valueField;
-        const queryObject = {};
-        queryObject[field] = value;
+        const result = await ProductModel.paginate(criteria, opts);
 
+        // console.log(queryObject);
 
 
-        console.log(queryObject);
-
-
-        const result = await ProductModel.find(queryObject)
-            .limit(limit)
-            .skip((page - 1) * limit)
-            .sort({ price: sort })
+        // const result = await ProductModel.find(queryObject)
+        //     .limit(limit)
+        //     .skip((page - 1) * limit)
+        //     .sort({ price: sort })
 
         return result;
     }
-
     static async getById(sid) {
         const product = await ProductModel.findById(sid);
         if (!product) {

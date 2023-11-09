@@ -15,23 +15,22 @@ export default class CartManager {
         return product;
     }
 
-    static async create(data) {    
-
-        console.log(data);
+    static async create(data) {
 
         const message = await cartModel.create(data);
         console.log('Cart creado correctamente 🚀🚀');
         return message;
-    }  
+    }
 
-    static async updateById(sid, data) {
-        const cart = cartModel.findById(sid);
+    static async updateById(sid, pid) {
+        const cart = await cartModel.findOne({ _id: sid });
         if (!cart) {
             console.error(`Couldn't find cart 😒`)
         }
-        const criteria = { _id: sid };
-        const operation = { $set: data }
-        await cartModel.updateOne(criteria, operation);
+        cart.products.push({ product: pid });
+        const result = await cartModel.updateOne({ _id: sid }, cart);
+        console.log('result', result);
+        return result;
     }
 
     static async deleteById(sid) {
@@ -42,6 +41,18 @@ export default class CartManager {
         const criteria = { _id: sid };
         await cartModel.deleteOne(criteria);
         console.log('Carrito eliminado correctamente 😑');
+    }
+
+
+    static async deleteProductCartByid(sid, pid) {
+        try {
+          const carritoActualizado = await cartModel.findByIdAndUpdate(sid, { $pull: { 'products': { product: pid } } })
+          return carritoActualizado;
+        } catch (error) {
+        
+            throw new Exception('no se pudo efectuar la operacion 😨', 404);
+        }
+        
     }
 
 
