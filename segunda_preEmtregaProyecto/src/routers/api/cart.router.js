@@ -10,6 +10,8 @@ router.get("/cart", async (req, res) => {
     const carrito = await CartManager.get();
 
     const carrMapping = carrito.map(s => s.toJSON());
+
+    console.log(carrMapping)
     res.render('cart', { carrito: carrito.map(s => s.toJSON()) });
 });
 

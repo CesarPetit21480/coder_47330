@@ -30,14 +30,14 @@ export default class CartManager {
 
         if (!quantity) {
             cart.products.push({ product: pid });
-            const result = await cartModel.updateOne({ _id: sid }, cart);
-            console.log('result', result);
+            const result = await cartModel.updateOne({ _id: sid }, cart);         
             return result;
         }
         else {
-            const product = cart.products.find(product => product.product.toString() === pid);
+            let product = cart.products.find(product => product.product.toString() === pid);
             if (!product) {
-                console.error(`Couldn't find products 😒`)
+                cart.products.push({ product: pid });
+                product = cart.products.find(product => product.product.toString() === pid);                          
             }
 
             product.quantity += quantity;
