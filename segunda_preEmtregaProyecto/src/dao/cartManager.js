@@ -22,15 +22,27 @@ export default class CartManager {
         return message;
     }
 
-    static async updateById(sid, pid) {
+    static async updateById(sid, pid, quantity) {
         const cart = await cartModel.findOne({ _id: sid });
         if (!cart) {
             console.error(`Couldn't find cart 😒`)
         }
-        cart.products.push({ product: pid });
-        const result = await cartModel.updateOne({ _id: sid }, cart);
-        console.log('result', result);
-        return result;
+
+        if (!quantity) {
+            cart.products.push({ product: pid });
+            const result = await cartModel.updateOne({ _id: sid }, cart);
+            console.log('result', result);
+            return result;
+        }
+        else {
+            const product = cart.products.find(product => product.product.toString() === pid);
+            if (!product) {
+                console.error(`Couldn't find products 😒`)
+            }
+
+            product.quantity += quantity;
+            return cart.save();
+        }
     }
 
     static async deleteById(sid) {
@@ -46,14 +58,25 @@ export default class CartManager {
 
     static async deleteProductCartByid(sid, pid) {
         try {
-          const carritoActualizado = await cartModel.findByIdAndUpdate(sid, { $pull: { 'products': { product: pid } } })
-          return carritoActualizado;
+            const carritoActualizado = await cartModel.findByIdAndUpdate(sid, { $pull: { 'products': { product: pid } } })
+            return carritoActualizado;
         } catch (error) {
-        
+
             throw new Exception('no se pudo efectuar la operacion 😨', 404);
         }
-        
+
     }
+    static async deleteProductCart(sid) {
+        try {
+            const carrito = await cartModel.updateOne(
+                { _id: sid },
+                { $set: { products: [] } })
 
+                return carrito;
+        } catch (error) {
 
+            throw new Exception('no se pudo efectuar la operacion 😨', 404);
+        }
+
+    }
 }

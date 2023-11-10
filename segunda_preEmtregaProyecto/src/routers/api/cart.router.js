@@ -63,7 +63,7 @@ router.put("/cart/update", async (req, res) => {
 
     const { quantity } = body;
 
-    const carrito = await CartManager.updateById(cid, pid);
+    const carrito = await CartManager.updateById(cid, pid,quantity);
 
     if (!carrito)
         res.status(500).json({
@@ -98,4 +98,28 @@ router.delete("/cart/:cid/product/:pid", async (req, res) => {
     });
 
 });
+
+
+router.delete("/cart/:cid", async (req, res) => {
+
+
+    const { cid, pid } = req.params;
+    const carrito = await CartManager.deleteProductCart(cid);
+
+    if (!carrito)
+        res.status(500).json({
+            message: `Id Carrito Inexistente`,
+            payload: `id Carrito ${cid}`,
+        });
+
+    res.json({
+        status: "success",
+        message: "Productos Borrados Correctamente Correctamente en Carrito 🚀",
+        payload: carrito,
+    });
+
+});
+
+
+
 export default router;

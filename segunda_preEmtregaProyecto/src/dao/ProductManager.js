@@ -19,8 +19,8 @@ export default class ProductManager {
 
         return result;
     }
-    static async getById(sid) {
-        const product = await ProductModel.findById(sid);
+    static async getById(pid) {
+        const product = await ProductModel.findById(pid);
         if (!product) {
             console.error(`Couldn't find products 😒`)
         }
