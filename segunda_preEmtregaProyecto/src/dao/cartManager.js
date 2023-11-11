@@ -14,6 +14,25 @@ export default class CartManager {
         }
         return product;
     }
+    
+    static async getActive() {
+
+        const cart =  await cartModel.findOne({ status: true });
+        console.log(cart);
+
+        if (!cart) {
+          return 0;
+        }
+        return cart;
+    }
+    static async getById(sid) {
+        const product = await cartModel.findById(sid);
+        if (!product) {
+            console.error(`Couldn't find Cart 😒`)
+        }
+        return product;
+    }
+
 
     static async create(data) {
 
@@ -47,7 +66,7 @@ export default class CartManager {
 
     static async deleteById(sid) {
         const cart = await cartModel.findById(sid);
-        if (!product) {
+        if (!cart) {
             throw new Exception('No existe el Carrito 😨', 404);
         }
         const criteria = { _id: sid };

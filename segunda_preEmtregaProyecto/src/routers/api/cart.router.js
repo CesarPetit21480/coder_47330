@@ -8,12 +8,18 @@ const listProductosCarrito = [];
 
 router.get("/cart", async (req, res) => {
     const carrito = await CartManager.get();
-
     const carrMapping = carrito.map(s => s.toJSON());
 
     console.log(carrMapping)
     res.render('cart', { carrito: carrito.map(s => s.toJSON()) });
 });
+
+
+router.get("/cart/active", async (req, res) => {
+
+    const carrito = await CartManager.getActiveCart();
+    return carrito;
+})
 
 
 router.get("/cart/id/:id", async (req, res) => {
@@ -31,20 +37,69 @@ router.get("/cart/id/:id", async (req, res) => {
     res.render("cart", { carrito });
 });
 
+
+router.post("/cart/manejador", async (req, res) => {
+
+    try {
+        const carrito = await CartManager.getActive();
+        const carrMapping = (carrito) ? carrito.toJSON() : 0;
+
+
+        const { body } = req;
+        const { productId, cantidad } = body;
+        const quantity = Number(cantidad)
+        const pid = productId;
+
+        if (carrMapping !== 0) {
+
+            const cid = carrMapping._id
+            const carrito = await CartManager.updateById(cid, pid, quantity);
+            res.json({
+                status: "success",
+                message: "Producto Actualizado Correctamente Correctamente en Carrito 🚀",
+                payload: carrito,
+            });
+
+        }
+        else {
+
+            const nuevoCarrito = {
+                fecha: new Date(),
+                products: [{ product: productId, quantity: Number(cantidad) }]
+
+            };
+            CartManager.create(nuevoCarrito)
+
+            res.status(200).json({
+                status: "success",
+                message: "Carrito Generado Correctamente Correctamente 🚀",
+                payload: nuevoCarrito,
+            });
+
+        }
+
+    } catch (error) {
+        console.error(error);
+        console.error(error);
+        res.status(500).json({
+            message: `Error en la operacion 😫 ${error}`
+        });
+
+    }
+})
+
 router.post("/cart/create", async (req, res) => {
     const { body } = req;
 
     try {
-        const { productId } = body;
+        const { productId, cantidad } = body;
 
         const nuevoCarrito = {
             fecha: new Date(),
-            products: [{ product: productId }]
+            products: [{ product: productId, quantity: Number(cantidad) }]
 
         };
         CartManager.create(nuevoCarrito)
-
-        res.redirect('/products');
 
         res.status(200).json({
             status: "success",
@@ -67,7 +122,7 @@ router.put("/cart/update", async (req, res) => {
 
     const { quantity } = body;
 
-    const carrito = await CartManager.updateById(cid, pid,quantity);
+    const carrito = await CartManager.updateById(cid, pid, quantity);
 
     if (!carrito)
         res.status(500).json({

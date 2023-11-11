@@ -9,6 +9,7 @@ const ProductsItemSchema = new mongoose.Schema({
 
 const cartSchema = new mongoose.Schema({
   fecha: { type: String, required: true },
+  status : { type: Boolean, required: true, default: true},
   products: { type: [ProductsItemSchema], default: [] }
 }, { timestamps: true });
 
