@@ -1,0 +1,42 @@
+<div>
+
+<div>
+    <h1>PRODUCTOS EN STOCK 🍅🌿</h1>
+    </div>
+
+<table id="main" role="grid">
+
+  <tr>
+    <th>Nombre</th>
+    <th>Descripcion</th>
+    <th>Precio</th>
+    <th>Stock</th>
+    <th>Categoria</th>
+    <th>cantidad</th>
+    <th>ingresar</th>
+  </tr>
+  {{#each payload}}
+    <tr>
+      <td>{{this.title}}</td>
+      <td>{{this.description}}</td>
+      <td>{{this.price}}</td>
+      <td>{{this.Stock}}</td>
+      <td>{{this.category}}</td> 
+  
+      <form method="post" >
+        <td><input style="width: 100px;" type="text" placeholder="Ingrese Cantidad" name="cantidad" value="1" required></td>   
+        <input type="hidden" name="productId" value="{{this._id}}">  
+        <td><input id="enviar" type="image" name="enviar" src="/imagen/carrito.png" alt="carga"></td>   
+      </form>
+    </tr>
+  {{/each}}
+  
+</table>
+
+<p>Página actual: {{page}}</p>
+
+<a href="{{prevLink}}" role="button" {{#unless hasPrevPage}}disabled{{/unless}} >Anterior</a>
+<a href="{{nextLink}}" role="button" {{#unless hasNextPage}}disabled{{/unless}} >Siguiente</a>
+
+
+</div>

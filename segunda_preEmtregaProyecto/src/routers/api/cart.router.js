@@ -44,6 +44,8 @@ router.post("/cart/create", async (req, res) => {
         };
         CartManager.create(nuevoCarrito)
 
+        res.redirect('/products');
+
         res.status(200).json({
             status: "success",
             message: "Carrito Generado Correctamente Correctamente 🚀",

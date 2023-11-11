@@ -7,16 +7,7 @@ export default class ProductManager {
 
     static async get(opts = {}, criteria = {},) {   
 
-        const result = await ProductModel.paginate(criteria, opts);
-
-        // console.log(queryObject);
-
-
-        // const result = await ProductModel.find(queryObject)
-        //     .limit(limit)
-        //     .skip((page - 1) * limit)
-        //     .sort({ price: sort })
-
+        const result = await ProductModel.paginate(criteria, opts);      
         return result;
     }
     static async getById(pid) {

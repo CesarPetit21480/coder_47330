@@ -2,6 +2,7 @@ import express from 'express';
 import handlebars from 'express-handlebars';
 import { __dirname } from './utils.js';
 import  ProductRouter  from './routers/api/products.router.js';
+import ProductRouterView  from './routers/views/products.router.js';
 import messageViewRouter from './routers/views/message.router.js';
 import CartRoutes from './routers/api/cart.router.js';
 import path from 'path'
@@ -21,6 +22,7 @@ app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'handlebars');
 
 // router
+app.use('/', ProductRouterView);
 app.use('/api', ProductRouter);
 app.use('/api', messageViewRouter);
 app.use('/api', CartRoutes);

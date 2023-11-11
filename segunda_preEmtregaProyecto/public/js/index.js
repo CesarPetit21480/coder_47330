@@ -15,8 +15,56 @@
 //     });
 // });
 
-document.getElementById("enviar").addEventListener("click", function(event) {
+document.getElementById("enviarProducto").addEventListener("click", function(event) {
     event.preventDefault();
+
+    alert('enviar producto');
+  
+    // Obtener los valores de los campos de entrada
+    const id = document.querySelector('input[name="productId"]').value;
+    const cantidad = document.querySelector('input[name="cantidad"]').value;
+  
+    // Crear un objeto con los datos a enviar
+    const data = {
+      productId: id,
+      cantidad: cantidad
+    };
+  
+    // Realizar la solicitud POST utilizando fetch
+    fetch('/api/cart/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (response.ok) {
+  
+        Swal.fire({
+            text: "Producto Agregado 😊",
+            toast: true,
+            position: 'top-right'
+        });
+        setTimeout(function() {
+            location.reload(); // Recargar la página
+          }, 3000); 
+      } else {      
+        console.error("Error al enviar el mensaje");
+      }
+    })
+    .catch(error => {
+      console.error("Error en la solicitud:", error);
+    });   
+  });
+
+
+
+  document.getElementById("enviar").addEventListener("click", function(event) {
+    event.preventDefault();
+
+
+    alert('enviar producto');
   
     // Obtener los valores de los campos de entrada
     const user = document.querySelector('input[name="user"]').value;

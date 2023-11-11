@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const init = async () => {
     try {
-        const URI = 'mongodb+srv://developer:bllKONuaBgLvqEak@cluster0.nhgydui.mongodb.net/ecommerce';
+        const URI = 'mongodb://localhost:27017/ecommerce';
         await mongoose.connect(URI);
         console.log("database connection established 🚀");
     } catch (error) {
