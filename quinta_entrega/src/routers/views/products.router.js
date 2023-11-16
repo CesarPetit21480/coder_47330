@@ -1,15 +1,23 @@
 import { Router } from "express";
 import ProductManager from "../../dao/ProductManager.js";
+import { privateRouter } from "../../utils.js";
 
 
 
 const router = Router();
 
+
+// router.get('/products', privateRouter, (req, res) => {
+//   res.render('products', { title: 'Perfil', user: req.session.user });
+// });
+
+
+
 // router.get('/products', privateRouter, (req, res) => {
 //   res.render('products', { title: 'Productos En Stock', user: req.session.user });
 // });
 
-router.get('/products', async (req, res) => {
+router.get('/products', privateRouter, async (req, res) => {
 
   const { page = 1, limit = 5, category, sort } = req.query; // sort: asc | desc
   const opts = { page, limit, sort: { price: sort || 'asc' } };
@@ -18,7 +26,20 @@ router.get('/products', async (req, res) => {
     criteria.category = category;
   }
   const product = await ProductManager.get(opts, criteria);
-  res.render('products', buildResponse({ title: 'Productos En Stock', user: req.session.user, ...product, category, sort }));
+
+  let info = buildResponse({ ...product, category, sort });
+  let esAdministrador;
+  if (req.session.user.rol) {
+    esAdministrador = req.session.user.rol
+  }
+  console.log(esAdministrador);
+
+
+  info = { ...info, title: 'Productos En Stock', user: req.session.user, isAdministrator: esAdministrador }
+
+
+
+  res.render('products', { info });
 
 });
 

@@ -1,28 +1,8 @@
 import { Router } from 'express';
-
+import { publicRouters } from '../utils.js';
 
 
 const router = Router();
-
-
-const privateRouter = (req, res, next) =>{
-  if (!req.session.user) {
-    return res.redirect('/login');
-  }
-  next();
-};
-
-const publicRouters = (req, res, next) => {
-  if (req.session.user) {
-    return res.redirect('/products');
-  }
-  next();
-}
-
-router.get('/products', privateRouter, (req, res) => {
-  res.render('products', { title: 'Perfil', user: req.session.user });
-});
-
 
 router.get('/login', publicRouters, (req, res) => {
   res.render('login', { title: 'Login' });

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import  UserModel  from '../models/user.model.js';
+import UserModel from '../models/user.model.js';
 
 const router = Router();
 
@@ -23,17 +23,27 @@ router.post('/sessions/login', async (req, res) => {
     if (!isValidPass) {
         return res.status(401).send('Correo o contraseña invalidos 😨.');
     }
-    const { first_name, last_name } = user;
-    req.session.user = { first_name, last_name, email }
+    const { first_name, last_name, rol } = user;
+
+    if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
+
+        req.session.user = { first_name, last_name, email, rol }
+    }
+    else {
+        req.session.user = { first_name, last_name, email }
+    }
+
+
+
     res.redirect('/products');
 })
 
 router.get('/sessions/logout', (req, res) => {
     req.session.destroy((error) => {
-      res.redirect('/login');
+        res.redirect('/login');
     });
-  });
-  
+});
+
 
 export default router;
 

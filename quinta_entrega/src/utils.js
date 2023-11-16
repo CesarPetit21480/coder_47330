@@ -27,3 +27,20 @@ const storage = multer.diskStorage({
 });
 
 export const uploader = multer({ storage });
+
+
+
+export const privateRouter = (req, res, next) =>{
+    if (!req.session.user) {
+      return res.redirect('/login');
+    }
+    next();
+  };
+  
+  export const publicRouters = (req, res, next) => {
+    if (req.session.user) {
+      return res.redirect('/products');
+    }
+    next();
+  }
+  

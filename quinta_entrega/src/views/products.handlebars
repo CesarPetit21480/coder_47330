@@ -1,5 +1,20 @@
 <div>
 
+  <header>
+    <div class="product">
+       <h2 class="nombre">Bienvenido {{info.user.first_name}} {{info.user.last_name}} </h2> 
+      <a title="salir" href="api/sessions/logout"><img class="logOut" src="imagen/logOut.png" alt="salir" /></a>
+    {{#if info.isAdministrator}}
+      <img class="logOut" src="imagen/Admin-icon.png" alt="Admin" srcset="">    
+    {{/if}}
+
+ 
+    </div>
+
+
+     
+  </header>
+
 <div>
     <h1>PRODUCTOS EN STOCK 🍅🌿</h1>
     </div>
@@ -13,7 +28,7 @@
     <th>Stock</th>
     <th>Categoria</th> 
   </tr>
-  {{#each payload}}
+  {{#each info.payload}}
     <tr>
       <td>{{this.title}}</td>
       <td>{{this.description}}</td>
@@ -26,8 +41,9 @@
   
 </table>
 <p>Página actual: {{page}}</p>
-<a href="{{prevLink}}" role="button" {{#unless hasPrevPage}}disabled{{/unless}} >Anterior</a>
-<a href="{{nextLink}}" role="button" {{#unless hasNextPage}}disabled{{/unless}} >Siguiente</a>
+<a href="{{info.prevLink}}" role="button" {{#unless info.hasPrevPage}}disabled{{/unless}} >Anterior</a>
+<a href="{{info.nextLink}}" role="button" {{#unless info.hasNextPage}}disabled{{/unless}} >Siguiente</a>
+
 
 
 </div>
