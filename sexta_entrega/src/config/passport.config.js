@@ -3,7 +3,8 @@ import { Strategy as GitHubStrategy } from "passport-github2";
 import { createHash, isValidPassword } from '../utils.js'
 import UserModel from '../models/user.model.js';
 import { Strategy as LocalStrategy } from "passport-local";
-
+import { JWT_SECRET} from '../utils.js'
+import {Strategy as JWTStrategy , ExtractJwt } from "passport-jwt";
 const opts = {
     usernameField: 'email',
     passReqToCallback: true,
@@ -15,30 +16,38 @@ const gitHubopts = {
 }
 
 
+const cookieExtractor = (req) => {
+    let token = null;
+
+    if (req.signedCookies && req) {
+         token = req.signedCookies["access_token"];
+    }
+    return token;
+}
+
+
+
 export const init = () => {
 
     passport.use('register', new LocalStrategy(opts, async (req, email, password, done) => {
 
         try {
-
             const user = await UserModel.findOne({ email });
             if (user) {
                 return done(new Error('User already registered'))
             }
             const newUser = await UserModel.create({
                 ...req.body,
-                password: createHash(body.password)
+                password: createHash(password)
             })
-            done(null, newUser);
+            done(null,  newUser);
 
         } catch (error) {
             done(new Error(`ocurrio un errror durante la autenticacion ${error.message} 😒)`));
         }
-
     }));
 
     passport.use('login', new LocalStrategy(opts, async (req, email, password, done) => {
-
         try {
             const user = await UserModel.findOne({ email });
             if (!user) {
@@ -50,7 +59,7 @@ export const init = () => {
             if (!isPasswordValid) {
                 return done(new Error(`correo o password Invalidos 😢`));
             }
-            done(null, newUser);
+            done(null, user);
 
         } catch (error) {
             done(new Error(`ocurrio un errror durante la autenticacion ${error.message} 😒)`));
@@ -81,6 +90,19 @@ export const init = () => {
         done(null, { ...newuser, rol: undefined });
     }));
 
+    passport.use('jwt', new JWTStrategy({
+
+        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+        secretOrKey: JWT_SECRET,
+    }, (payload, done) => {
+
+        return done(null, payload);
+
+    }));
+
+
+    
+
 
 
     passport.serializeUser((user, done) => {
@@ -91,11 +113,5 @@ export const init = () => {
         const user = await UserModel.findById(uid);
         done(null, user);
     });
-
-
-
-
-
-
 
 }

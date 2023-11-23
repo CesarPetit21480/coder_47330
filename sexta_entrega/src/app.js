@@ -1,30 +1,41 @@
 import express from 'express';
 import path from 'path';
-import expressSession from 'express-session';
 import handlebars from 'express-handlebars'
-import MongoStore from 'connect-mongo';
+import expressSession from 'express-session';
 import indexRouter from './routers/index.router.js';
+import MongoStore from 'connect-mongo';
 import { __dirname } from './utils.js';
 import { URI } from './db/mongodb.js'
 import sessionsRouter from './routers/sessions.router.js';
 import ProductRouterView  from './routers/views/products.router.js';
 import { init as initPassportConfig } from './config/passport.config.js';
+import cookieParser from 'cookie-parser';
+import passport from 'passport';
 
 const app = express();
-
-
+const COOKIE_SECRET = 'qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@';
 const SESSION_SECRET = '6+pSmK{q3?w5V2_{.!qR'
 
+
 app.use(expressSession({
-  secret: SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: URI,
-    mongoOptions: {},
-    ttl: 120,
-  }),
+  secret: 'SESSION_SECRET',
+  resave: true,
+  saveUninitialized: false
 }));
+
+
+
+// app.use(expressSession({
+//   secret: SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: false,
+//   store: MongoStore.create({
+//     mongoUrl: URI,
+//     mongoOptions: {},
+//     ttl: 120,
+//   }), 
+// }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,10 +43,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.engine('handlebars', handlebars.engine());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
+app.use(cookieParser(COOKIE_SECRET));
 initPassportConfig();
-
-
-
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/', ProductRouterView);
