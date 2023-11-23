@@ -10,8 +10,8 @@ const opts = {
     passReqToCallback: true,
 }
 const gitHubopts = {
-    clientID: 'Iv1.371623f04cc27484',
-    clientSecret: '7e246298471650881d07b6524fbe39f7fdf1572c',
+    clientID:  'se cargara clientID',
+    clientSecret: 'se cargara clientSecret',
     callbackURL: "http://localhost:8080/api/sessions/github/callback"
 }
 
