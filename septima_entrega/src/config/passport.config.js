@@ -101,10 +101,6 @@ export const init = () => {
     }));
 
 
-    
-
-
-
     passport.serializeUser((user, done) => {
         done(null, user._id)
     });

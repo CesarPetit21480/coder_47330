@@ -3,11 +3,12 @@ import path from 'path';
 import handlebars from 'express-handlebars'
 import expressSession from 'express-session';
 import indexRouter from './routers/index.router.js';
+import userRouter from './routers/user.router.js';
 import MongoStore from 'connect-mongo';
 import { __dirname } from './utils.js';
 import { URI } from './db/mongodb.js'
 import sessionsRouter from './routers/sessions.router.js';
-import ProductRouterView  from './routers/views/products.router.js';
+import ProductRouterView from './routers/views/products.router.js';
 import { init as initPassportConfig } from './config/passport.config.js';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
@@ -47,9 +48,9 @@ app.use(cookieParser(COOKIE_SECRET));
 initPassportConfig();
 app.use(passport.initialize());
 
-app.use('/', indexRouter);
+app.use('/', indexRouter)
 app.use('/', ProductRouterView);
-app.use('/api', sessionsRouter);
+app.use('/api', userRouter);
 
 app.use((error, req, res, next) => {
   const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;

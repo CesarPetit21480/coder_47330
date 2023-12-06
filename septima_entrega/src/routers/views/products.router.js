@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductManager from "../../dao/ProductManager.js";
+import passport from "passport";
 import { privateRouter } from "../../utils.js";
 import { jwtAuth, isSuperAdmin, authenticationMiddleware, authorizarionMiddeleware } from '../../utils.js';
 
@@ -18,7 +19,7 @@ const router = Router();
 //   res.render('products', { title: 'Productos En Stock', user: req.session.user });
 // });
 
-router.get('/products', authenticationMiddleware('jwt'), authorizarionMiddeleware(['regular,seller', 'admin']), async (req, res) => {
+router.get('/products', passport.authenticate('jwt', { session: false }), async (req, res) => {
 
   const { page = 1, limit = 5, category, sort } = req.query; // sort: asc | desc
   const opts = { page, limit, sort: { price: sort || 'asc' } };
