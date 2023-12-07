@@ -4,7 +4,7 @@ import handlebars from 'express-handlebars'
 import expressSession from 'express-session';
 import indexRouter from './routers/index.router.js';
 import userRouter from './routers/user.router.js';
-import MongoStore from 'connect-mongo';
+import currentRouter from './routers//views/current.router.js';
 import { __dirname } from './utils.js';
 import { URI } from './db/mongodb.js'
 import sessionsRouter from './routers/sessions.router.js';
@@ -51,6 +51,7 @@ app.use(passport.initialize());
 app.use('/', indexRouter)
 app.use('/', ProductRouterView);
 app.use('/api', userRouter);
+app.use('/', currentRouter);
 
 app.use((error, req, res, next) => {
   const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;

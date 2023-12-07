@@ -58,7 +58,7 @@ export const tokenGenerator = (user) => {
     email,
     role
   };
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '2m' });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '5m' });
 }
 
 export const jwtAuth = (req, res, next) => {
