@@ -1,31 +1,32 @@
 import { Router } from "express";
-import ProductsManager from "../../dao/ProductManager.js";
-import CartManager from "../../dao/cartManager.js";
+import ProductsManager from "../../dao/product.dao.js";
+import CartManager from "../../dao/cart.dao.js";
+import CartController from "../../controllers/cart.controller.js";
 
 const router = Router();
 
 const listProductosCarrito = [];
 
 router.get("/cart", async (req, res) => {
-    const carrito = await CartManager.get();
-    const carrMapping = carrito.map(s => s.toJSON());
 
-    console.log(carrMapping)
-    res.render('cart', { carrito: carrito.map(s => s.toJSON()) });
+    try {
+        const carrito = await CartController.get();
+        res.render('cart', { carrito: carrito });
+    } catch (error) {
+        next(res.status(error.statusCode || 500).json({ message: error.message }));
+    }
 });
-
 
 router.get("/cart/active", async (req, res) => {
 
-    const carrito = await CartManager.getActive();
+    const carrito = await CartController.getActive();
     return carrito;
 })
-
 
 router.get("/cart/id/:id", async (req, res) => {
     const { id } = req.params;
     const carrito = [];
-    const carritoById = await CartManager.getById(id);
+    const carritoById = await CartController.getById(id);
     carrito.push(carritoById);
 
     if (!carritoById) {
@@ -41,18 +42,16 @@ router.get("/cart/id/:id", async (req, res) => {
 router.post("/cart/manejador", async (req, res) => {
 
     try {
-        const carrito = await CartManager.getActive();
-        const carrMapping = (carrito) ? carrito.toJSON() : 0;
-
+        const carrito = await CartController.getActive();   
 
         const { body } = req;
         const { productId, cantidad } = body;
         const quantity = Number(cantidad)
         const pid = productId;
 
-        if (carrMapping !== 0) {
+        if (carrito !== 0) {
 
-            const cid = carrMapping._id
+            const cid = carrito._id
             const carrito = await CartManager.updateById(cid, pid, quantity);
             res.json({
                 status: "success",
@@ -79,8 +78,7 @@ router.post("/cart/manejador", async (req, res) => {
         }
 
     } catch (error) {
-        console.error(error);
-        console.error(error);
+        console.error(error);      
         res.status(500).json({
             message: `Error en la operacion 😫 ${error}`
         });
