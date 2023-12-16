@@ -8,6 +8,9 @@ import userRouter from './routers/api/user.router.js';
 import { __dirname } from './utils.js';
 import { URI } from './db/mongodb.js'
 import ProductRouterView from './routers/views/products.router.js';
+import cartViewer from './routers/views/cart.router.js';
+
+
 import messageViewRouter from './routers/views/message.router.js';
 import CartRoutes from './routers/api/cart.router.js';
 import { init as initPassportConfig } from './config/passport.config.js';
@@ -39,6 +42,7 @@ app.use(passport.initialize());
 
 app.use('/', indexRouter)
 app.use('/', ProductRouterView);
+app.use('/', cartViewer);
 app.use('/api/user', userRouter);
 app.use('/api', messageViewRouter);
 app.use('/api', CartRoutes);
