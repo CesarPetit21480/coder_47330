@@ -6,11 +6,18 @@ export default class user {
     }
     async get(email) {
         const user = await this.dao.get(email);
-        console.log(user);
-        return user.map(user => new UserDTO(user));
+        const userMapping = new UserDTO(user)
+        return user;
+
+       
     }
     async create(data) {
         const user = await this.dao.create(data);
+        return user;
+    }
+
+    async getById(uid) {
+        const user = await this.dao.getById(uid);
         return user;
     }
 }

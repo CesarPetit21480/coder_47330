@@ -14,7 +14,7 @@ router.get('/message', async (req, res) => {
 
 router.post('/message', async (req, res) => {    
     const { body } = req;
-    console.log(body);    
+  
     const message = await MessageManager.create(body);
     const msg = await MessageManager.get();      
     res.render('messages', { msg: msg.map(s => s.toJSON()) })

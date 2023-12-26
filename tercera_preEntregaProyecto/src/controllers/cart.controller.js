@@ -24,7 +24,8 @@ export default class CartController {
     }
 
     static async create(data) {
-        const carrito = await cartServices.create(cid);
+        const carrito = await cartServices.create(data);
+        return carrito;
 
     }
 

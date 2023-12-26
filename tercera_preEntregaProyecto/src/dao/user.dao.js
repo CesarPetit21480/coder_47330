@@ -3,12 +3,17 @@ import UserModel from '../models/user.model.js'
 
 export default class UserDao {
 
-    static async create(data) {
+     async create(data) {
         const newUser =  await UserModel.create(data);
         return newUser;
     }
-    static async get(email) {
+     async get(email) {
         const user = await UserModel.findOne({ email });
+        return user;
+    }
+
+     async getById(uid) {
+        const user = await UserModel.findById(uid);
         return user;
     }
 }

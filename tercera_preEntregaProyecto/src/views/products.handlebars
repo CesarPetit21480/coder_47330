@@ -3,12 +3,12 @@
  <header>
     <div class="product">
        <h4 class="nombre">Bienvenido {{info.user.first_name}} {{info.user.last_name}} </h4> 
+      <input type="hidden" id="idUser" value="{{info.user.id}}">      
       <a title="salir" href="api/user/logout"><img class="tamImg" src="imagen/logOut.png" alt="salir" /></a>
     {{#if info.isAdministrator}}
       <img class="tamImg" src="imagen/Admin-icon.png" alt="Admin" srcset="">    
     {{/if}}
-    </div>
-
+    </div>  
      
   </header>
 
@@ -42,7 +42,7 @@
   
       <form id="myForm{{this.id}}"method="post" >
         <td><input type="text" class="text-primary bg-light" placeholder="Ingrese Cantidad" name="cantidad" value="1" required></td>   
-        <input type="hidden" name="productId" value="{{this._id}}">  
+        <input type="hidden" name="productId" value="{{this._id}}">       
         <td><input id="envio-button" class="text-primary bg-light" type="image" data-id={{this._id}} name="enviar" src="/imagen/carrito.png" alt="carga"></td>   
       </form>
     </tr>

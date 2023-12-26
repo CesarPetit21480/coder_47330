@@ -1,31 +1,30 @@
 import cartModel from "../models/cart.model.js";
 import { Exception } from '../utils.js';
+import mongoose from "mongoose";
 
-export default class CartManager {
+export default class CartDao {
 
-
-    static get() {
+    get() {
         return cartModel.find();
     }
-    static async getById(sid) {
+    async getById(sid) {
         const product = await cartModel.findById(sid);
         if (!product) {
             console.error(`Couldn't find Cart 😒`)
         }
         return product;
     }
-    
-    static async getActive() {
 
-        const cart =  await cartModel.findOne({ status: true });
-        console.log(cart);
+    async getActive() {
+
+        const cart = await cartModel.findOne({ status: true });
 
         if (!cart) {
-          return 0;
+            return 0;
         }
         return cart;
     }
-    static async getById(sid) {
+    async getById(sid) {
         const product = await cartModel.findById(sid);
         if (!product) {
             console.error(`Couldn't find Cart 😒`)
@@ -34,14 +33,13 @@ export default class CartManager {
     }
 
 
-    static async create(data) {
-
+    async create(data) {
         const message = await cartModel.create(data);
         console.log('Cart creado correctamente 🚀🚀');
         return message;
     }
 
-    static async updateById(sid, pid, quantity) {
+    async updateById(sid, pid, quantity) {
         const cart = await cartModel.findOne({ _id: sid });
         if (!cart) {
             console.error(`Couldn't find cart 😒`)
@@ -49,14 +47,14 @@ export default class CartManager {
 
         if (!quantity) {
             cart.products.push({ product: pid });
-            const result = await cartModel.updateOne({ _id: sid }, cart);         
+            const result = cartModel.updateOne({ _id: sid }, cart);
             return result;
         }
         else {
             let product = cart.products.find(product => product.product.toString() === pid);
             if (!product) {
                 cart.products.push({ product: pid });
-                product = cart.products.find(product => product.product.toString() === pid);                          
+                product = cart.products.find(product => product.product.toString() === pid);
             }
 
             product.quantity += quantity;
@@ -64,7 +62,7 @@ export default class CartManager {
         }
     }
 
-    static async deleteById(sid) {
+    async deleteById(sid) {
         const cart = await cartModel.findById(sid);
         if (!cart) {
             throw new Exception('No existe el Carrito 😨', 404);
@@ -75,7 +73,7 @@ export default class CartManager {
     }
 
 
-    static async deleteProductCartByid(sid, pid) {
+    async deleteProductCartByid(sid, pid) {
         try {
             const carritoActualizado = await cartModel.findByIdAndUpdate(sid, { $pull: { 'products': { product: pid } } })
             return carritoActualizado;
@@ -85,13 +83,13 @@ export default class CartManager {
         }
 
     }
-    static async deleteProductCart(sid) {
+    async deleteProductCart(sid) {
         try {
             const carrito = await cartModel.updateOne(
                 { _id: sid },
                 { $set: { products: [] } })
 
-                return carrito;
+            return carrito;
         } catch (error) {
 
             throw new Exception('no se pudo efectuar la operacion 😨', 404);

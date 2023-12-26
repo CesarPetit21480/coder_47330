@@ -1,6 +1,7 @@
 import { Router } from "express";
 import CartController from "../../controllers/cart.controller.js";
 import passport from "passport";
+import userController from "../../controllers/user.controller.js";
 
 const router = Router();
 
@@ -16,10 +17,16 @@ router.get("/cart", passport.authenticate('jwt', { session: false }),async (req,
     }
 });
 
-router.get("/cart/active", async (req, res) => {
+router.get("/cart/active", async (req, res,next) => {
+    try {
+        const carrito = await CartController.getActive();
+        return carrito;
+        
+    } catch (error) {
+        next(res.status(error.statusCode || 500).json({ message: error.message }));
+    }
 
-    const carrito = await CartController.getActive();
-    return carrito;
+  
 })
 
 router.get("/cart/id/:id", passport.authenticate('jwt', { session: false }),async (req, res, next) => {
@@ -39,7 +46,7 @@ router.get("/cart/id/:id", passport.authenticate('jwt', { session: false }),asyn
         res.render("cart", { carrito });
 
     } catch (error) {
-        next(error);
+        next(res.status(error.statusCode || 500).json({ message: error.message }));
     }
 });
 router.post("/cart/manejador", passport.authenticate('jwt', { session: false }),async (req, res,next) => {
@@ -48,10 +55,11 @@ router.post("/cart/manejador", passport.authenticate('jwt', { session: false }),
         const carrito = await CartController.getActive();      
 
         const { body } = req;
-        const { productId, cantidad } = body;
+        const { productId, cantidad,userId } = body;
         const quantity = Number(cantidad)
         const pid = productId;
         const cid = (carrito) ? carrito._id : undefined
+        const userBase = await userController.getByid(userId)    
 
         if (carrito) {        
             const carrito = await CartController.updateById(cid, pid, quantity);
@@ -66,7 +74,8 @@ router.post("/cart/manejador", passport.authenticate('jwt', { session: false }),
 
             const nuevoCarrito = {
                 fecha: new Date(),
-                products: [{ product: productId, quantity: Number(cantidad) }]
+                products: [{ product: productId, quantity: Number(cantidad) }],
+                user: userBase._id
 
             };
             CartController.create(nuevoCarrito)

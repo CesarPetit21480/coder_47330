@@ -9,4 +9,15 @@ export default class UserController {
         console.log("user created successfully");
         return user;
     }
+
+    static async getByid(uid) {
+        const user = await UserServices.getByid(uid);
+        return user;
+    }
+
+
+    static async getByEmail(email) {
+        const user = await UserServices.getByEmail(email);
+        return user;
+    }
 }

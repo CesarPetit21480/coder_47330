@@ -2,15 +2,15 @@ import ProductModel from "../models/product.model.js";
 import { Exception } from '../utils.js';
 
 
-export default class ProductManager {
+export default class ProductDao {
 
 
-    static async get(opts = {}, criteria = {},) {   
+     async get(opts = {}, criteria = {},) {   
 
         const result = await ProductModel.paginate(criteria, opts);      
         return result;
     }
-    static async getById(pid) {
+     async getById(pid) {
         const product = await ProductModel.findById(pid);
         if (!product) {
             console.error(`Couldn't find products 😒`)
@@ -18,14 +18,14 @@ export default class ProductManager {
         return product;
     }
 
-    static async create(data) {
+     async create(data) {
         const product = await ProductModel.create(data);
         console.log('Producto creado correctamente 🚀🚀');
         return product;
     }
 
 
-    static async updateById(sid, data) {
+     async updateById(sid, data) {
         const product = ProductModel.findById(sid);
         if (!product) {
             console.error(`Couldn't find product 😒`)
@@ -35,7 +35,7 @@ export default class ProductManager {
         await ProductModel.updateOne(criteria, operation);
     }
 
-    static async deleteById(sid) {
+     async deleteById(sid) {
         const product = await ProductModel.findById(sid);
         if (!product) {
             throw new Exception('No existe el Producto 😨', 404);

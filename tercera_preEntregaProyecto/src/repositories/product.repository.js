@@ -7,8 +7,8 @@ export default class Product {
         this.dao = dao;
     }
 
-    async get() {
-        const product = await this.dao.get();
+    async get(opts, criteria) {
+        const product = await this.dao.get(opts, criteria);
         return product;
     }
     async getById(pid) {

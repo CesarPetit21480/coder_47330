@@ -1,4 +1,3 @@
-import cartDao from "../dao/cart.dao.js";
 import { cartRepository } from "../repositories/index.js";
 
 
@@ -6,40 +5,40 @@ export default class CartServices {
 
 
     static async get() {
-        const carrito = await cartDao.get();
+        const carrito = await cartRepository.get();
         return carrito;
     }
 
-    static async getActive() {
-        const carrito = await cartDao.getActive();
+    static getActive() {
+        const carrito = cartRepository.getActive();
         return carrito;
     }
 
-    static async getById(cid) {
-        const carrito = await cartDao.getById(cid);
+    static getById(cid) {
+        const carrito = cartRepository.getById(cid);
         return carrito;
     }
 
-    static async updateById(cid, pid, quantity) {
-        const carrito = await cartDao.updateById(cid, pid, quantity);
+    static updateById(cid, pid, quantity) {
+        const carrito = cartRepository.updateById(cid, pid, quantity);
         return carrito;
     }
 
-    static async create(data) {
-        const carrito = cartDao.create(data);
+    static create(data) {
+        const carrito = cartRepository.create(data);
 
     }
     static async deleteProductCartByid(cid, pid) {
-        const carrito = await cartDao.deleteProductCartByid(cid, pid);
+        const carrito = cartRepository.deleteProductCartByid(cid, pid);
 
     }
 
-    static async deleteProductCart(cid, pid) {
-        const carrito = await cartDao.deleteProductCart(cid, pid);
+    static deleteProductCart(cid, pid) {
+        const carrito = cartRepository.deleteProductCart(cid, pid);
         return carrito;
     }
 
-    static async deleteCart(cid) {
-        await cartDao.deleteById(cid);
-    } 
+    static deleteCart(cid) {
+        cartRepository.deleteById(cid);
+    }
 }

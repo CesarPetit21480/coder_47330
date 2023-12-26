@@ -5,13 +5,18 @@ function handleEnviarClick(event) {
   // Obtiene el "id" del botón clicado
   var id = this.getAttribute("data-id");
   const cantidad = document.querySelector('input[name="cantidad"]').value;
+  const user = document.getElementById("idUser").value;
 
 
-  // Crear un objeto con los datos a enviar
+
+    // Crear un objeto con los datos a enviar
   const data = {
     productId: id,
-    cantidad: cantidad
+    cantidad: cantidad,
+    userId : user
   };
+
+
 
   // Realizar la solicitud POST utilizando fetch
   fetch('api/cart/manejador', {

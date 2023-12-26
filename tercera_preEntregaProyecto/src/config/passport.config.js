@@ -43,7 +43,10 @@ export const init = () => {
 
     passport.use('login', new LocalStrategy(opts, async (req, email, password, done) => {
         try {
-            const user = await UserModel.findOne({ email });
+            const user =await  UserController.getByEmail(email);
+            
+            
+            //await UserModel.findOne({ email });
             if (!user) {
                 return done(new Error(`correo o password Invalidos 😢`));
             }
