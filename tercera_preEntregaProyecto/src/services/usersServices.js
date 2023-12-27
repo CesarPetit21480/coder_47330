@@ -7,8 +7,7 @@ export default class UsersServicies {
 
     static async create(data, email, password) {
 
-
-        let user = await userRepository.get(email);
+        let user = await userRepository.getbyLogin(email);
         if (user) {
             throw new Error('User already registered');
         }
@@ -32,10 +31,20 @@ export default class UsersServicies {
     }
 
     
+    static async getByLogin(email) {
+
+
+        let user = await userRepository.getbyLogin(email);
+        if (!user) {
+            throw new Error('User not exists');
+        }     
+        return user;
+    }
+
     static async getByEmail(email) {
 
 
-        let user = await userRepository.get(email);
+        let user = await userRepository.getbyEmail(email);
         if (!user) {
             throw new Error('User not exists');
         }     

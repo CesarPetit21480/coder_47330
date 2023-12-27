@@ -43,7 +43,7 @@ export const init = () => {
 
     passport.use('login', new LocalStrategy(opts, async (req, email, password, done) => {
         try {
-            const user =await  UserController.getByEmail(email);
+            const user =await  UserController.getByLogin(email);
             
             
             //await UserModel.findOne({ email });

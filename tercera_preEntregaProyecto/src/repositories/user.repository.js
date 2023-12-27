@@ -1,15 +1,31 @@
+import UserLoginDTO from "../dto/user_login.DTO.js";
 import UserDTO from "../dto/userDTO.js";
 export default class user {
 
     constructor(dao) {
         this.dao = dao;
     }
-    async get(email) {
+    async getbyLogin(email) {
         const user = await this.dao.get(email);
-        const userMapping = new UserDTO(user)
-        return user;
 
-       
+        if (user) {
+            return user;
+        }
+        return null;
+
+    }
+
+
+    async getbyEmail(email) {
+        const user = await this.dao.get(email);
+
+        if (user) {
+            const userMapping = new UserDTO(user)
+            return userMapping;
+        }
+        return null;
+
+
     }
     async create(data) {
         const user = await this.dao.create(data);
@@ -18,7 +34,11 @@ export default class user {
 
     async getById(uid) {
         const user = await this.dao.getById(uid);
-        return user;
+
+        if (user)
+            return user;
+        return null;
+
     }
 }
 

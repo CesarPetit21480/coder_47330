@@ -16,6 +16,12 @@ export default class UserController {
     }
 
 
+    static async getByLogin(email) {
+        const user = await UserServices.getByLogin(email);
+        return user;
+    }
+
+
     static async getByEmail(email) {
         const user = await UserServices.getByEmail(email);
         return user;

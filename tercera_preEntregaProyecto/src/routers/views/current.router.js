@@ -10,8 +10,6 @@ const router = Router();
 
 
 router.get('/current', passport.authenticate('jwt', { session: false }), async (req, res) => {
-
-
     const info = { user: req.user }
     res.render('current', { info });
 

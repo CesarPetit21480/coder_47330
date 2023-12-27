@@ -1,6 +1,7 @@
 import Router from 'express';
 // import ProductManager from '../../dao/ProductManager.js';
 import productsControllers from '../../controllers/products.controller.js';
+import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils.js';
 const router = Router();
 
 router.get('/products', async (req, res, next) => {
@@ -51,7 +52,7 @@ router.get('/products/:sid', async (req, res) => {
 //   res.status(200).json(product);
 // });
 
-router.post('/products', async (req, res) => {
+router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
     const { body } = req;
     const product = await productsControllers.create(body);
@@ -63,7 +64,7 @@ router.post('/products', async (req, res) => {
 
 });
 
-router.put('/products/:pid', async (req, res, next) => {
+router.put('/products/:pid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
     const { params: { sid }, body } = req;
     await productsControllers.updateById(pid, body);
@@ -72,7 +73,7 @@ router.put('/products/:pid', async (req, res, next) => {
     next(res.status(error.statusCode || 500).json({ message: error.message }));
   }
 });
-router.delete('/products/:sid', async (req, res) => {
+router.delete('/products/:sid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res) => {
   try {
     const { params: { sid } } = req;
     await productsControllers.deleteById(sid);
