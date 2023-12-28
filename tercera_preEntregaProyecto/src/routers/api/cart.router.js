@@ -230,4 +230,12 @@ router.delete("/cart/:cid", passport.authenticate('jwt', { session: false }), as
 })
 
 
+router.post("/cart/:cid/purchase", async (req, res, next) => {
+
+    const carrito = await CartController.getActive();
+
+
+});
+
+
 export default router;

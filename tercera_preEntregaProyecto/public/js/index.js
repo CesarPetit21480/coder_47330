@@ -4,7 +4,7 @@ function handleEnviarClick(event) {
 
   // Obtiene el "id" del botón clicado
   var id = this.getAttribute("data-id");
-  const cantidad = document.querySelector('input[name="cantidad"]').value;
+  const cant = document.getElementById("cant_" + id).value;
   const user = document.getElementById("idUser").value;
 
 
@@ -12,7 +12,7 @@ function handleEnviarClick(event) {
     // Crear un objeto con los datos a enviar
   const data = {
     productId: id,
-    cantidad: cantidad,
+    cantidad: cant,
     userId : user
   };
 

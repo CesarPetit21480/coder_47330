@@ -41,7 +41,7 @@
       <td>{{this.category}}</td> 
   
       <form id="myForm{{this.id}}"method="post" >
-        <td><input type="text" class="text-primary bg-light" placeholder="Ingrese Cantidad" name="cantidad" value="1" required></td>   
+        <td><input type="text" id="cant_{{this._id}}" class="text-primary bg-light" placeholder="Ingrese Cantidad" name="cantidad" value="1" required></td>   
         <input type="hidden" name="productId" value="{{this._id}}">       
         <td><input id="envio-button" class="text-primary bg-light" type="image" data-id={{this._id}} name="enviar" src="/imagen/carrito.png" alt="carga"></td>   
       </form>
