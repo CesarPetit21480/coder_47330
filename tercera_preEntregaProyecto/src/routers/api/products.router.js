@@ -46,11 +46,6 @@ router.get('/products/:sid', async (req, res) => {
   }
 });
 
-// router.get('/products', async (req, res) => {
-//   const { query = {} } = req;
-//   const product = await ProductManager.get(query);
-//   res.status(200).json(product);
-// });
 
 router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
@@ -66,21 +61,22 @@ router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddelewa
 
 router.put('/products/:pid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
-    const { params: { sid }, body } = req;
+    const { params: { pid }, body } = req;
     await productsControllers.updateById(pid, body);
-    res.status(204).end();
+    res.status(204).end()
+       
   } catch (error) {
     next(res.status(error.statusCode || 500).json({ message: error.message }));
   }
 });
-router.delete('/products/:sid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res) => {
+router.delete('/products/:pid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res) => {
   try {
-    const { params: { sid } } = req;
-    await productsControllers.deleteById(sid);
+    const { params: { pid } } = req;
+    await productsControllers.deleteById(pid);
     res.status(204).end();
   } catch (error) {
     res.status(error.statusCode || 500).json({ message: error.message });
   }
 });
 
-export default router;
+export default router;  

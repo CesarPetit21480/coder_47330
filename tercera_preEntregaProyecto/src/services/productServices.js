@@ -1,5 +1,5 @@
 import ProductDao from '../dao/product.dao.js';
-import {productRepository} from '../repositories/index.js';
+import { productRepository } from '../repositories/index.js';
 
 
 export default class ProductServices {
@@ -15,9 +15,9 @@ export default class ProductServices {
         return product;
     }
 
-    static async updateById(pid) {
+    static async updateById(pid, data) {
 
-        const product = await productRepository.updateById(pid,data);
+        const product = await productRepository.updateById(pid, data);
         return product;
     }
 
@@ -29,12 +29,11 @@ export default class ProductServices {
     }
 
     static async deleteById(pid) {
+        await productRepository.deleteById(pid);
 
-        const product =   await productRepository.deleteById(sid);
-        return product;
     }
 
-   
+
 }
 
 

@@ -25,14 +25,15 @@ export default class ProductDao {
     }
 
 
-     async updateById(sid, data) {
-        const product = ProductModel.findById(sid);
+     async updateById(pid, data) {
+        const product = ProductModel.findById(pid);
         if (!product) {
             console.error(`Couldn't find product 😒`)
         }
-        const criteria = { _id: sid };
+        const criteria = { _id: pid };
         const operation = { $set: data }
         await ProductModel.updateOne(criteria, operation);
+        return product;
     }
 
      async deleteById(sid) {
