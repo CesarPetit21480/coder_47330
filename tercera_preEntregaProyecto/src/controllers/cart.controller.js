@@ -26,23 +26,26 @@ export default class CartController {
     static async create(data) {
         const carrito = await cartServices.create(data);
         return carrito;
-
     }
 
-    static async deleteProductCartByid(data) {
-        const carrito = await cartServices.create(cid, pid);
-        return carrito;
 
+    static async deleteProductCartByid(cid,pid) {
+        const carrito = await cartServices.deleteProductCartByid(cid, pid);
+        return carrito;
     }
 
     static async deleteProductCart(cid, pid) {
         const carrito = await cartServices.deleteProductCart(cid, pid);
         return carrito;
-
     }
 
     static async deleteCart(cid) {
         await cartServices.deleteCart(cid);
+    }
+
+    static async verificarStock (pid,quantity){
+        const hayStock = await cartServices.verificarStock(pid,quantity);
+        return hayStock;
     }
 
 }

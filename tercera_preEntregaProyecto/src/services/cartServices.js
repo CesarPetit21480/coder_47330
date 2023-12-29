@@ -1,5 +1,4 @@
-import { cartRepository } from "../repositories/index.js";
-
+import { cartRepository, productRepository ,rejectRepository} from "../repositories/index.js";
 
 export default class CartServices {
 
@@ -9,36 +8,47 @@ export default class CartServices {
         return carrito;
     }
 
-    static getActive() {
+    static async getActive() {
         const carrito = cartRepository.getActive();
         return carrito;
     }
 
-    static getById(cid) {
-        const carrito = cartRepository.getById(cid);
+    static async getById(cid) {
+        const carrito = await cartRepository.getById(cid);
         return carrito;
     }
 
-    static updateById(cid, pid, quantity) {
-        const carrito = cartRepository.updateById(cid, pid, quantity);
+    static async updateById(cid, pid, quantity) {
+        const carrito = await cartRepository.updateById(cid, pid, quantity);
         return carrito;
     }
 
-    static create(data) {
-        const carrito = cartRepository.create(data);
-
+    static async create(data) {
+        const carrito = await cartRepository.create(data);
     }
+  
     static async deleteProductCartByid(cid, pid) {
-        const carrito = cartRepository.deleteProductCartByid(cid, pid);
+        const carrito = await cartRepository.deleteProductCartByid(cid, pid);
 
     }
 
-    static deleteProductCart(cid, pid) {
-        const carrito = cartRepository.deleteProductCart(cid, pid);
+    static async deleteProductCart(cid, pid) {
+        const carrito = await cartRepository.deleteProductCart(cid, pid);
         return carrito;
     }
 
-    static deleteCart(cid) {
-        cartRepository.deleteById(cid);
+    static async deleteCart(cid) {
+        await cartRepository.deleteById(cid);
+    }
+
+    static async verificarStock(pid, quantity) {
+        const product = await productRepository.getById(pid);
+
+        let hayStock = false;
+        if (product.stock >= quantity) {
+            hayStock = true;
+        }
+
+        return hayStock;
     }
 }

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import CartController from "../../controllers/cart.controller.js";
+import RejectController from "../../controllers/reject.controller.js";
 import passport from "passport";
 import userController from "../../controllers/user.controller.js";
 import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils.js';
@@ -232,8 +233,47 @@ router.delete("/cart/:cid", passport.authenticate('jwt', { session: false }), as
 
 router.post("/cart/:cid/purchase", async (req, res, next) => {
 
-    const carrito = await CartController.getActive();
+    const { cid } = req.params;
 
+    const carrito = await CartController.getById(cid);
+    const cantProducts = carrito.products.length;
+    const products = carrito.products;
+
+    for (let i = 0; i < cantProducts; i++) {
+
+        const idProduct = products[i].product
+        const quantity = products[i].quantity
+        const userId = carrito.user
+        const hayStock = await CartController.verificarStock(idProduct, quantity);
+
+        if (!hayStock) {
+
+            const reject = await RejectController.getActive();
+
+            if (!reject) {
+                const nuevoReject = {
+                    fecha: new Date(),
+                    products: [{ product: idProduct, quantity: Number(quantity) }],
+                    user: userId
+                };
+                RejectController.createReject(nuevoReject)
+            }
+            else {
+
+                const reject = await RejectController.updateById(reject._id, idProduct);
+                res.json({
+                    status: "success",
+                    message: "Producto agrego Producto reject 🚀",
+                    payload: reject,
+                });
+            }
+
+
+            const carrito = await CartController.deleteProductCartByid(cid, idProduct);
+
+        }
+
+    }
 
 });
 
