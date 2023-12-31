@@ -267,11 +267,8 @@ router.post("/cart/:cid/purchase", async (req, res, next) => {
                     payload: reject,
                 });
             }
-
-
             const carrito = await CartController.deleteProductCartByid(cid, idProduct);
-
-        }
+                }
 
     }
 
