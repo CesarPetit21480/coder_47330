@@ -1,6 +1,7 @@
 import { Router } from "express";
 import CartController from "../../controllers/cart.controller.js";
 import RejectController from "../../controllers/reject.controller.js";
+import ProductsController from "../../controllers/products.controller.js";
 import passport from "passport";
 import userController from "../../controllers/user.controller.js";
 import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils.js';
@@ -268,7 +269,14 @@ router.post("/cart/:cid/purchase", async (req, res, next) => {
                 });
             }
             const carrito = await CartController.deleteProductCartByid(cid, idProduct);
-                }
+        }
+        else {
+
+            const product = await ProductsController.getById(idProduct)
+            product.stock -= quantity;
+            await ProductsController.updateById(idProduct, product);
+
+        }
 
     }
 
