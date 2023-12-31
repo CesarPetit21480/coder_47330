@@ -1,4 +1,4 @@
-import { cartRepository, productRepository ,rejectRepository} from "../repositories/index.js";
+import { cartRepository, purchaseRepository } from "../repositories/index.js";
 
 export default class CartServices {
 
@@ -26,7 +26,11 @@ export default class CartServices {
     static async create(data) {
         const carrito = await cartRepository.create(data);
     }
-  
+
+    static async addPurchase(data) {
+        const carrito = await purchaseRepository.create(data);
+    }
+
     static async deleteProductCartByid(cid, pid) {
         const carrito = await cartRepository.deleteProductCartByid(cid, pid);
 
