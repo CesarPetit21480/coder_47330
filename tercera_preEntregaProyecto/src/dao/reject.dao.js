@@ -35,7 +35,7 @@ export default class CartDao {
     async updateById(rid, pid) {
 
         const rejectCart = await rejectModel.findOne({ _id: rid });
-        if (!cart) {
+        if (!rejectCart) {
             console.error(`Couldn't find Reject 😒`)
         }
         rejectCart.products.push({ product: pid });

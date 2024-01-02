@@ -5,6 +5,7 @@ import ProductsController from "../../controllers/products.controller.js";
 import passport from "passport";
 import userController from "../../controllers/user.controller.js";
 import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils.js';
+import PurchaseController from "../../controllers/purchase.controller.js";
 
 const router = Router();
 
@@ -14,7 +15,12 @@ router.get("/cart", passport.authenticate('jwt', { session: false }), async (req
 
     try {
         const carrito = await CartController.get();
-        res.render('cart', { carrito: carrito });
+        res.json({
+            status: "success",
+            message: "Producto en Carrito 🚀",
+            payload: carrito,
+        });
+
     } catch (error) {
         next(res.status(error.statusCode || 500).json({ message: error.message }));
     }
@@ -234,53 +240,72 @@ router.delete("/cart/:cid", passport.authenticate('jwt', { session: false }), as
 
 router.post("/cart/:cid/purchase", async (req, res, next) => {
 
-    const { cid } = req.params;
+    try {
 
-    const carrito = await CartController.getById(cid);
-    const cantProducts = carrito.products.length;
-    const products = carrito.products;
+        const { cid } = req.params;
+        const carrito = await CartController.getById(cid);
 
-    for (let i = 0; i < cantProducts; i++) {
-
-        const idProduct = products[i].product
-        const quantity = products[i].quantity
+        if (!carrito) {
+            throw new Error("carrito not found");
+        }
+        const cantProducts = carrito.products.length;
+        const products = carrito.products;
         const userId = carrito.user
-        const hayStock = await CartController.verificarStock(idProduct, quantity);
 
-        if (!hayStock) {
+        for (let i = 0; i < cantProducts; i++) {
 
-            const reject = await RejectController.getActive();
+            const idProduct = products[i].product
+            const quantity = products[i].quantity
+            const hayStock = await CartController.verificarStock(idProduct, quantity);
 
-            if (!reject) {
-                const nuevoReject = {
-                    fecha: new Date(),
-                    products: [{ product: idProduct, quantity: Number(quantity) }],
-                    user: userId
-                };
-                RejectController.createReject(nuevoReject)
+            if (!hayStock) {
+
+                const reject = await RejectController.getActive();
+
+                if (!reject) {
+                    const nuevoReject = {
+                        fecha: new Date(),
+                        products: [{ product: idProduct, quantity: Number(quantity) }],
+                        user: userId
+                    };
+                    RejectController.createReject(nuevoReject)
+                }
+                else {
+                    const rejectUptate = await RejectController.updateById(reject._id, idProduct);
+                }
+                const carrito = await CartController.deleteProductCartByid(cid, idProduct);
             }
             else {
 
-                const reject = await RejectController.updateById(reject._id, idProduct);
-                res.json({
-                    status: "success",
-                    message: "Producto agrego Producto reject 🚀",
-                    payload: reject,
-                });
+                const product = await ProductsController.getById(idProduct)
+                product.stock -= quantity;
+                await ProductsController.updateById(idProduct, product);
             }
-            const carrito = await CartController.deleteProductCartByid(cid, idProduct);
         }
-        else {
+        const nuevoTicket = {
+            purchase_datetime: new Date(),
+            code: "aasssa",
+            amount: Number(2500),
+            cart: { cart: cid },
+            user: { user: userId }
+        };
+        await PurchaseController.create(nuevoTicket);
+        const tickeGenerado = await PurchaseController.get();
 
-            const product = await ProductsController.getById(idProduct)
-            product.stock -= quantity;
-            await ProductsController.updateById(idProduct, product);
 
-        }
+        res.json({
+            status: "success",
+            message: "ticket generado🚀",
+            payload: tickeGenerado,
+        });
 
+
+    } catch (error) {
+        next(error);
     }
 
+
 });
-
-
 export default router;
+
+

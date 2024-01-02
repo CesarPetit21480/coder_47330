@@ -48,9 +48,5 @@ export default class CartController {
         return hayStock;
     }
 
-    static async addPurchase (data){
-        const hayStock = await cartServices.addPurchase(data);
-        return hayStock;
-    }
 
 }

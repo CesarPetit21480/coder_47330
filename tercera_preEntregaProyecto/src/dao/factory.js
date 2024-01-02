@@ -13,6 +13,7 @@ switch (config.persistence) {
         productDao = (await import('./product.dao.js')).default;
         userDao = (await import('./user.dao.js')).default;
         rejectDao = (await import('./reject.dao.js')).default;
+        
         purchaseDao = (await import('./purchase.dao.js')).default;
         break;
     default:
@@ -20,5 +21,5 @@ switch (config.persistence) {
         productDao = undefined;
         userDao = undefined;
         rejectDao = undefined
-        purchasDao = undefined
+        purchaseDao = undefined
 }
