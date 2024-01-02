@@ -6,6 +6,7 @@ import passport from "passport";
 import userController from "../../controllers/user.controller.js";
 import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils.js';
 import PurchaseController from "../../controllers/purchase.controller.js";
+import { v4 as uuidv4 } from 'uuid';
 
 const router = Router();
 
@@ -284,7 +285,7 @@ router.post("/cart/:cid/purchase", async (req, res, next) => {
         }
         const nuevoTicket = {
             purchase_datetime: new Date(),
-            code: "aasssa",
+            code: uuidv4(),
             amount: Number(2500),
             cart: { cart: cid },
             user: { user: userId }
