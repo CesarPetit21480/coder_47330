@@ -11,7 +11,8 @@ export default class PurchaseController {
 
     static async get() {
         const ticket = await PurchaseServices.get();
-        return ticket;
+        const ticketMapping = ticket.map(t => t.toJSON());
+        return ticketMapping;
     }
 
 

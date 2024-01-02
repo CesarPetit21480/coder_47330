@@ -8,7 +8,7 @@ export default class PurchaseServices {
     }
 
     
-    static async get(data) {
+    static async get() {
         const ticket = await purchaseRepository.get();
         return ticket;
     }

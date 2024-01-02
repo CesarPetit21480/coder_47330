@@ -11,7 +11,7 @@ export default class Purchase{
     }
 
     async get() {
-        const ticket = await this.dao.get(data);
+        const ticket = await this.dao.get();
         return ticket;
     }
     

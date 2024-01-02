@@ -10,7 +10,12 @@ export default class PurchaseDao {
 
     async get() {
 
-        const purchase = await purchaseModel.find();
+        const purchase = await purchaseModel.find()
+        .populate('cart.cart')  // Poblar la referencia 'cart.cart'
+        .populate('user.user');  // Poblar la referencia 'user.user'
+  
+
+    
         return purchase;
     }
 
