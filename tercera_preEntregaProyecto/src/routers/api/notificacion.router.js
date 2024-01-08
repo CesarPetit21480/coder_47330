@@ -15,7 +15,7 @@ router.get('/sendEmail', async (req, res, next) => {
       <div>
         <h1>Hola cómo estás?</h1>
         <p>Esta es una prueba de envio de correo desde Node js.</p>
-        <img src="cid:cat-001" />
+     
       </div>
       `,
       [

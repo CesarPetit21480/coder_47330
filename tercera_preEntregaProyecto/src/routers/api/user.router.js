@@ -50,7 +50,7 @@ router.post('/recovery-password', (req, res, next) => {
       email,
       'Recuperacion de contraseña',
       `<p> Para recuperar tu contraseña, debes acceder al siguiente enlace: <a href="${urlRecoveryPassStep2}">AQUI</a> </p>
-      <img src="cid:saludo-001" />
+     
       `,
       [
         {
