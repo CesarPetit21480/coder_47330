@@ -11,5 +11,7 @@ export default {
   jwtSecret: process.env.JWT_SECRET,
   cookieSecret: process.env.COOKIE_SECRET,
   sessionSecret: process.env.SESSION_SECRET,
-  persistence : process.env.PERSISTENCE
+  persistence : process.env.PERSISTENCE,
+  userEmail: process.env.GMAIL_USER,
+  userPass: process.env.GMAIL_PASS,
 }

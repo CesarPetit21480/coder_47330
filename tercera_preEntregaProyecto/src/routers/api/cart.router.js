@@ -245,6 +245,7 @@ router.post("/cart/:cid/purchase", async (req, res, next) => {
 
         const { cid } = req.params;
         const carrito = await CartController.getById(cid);
+        let amountProduct = 0;
 
         if (!carrito) {
             throw new Error("carrito not found");
@@ -280,16 +281,19 @@ router.post("/cart/:cid/purchase", async (req, res, next) => {
 
                 const product = await ProductsController.getById(idProduct)
                 product.stock -= quantity;
+                const monto = product.price * quantity;
+                amountProduct += monto;
                 await ProductsController.updateById(idProduct, product);
             }
         }
         const nuevoTicket = {
             purchase_datetime: new Date(),
             code: uuidv4(),
-            amount: Number(2500),
+            amount: Number(amountProduct),
             cart: { cart: cid },
             user: { user: userId }
         };
+
         await PurchaseController.create(nuevoTicket);
         const tickeGenerado = await PurchaseController.get();
 
