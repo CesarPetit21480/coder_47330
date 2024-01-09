@@ -1,5 +1,5 @@
 import ProductModel from "../models/product.model.js";
-import { Exception } from '../utils.js';
+import { Exception } from '../utils/util.js';
 
 
 export default class ProductDao {

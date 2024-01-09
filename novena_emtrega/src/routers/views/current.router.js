@@ -9,7 +9,7 @@ import { jwtAuth, isSuperAdmin, authenticationMiddleware, authorizarionMiddelewa
 const router = Router();
 
 
-router.get('/current', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.get('/current', authenticationMiddleware('jwt'), async (req, res) => {
     const info = { user: req.user }
     res.render('current', { info });
 

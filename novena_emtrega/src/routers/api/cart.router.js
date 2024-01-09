@@ -4,7 +4,7 @@ import RejectController from "../../controllers/reject.controller.js";
 import ProductsController from "../../controllers/products.controller.js";
 import passport from "passport";
 import userController from "../../controllers/user.controller.js";
-import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils.js';
+import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils/util.js'
 import PurchaseController from "../../controllers/purchase.controller.js";
 import { v4 as uuidv4 } from 'uuid';
 

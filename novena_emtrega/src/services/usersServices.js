@@ -1,5 +1,5 @@
 import UserDao from '../dao/user.dao.js'
-import { createHash, isValidPassword } from '../utils.js'
+import { createHash, isValidPassword } from '../utils/util.js'
 import {userRepository} from '../repositories/index.js'
 
 

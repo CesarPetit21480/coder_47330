@@ -14,4 +14,6 @@ export default {
   persistence : process.env.PERSISTENCE,
   userEmail: process.env.GMAIL_USER,
   userPass: process.env.GMAIL_PASS,
+  tokenName: process.env.TOKEN_NAME,
+
 }

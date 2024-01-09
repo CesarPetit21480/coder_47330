@@ -5,23 +5,24 @@ import expressSession from 'express-session';
 import indexRouter from './routers/api/index.router.js';
 import  productRouter from './routers/api/products.router.js';
 import userRouter from './routers/api/user.router.js';
-import { __dirname } from './utils.js';
-import { URI } from './db/mongodb.js'
+// import { __dirname } from './utils/util.js';
 import ProductRouterView from './routers/views/products.router.js';
 import cartViewer from './routers/views/cart.router.js';
-
-
 import messageViewRouter from './routers/views/message.router.js';
 import CartRoutes from './routers/api/cart.router.js';
 import { init as initPassportConfig } from './config/passport.config.js';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import config from './config/config.js';
+import { fileURLToPath } from 'url';
 
 const app = express();
 
 const SESSION_SECRET = config.sessionSecret;
 const COOKIE_SECRET = config.cookieSecret;
+
+const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
 
 
 app.use(expressSession({

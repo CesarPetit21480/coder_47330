@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+import config from "../config/config.js";
 
-export const URI = 'mongodb://localhost:27017/ecommerce'
+export const URI =  config.db.mongodbUri
+
+
 
 export const init = async () => {
     try {

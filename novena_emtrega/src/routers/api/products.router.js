@@ -1,7 +1,10 @@
 import Router from 'express';
 // import ProductManager from '../../dao/ProductManager.js';
 import productsControllers from '../../controllers/products.controller.js';
-import { authenticationMiddleware, authorizarionMiddeleware,generateProducts } from '../../utils.js';
+import { authenticationMiddleware, authorizarionMiddeleware, generateProducts } from '../../utils/util.js';
+import { generatorProductError } from '../../utils/causeMessageError.js'
+import EnumsError from '../../utils/enumError.js'
+import { CustomError } from '../../utils/CustomError.js'; 
 const router = Router();
 
 router.get('/products', async (req, res, next) => {
@@ -48,14 +51,53 @@ router.get('/products/:sid', async (req, res) => {
 
 
 router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
+
   try {
-    const { body } = req;
-    const product = await productsControllers.create(body);
+    
+ 
+    const {
+      title,
+      description,
+      price,
+      code,
+      stock,
+      category,
+      thumbnails
+    } = req.body;
+
+    if (
+      !title ||
+      !description ||
+      !price ||
+      !code ||
+      !stock ||
+      !category ||
+      !thumbnails
+
+    ) {
+      CustomError.createError({
+        name: 'Error creando el producto',
+        cause: generatorProductError({
+          title,
+          description,
+          price,
+          code,
+          stock,
+          category,
+          thumbnails
+        }),
+        message: 'Ocurrio un error mientras intentamos generar un producto.',
+        code: EnumsError.BAD_REQUEST_ERROR,
+      });
+    }
+    const product = await productsControllers.create(req.body);
     res.status(201).send(product);
 
   } catch (error) {
-    next(res.status(error.statusCode || 500).json({ message: error.message }));
+    res.status(error.statusCode || 500).json({ message: error.message });
   }
+
+
 
 });
 
@@ -64,7 +106,7 @@ router.put('/products/:pid', authenticationMiddleware('jwt'), authorizarionMidde
     const { params: { pid }, body } = req;
     await productsControllers.updateById(pid, body);
     res.status(204).end()
-       
+
   } catch (error) {
     next(res.status(error.statusCode || 500).json({ message: error.message }));
   }
@@ -79,9 +121,9 @@ router.delete('/products/:pid', authenticationMiddleware('jwt'), authorizarionMi
   }
 });
 
-router.get('/mokingProducts',  (req, res,next) => {
-  try {   
-    const products =  generateProducts();
+router.get('/mokingProducts', (req, res, next) => {
+  try {
+    const products = generateProducts();
     res.status(201).send(products);
 
   } catch (error) {

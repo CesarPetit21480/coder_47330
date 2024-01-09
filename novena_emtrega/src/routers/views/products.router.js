@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import { isSuperAdmin } from '../../utils.js';
+import { isSuperAdmin } from '../../utils/util.js';
 import productsControllers from '../../controllers/products.controller.js';
 
 

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import MessageManager from '../../dao/messageManager.js';
-import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils.js';
+import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils/util.js';
 
 const router = Router();
 

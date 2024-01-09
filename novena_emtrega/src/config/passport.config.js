@@ -1,11 +1,11 @@
 import passport from "passport";
 import { Strategy as GitHubStrategy } from "passport-github2";
-import { createHash, isValidPassword } from '../utils.js'
+import { createHash, isValidPassword } from '../utils/util.js'
 import UserModel from '../models/user.model.js';
 import { Strategy as LocalStrategy } from "passport-local";
-import { JWT_SECRET } from '../utils.js'
 import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
 import UserController from "../controllers/user.controller.js";
+import config from '../config/config.js';
 const opts = {
     usernameField: 'email',
     passReqToCallback: true,
@@ -90,7 +90,7 @@ export const init = () => {
     passport.use('jwt', new JWTStrategy({
 
         jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-        secretOrKey: JWT_SECRET,
+        secretOrKey: config.jwtSecret,
     }, (payload, done) => {
 
         return done(null, payload);

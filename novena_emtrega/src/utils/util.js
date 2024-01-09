@@ -4,11 +4,10 @@ import multer from 'multer';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
-import config from './config/config.js';
+import config from '../config/config.js';
 import { faker } from '@faker-js/faker';
 
 const __filename = fileURLToPath(import.meta.url);
-
 export const __dirname = path.dirname(__filename);
 
 export class Exception extends Error {
@@ -94,8 +93,6 @@ export const isSuperAdmin = (user) => {
     return true;
   }
   return false;
-
-
 }
 
 

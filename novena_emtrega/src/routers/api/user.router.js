@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Router } from "express";
-import { createHash, isValidPassword, tokenGenerator, jwtAuth } from '../../utils.js';
+import { createHash, isValidPassword, tokenGenerator, jwtAuth } from '../../utils/util.js';
 import EmailService from '../../services/emailServices.js'
 
 
