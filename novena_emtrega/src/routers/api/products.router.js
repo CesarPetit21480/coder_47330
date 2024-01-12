@@ -2,9 +2,9 @@ import Router from 'express';
 // import ProductManager from '../../dao/ProductManager.js';
 import productsControllers from '../../controllers/products.controller.js';
 import { authenticationMiddleware, authorizarionMiddeleware, generateProducts } from '../../utils/util.js';
-import { generatorProductError } from '../../utils/causeMessageError.js'
+import { generatorProductError, generatorProductIdError } from '../../utils/causeMessageError.js'
 import EnumsError from '../../utils/enumError.js'
-import { CustomError } from '../../utils/CustomError.js'; 
+import { CustomError } from '../../utils/CustomError.js';
 const router = Router();
 
 router.get('/products', async (req, res, next) => {
@@ -38,11 +38,11 @@ const buildResponse = (data) => {
   };
 };
 
-router.get('/products/:sid', async (req, res) => {
+router.get('/products/:pid', async (req, res) => {
   try {
     const { params: { sid } } = req;
 
-    const product = await productsControllers.getById(sid);
+    const product = await productsControllers.getById(pid);
     res.status(200).json(product);
   } catch (error) {
     next(res.status(error.statusCode || 500).json({ message: error.message }));
@@ -53,8 +53,8 @@ router.get('/products/:sid', async (req, res) => {
 router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
 
   try {
-    
- 
+
+
     const {
       title,
       description,
@@ -104,6 +104,20 @@ router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddelewa
 router.put('/products/:pid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
     const { params: { pid }, body } = req;
+
+    if (!pid) {
+
+      CustomError.createError({
+        name: 'Error Update Prodcut',
+        cause: generatorProductIdError({
+          pid
+        }),
+        message: 'Ocurrio un error mientras intentamos Actualizar un producto.',
+        code: EnumsError.INVALID_PARAMS_ERROR,
+      });
+    }
+
+
     await productsControllers.updateById(pid, body);
     res.status(204).end()
 

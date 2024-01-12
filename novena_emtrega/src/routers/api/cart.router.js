@@ -6,6 +6,7 @@ import passport from "passport";
 import userController from "../../controllers/user.controller.js";
 import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils/util.js'
 import PurchaseController from "../../controllers/purchase.controller.js";
+import { generatorCartError } from '../../utils/causeMessageError.js'
 import { v4 as uuidv4 } from 'uuid';
 
 const router = Router();
@@ -69,6 +70,24 @@ router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMid
         const quantity = Number(cantidad)
         const pid = productId;
         const cid = (carrito) ? carrito._id : undefined
+
+        if (
+            !productId ||
+            !cantidad ||
+            !userId
+        ) {
+            CustomError.createError({
+                name: 'Error gegeranod cart',
+                cause: generatorCartError({
+                    productId,
+                    cantidad,
+                    userId
+                }),
+                message: 'Ocurrio un error mientras intentamos generar un Carrito.',
+                code: EnumsError.BAD_REQUEST_ERROR,
+            });
+        }
+
         const userBase = await userController.getByid(userId)
 
         if (carrito) {
@@ -100,10 +119,7 @@ router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMid
 
     } catch (error) {
 
-        const response = res.status(500).json({
-            message: `Error en la operacion 😫 ${error}`
-        });
-        next(response);
+        next(res.status(error.statusCode || 500).json({ message: error.message }));
 
     }
 })

@@ -11,7 +11,18 @@ export const generatorProductError = (product) => {
       `;
   };
   
-  export const generatorUserIdError = (id) => {
+  export const generatorProductIdError = (id) => {
    return `Se debe enviar un identificador valido 😱.
     Valor recibido: ${id}`;
-  } 
+  }
+
+  export const generatorCartError = (cart) => {
+    return `Todos lo campos son requerios y deben ser valido 😱.
+    Lista de campos recibidos en la solicitud:
+      - id Producto:        ${cart.productId}
+      - quantity:    ${cart.cantidad}
+      - id user:  ${cart.userId}
+    
+      `;
+  };
+
