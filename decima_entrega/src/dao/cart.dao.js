@@ -1,6 +1,7 @@
 import cartModel from "../models/cart.model.js";
 import { Exception } from '../utils/util.js';
 import mongoose from "mongoose";
+import { logMessage } from '../config/logger.js';
 
 export default class CartDao {
 
@@ -10,6 +11,7 @@ export default class CartDao {
     async getById(sid) {
         const product = await cartModel.findById(sid);
         if (!product) {
+
             console.error(`Couldn't find Cart 😒`)
         }
         return product;
@@ -35,7 +37,7 @@ export default class CartDao {
 
     async create(data) {
         const message = await cartModel.create(data);
-        console.log('Cart creado correctamente 🚀🚀');
+        logMessage("Cart creado correctamente 🚀🚀", "info");
         return message;
     }
 
@@ -69,7 +71,7 @@ export default class CartDao {
         }
         const criteria = { _id: sid };
         await cartModel.deleteOne(criteria);
-        console.log('Carrito eliminado correctamente 😑');
+        logMessage('Carrito eliminado correctamente 😑', "info");
     }
 
 

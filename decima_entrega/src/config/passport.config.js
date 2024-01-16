@@ -6,6 +6,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
 import UserController from "../controllers/user.controller.js";
 import config from '../config/config.js';
+import { logMessage } from '../config/logger.js';
 const opts = {
     usernameField: 'email',
     passReqToCallback: true,
@@ -43,9 +44,9 @@ export const init = () => {
 
     passport.use('login', new LocalStrategy(opts, async (req, email, password, done) => {
         try {
-            const user =await  UserController.getByLogin(email);
-            
-            
+            const user = await UserController.getByLogin(email);
+
+
             //await UserModel.findOne({ email });
             if (!user) {
                 return done(new Error(`correo o password Invalidos 😢`));
@@ -65,7 +66,7 @@ export const init = () => {
 
     passport.use('github', new GitHubStrategy(gitHubopts, async (accessToken, refreshToken, profile, done) => {
 
-        console.log(profile);
+        logMessage(profile, "info");
 
         const email = profile._json.email;
         let user = await UserModel.findOne({ email });

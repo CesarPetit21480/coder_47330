@@ -54,7 +54,7 @@ app.use('/api', productRouter);
 
 app.use((error, req, res, next) => {
   const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;
-  console.log(message);
+  req.logger.fatal(message);
   res.status(500).json({ status: 'error', message });
 });
 

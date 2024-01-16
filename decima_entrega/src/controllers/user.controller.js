@@ -1,4 +1,5 @@
 import UserServices from '../services/usersServices.js';
+import { logMessage } from '../config/logger.js';
 
 
 export default class UserController {
@@ -6,7 +7,7 @@ export default class UserController {
     static async create(data, email, password) {
 
         const user = await UserServices.create(data, email, password);
-        console.log("user created successfully");
+        logMessage("user created successfully", "info");
         return user;
     }
 
