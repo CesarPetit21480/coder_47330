@@ -108,7 +108,7 @@ router.put('/products/:pid', authenticationMiddleware('jwt'), authorizarionMidde
     if (!pid) {
 
       CustomError.createError({
-        name: 'Error Update Product',
+        name: 'Error Update Prodcut',
         cause: generatorProductIdError({
           pid
         }),
