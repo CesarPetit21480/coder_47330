@@ -1,6 +1,8 @@
 import rejectModel from "../models/rejectCart.model.js";
 import { Exception } from '../utils/util.js';
 import mongoose from "mongoose";
+import { logMessage } from '../config/logger.js';
+
 
 export default class CartDao {
 
@@ -10,7 +12,7 @@ export default class CartDao {
     async getById(rid) {
         const reject = await rejectModel.findById(rid);
         if (!reject) {
-            console.error(`Couldn't find Reject Cart Model 😒`)
+            logMessage(`Couldn't find Reject Reject Model 😒`, "fatal");
         }
         return reject;
     }
@@ -28,7 +30,7 @@ export default class CartDao {
 
     async create(data) {
         const message = await rejectModel.create(data);
-        console.log('Reject creado correctamente 🚀🚀');
+        logMessage("Reject creado correctamente 🚀🚀", "info");
         return message;
     }
 
@@ -36,7 +38,7 @@ export default class CartDao {
 
         const rejectCart = await rejectModel.findOne({ _id: rid });
         if (!rejectCart) {
-            console.error(`Couldn't find Reject 😒`)
+            logMessage(`Couldn't find Reject 😒`, "fatal");
         }
         rejectCart.products.push({ product: pid });
         const result = rejectModel.updateOne({ _id: rid }, rejectCart);
@@ -52,7 +54,8 @@ export default class CartDao {
         }
         const criteria = { _id: rid };
         await cartModel.deleteOne(criteria);
-        console.log('REJECT eliminado correctamente 😑');
-    }    
+        logMessage('REJECT eliminado correctamente 😑', "info");
+
+    }
 
 }

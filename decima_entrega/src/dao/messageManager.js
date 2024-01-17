@@ -1,4 +1,6 @@
 import MessageModel from "../models/message.model.js";
+import { logMessage } from '../config/logger.js';
+
 
 export default class MessageManager {
 
@@ -8,7 +10,7 @@ export default class MessageManager {
 
     static async create(data) {
         const message = await MessageModel.create(data);
-        console.log('Mensaje creado correctamente 🚀🚀');
+        logMessage('Mensaje creado correctamente 🚀🚀', "info");
         return message;
     }
 

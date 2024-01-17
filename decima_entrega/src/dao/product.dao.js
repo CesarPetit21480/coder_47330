@@ -1,3 +1,4 @@
+import { logMessage } from "../config/logger.js";
 import ProductModel from "../models/product.model.js";
 import { Exception } from '../utils/util.js';
 
@@ -5,30 +6,30 @@ import { Exception } from '../utils/util.js';
 export default class ProductDao {
 
 
-     async get(opts = {}, criteria = {},) {   
+    async get(opts = {}, criteria = {},) {
 
-        const result = await ProductModel.paginate(criteria, opts);      
+        const result = await ProductModel.paginate(criteria, opts);
         return result;
     }
-     async getById(pid) {
+    async getById(pid) {
         const product = await ProductModel.findById(pid);
         if (!product) {
-            console.error(`Couldn't find products 😒`)
+            logMessage(`Couldn't find products 😒`, "fatal");
         }
         return product;
     }
 
-     async create(data) {
+    async create(data) {
         const product = await ProductModel.create(data);
-        console.log('Producto creado correctamente 🚀🚀');
+        logMessage('Producto creado correctamente 🚀🚀', "info");
         return product;
     }
 
 
-     async updateById(pid, data) {
+    async updateById(pid, data) {
         const product = ProductModel.findById(pid);
         if (!product) {
-            console.error(`Couldn't find product 😒`)
+            logMessage(`Couldn't find products 😒`, "fatal");
         }
         const criteria = { _id: pid };
         const operation = { $set: data }
@@ -36,7 +37,7 @@ export default class ProductDao {
         return product;
     }
 
-     async deleteById(sid) {
+    async deleteById(sid) {
         const product = await ProductModel.findById(sid);
         if (!product) {
             throw new Exception('No existe el Producto 😨', 404);

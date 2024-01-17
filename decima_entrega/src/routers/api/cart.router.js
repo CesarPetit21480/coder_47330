@@ -177,8 +177,6 @@ router.put("/cart/update", passport.authenticate('jwt', { session: false }), asy
     } catch (error) {
         next(error);
     }
-
-
 });
 
 router.delete("/cart/:cid/product/:pid", passport.authenticate('jwt', { session: false }), async (req, res) => {

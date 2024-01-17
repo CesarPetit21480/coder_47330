@@ -11,8 +11,7 @@ export default class CartDao {
     async getById(sid) {
         const product = await cartModel.findById(sid);
         if (!product) {
-
-            console.error(`Couldn't find Cart 😒`)
+            logMessage(`Couldn't find Cart 😒`, "fatal");
         }
         return product;
     }
@@ -29,7 +28,7 @@ export default class CartDao {
     async getById(sid) {
         const product = await cartModel.findById(sid);
         if (!product) {
-            console.error(`Couldn't find Cart 😒`)
+            logMessage(`Couldn't find Cart 😒`, "fatal");
         }
         return product;
     }
@@ -44,7 +43,7 @@ export default class CartDao {
     async updateById(sid, pid, quantity) {
         const cart = await cartModel.findOne({ _id: sid });
         if (!cart) {
-            console.error(`Couldn't find cart 😒`)
+            logMessage(`Couldn't find Cart 😒`, "fatal");
         }
 
         if (!quantity) {
@@ -80,7 +79,6 @@ export default class CartDao {
             const carritoActualizado = await cartModel.findByIdAndUpdate(sid, { $pull: { 'products': { product: pid } } })
             return carritoActualizado;
         } catch (error) {
-
             throw new Exception('no se pudo efectuar la operacion 😨', 404);
         }
 
@@ -93,7 +91,6 @@ export default class CartDao {
 
             return carrito;
         } catch (error) {
-
             throw new Exception('no se pudo efectuar la operacion 😨', 404);
         }
 
