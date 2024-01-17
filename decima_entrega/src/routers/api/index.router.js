@@ -17,24 +17,13 @@ router.get('/recovery-password', publicRouters, (req, res) => {
 });
 
 
-router.get('/loggersProd', (req, res) => {  
+router.get('/loggers', (req, res) => {
 
-  req.logger.fatal('Esta es una prueba de log fatal PROD');
-  req.logger.warning('Esta es una prueba de log warn PROD');
-  req.logger.info('Esta es una prueba de log info PROD');
-  req.logger.error('Esta es una prueba de log error PROD');
-  req.logger.debug('Esta es una prueba de log debug PROD');
-  res.status(200).send('ok');
-});
-
-
-router.get('/loggersDev', (req, res) => {
-  
-  req.logger.fatal('Esta es una prueba de log fatal DEV');
-  req.logger.warning('Esta es una prueba de log warn DEV');
-  req.logger.info('Esta es una prueba de log info DEV');
-  req.logger.error('Esta es una prueba de log error DEV');
-  req.logger.debug('Esta es una prueba de log debug DEV');
+  req.logger.fatal('Esta es una prueba de log fatal');
+  req.logger.warning('Esta es una prueba de log warn ');
+  req.logger.info('Esta es una prueba de log info ');
+  req.logger.error('Esta es una prueba de log error ');
+  req.logger.debug('Esta es una prueba de log debug ');
   res.status(200).send('ok');
 });
 
