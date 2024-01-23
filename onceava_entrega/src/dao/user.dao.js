@@ -1,6 +1,5 @@
 import UserModel from '../models/user.model.js'
 
-
 export default class UserDao {
 
     async create(data) {
@@ -21,10 +20,7 @@ export default class UserDao {
     async getById(uid) {
         const user = await UserModel.findById(uid);
         return user;
-    }
-
-
-    
+    }    
 
     async updateById(uuid, user) {
         const userExists = UserModel.findById(uuid);
@@ -35,6 +31,5 @@ export default class UserDao {
         const operation = { $set: user }
         const userdb = await UserModel.updateOne(criteria, operation);
         return userdb;
-
     }
 }
