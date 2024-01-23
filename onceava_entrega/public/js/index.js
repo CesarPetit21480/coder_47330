@@ -53,7 +53,9 @@ for (var i = 0; i < envioButtons.length; i++) {
 }
 
 
-function reruperarCorreo() {
+function reruperarCorreo(event) {
+
+  event.preventDefault();
   Swal.fire({
     title: "Ingrese su correo electronico",
     input: "text",
@@ -90,16 +92,14 @@ function reruperarCorreo() {
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({
-        title: `Mail Enciado Correntamente`,
+        title: `Mail Enviado Correntamente`,
         imageUrl: result.value.avatar_url
       });
     }
   });
 }
 
-
-var envioRecuperar = document.getElementById("recuperar");
-
+let envioRecuperar = document.getElementById("recuperar");
 envioRecuperar.addEventListener("click", reruperarCorreo);
 
 

@@ -10,13 +10,6 @@ import { faker } from '@faker-js/faker';
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
-export class Exception extends Error {
-
-  constructor(message, status) {
-    super(message);
-    this.statusCode = status;
-  }
-}
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const pathFile = path.join(__dirname, '../public/avatars');
@@ -50,15 +43,35 @@ export const isValidPassword = (password, user) => {
 
 export const JWT_SECRET = config.jwtSecret;
 
-export const tokenGenerator = (user) => {
-  const { _id, first_name, last_name, email, role } = user;
-  const payload = {
-    id: _id,
-    first_name,
-    last_name,
-    email,
-    role
-  };
+export const tokenGenerator = (user, email, type) => {
+
+  let payload;
+
+  if (user) {
+    const { _id, first_name, last_name, email, role } = user;
+    payload = {
+      id: _id,
+      first_name,
+      last_name,
+      email,
+      role,
+      type
+    };
+  }
+  else {
+    payload = {
+      id: undefined,
+      first_name: undefined,
+      last_name: undefined,
+      email,
+      role: undefined,
+      type
+    };
+  }
+
+  if (type === 'recovery')
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1m' });
+
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '5m' });
 }
 
@@ -86,7 +99,6 @@ export const jwtAuth = (req, res, next) => {
   });
 }
 
-
 export const isSuperAdmin = (user) => {
 
   if (user.email === 'adminCoder@coder.com' && user.rol === 'administrador') {
@@ -94,7 +106,6 @@ export const isSuperAdmin = (user) => {
   }
   return false;
 }
-
 
 export const authenticationMiddleware = (strategy) => (req, res, next) => {
 
@@ -109,7 +120,6 @@ export const authenticationMiddleware = (strategy) => (req, res, next) => {
     next();
   })(req, res, next);
 };
-
 
 export const authorizarionMiddeleware = (roles) => (req, res, next) => {
 
@@ -127,7 +137,6 @@ export const authorizarionMiddeleware = (roles) => (req, res, next) => {
   }
   next();
 }
-
 export const generateProducts = () => {
   const products = [];
   const limit = 100;
@@ -136,7 +145,6 @@ export const generateProducts = () => {
   }
   return products;
 };
-
 
 export const generateProduct = () => {
   return {
@@ -149,10 +157,30 @@ export const generateProduct = () => {
     category: faker.datatype.boolean() ? 'VERDURAS' : 'FRUTAS',
     thumbnails: faker.email,
   };
-
-
-
 }
 
+export class Exception extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
 
+export class NotFoundException extends Exception {
+  constructor(message) {
+    super(message, 404);
+  }
+}
+
+export class InvalidDataException extends Exception {
+  constructor(message) {
+    super(message, 400);
+  }
+}
+
+export class UnauthorizedException extends Exception {
+  constructor(message) {
+    super(message, 401);
+  }
+}
 

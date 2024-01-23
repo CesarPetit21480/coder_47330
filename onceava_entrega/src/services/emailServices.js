@@ -25,11 +25,15 @@ export default class EmailService {
     });
   }
 
-  sendRecoveryPasswordEmail(email) {
+  sendRecoveryPasswordEmail(email, token) {
+
+
+    const url = `http://localhost:8080/api/user/reset/${token}`
+
     return this.sendEmail(
       email,
-      `Hola cesar 😁`,
-      `<h1>Hola cesar te damos la bienvenida a nuestro colegio 😍</h1>`
+      `Recovery password`,
+      `<h1>Ingrese este link para recuperar password: ${url}</h1>`
     );
   }
 

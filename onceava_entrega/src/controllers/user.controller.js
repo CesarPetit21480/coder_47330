@@ -1,5 +1,6 @@
 import UserServices from '../services/usersServices.js';
 import { logMessage } from '../config/logger.js';
+import EmailService from '../services/emailServices.js';
 
 
 export default class UserController {
@@ -26,5 +27,9 @@ export default class UserController {
     static async getByEmail(email) {
         const user = await UserServices.getByEmail(email);
         return user;
+    }
+
+    static async IsvalidatePassword(email, password, recoveryPassword) {
+        return await UserServices.validatePassword(email, password, recoveryPassword);
     }
 }

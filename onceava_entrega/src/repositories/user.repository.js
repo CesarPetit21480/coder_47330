@@ -7,14 +7,11 @@ export default class user {
     }
     async getbyLogin(email) {
         const user = await this.dao.get(email);
-
         if (user) {
             return user;
         }
         return null;
-
     }
-
 
     async getbyEmail(email) {
         const user = await this.dao.get(email);
@@ -25,13 +22,11 @@ export default class user {
         }
         return null;
 
-
     }
     async create(data) {
         const user = await this.dao.create(data);
         return user;
     }
-
     async getById(uid) {
         const user = await this.dao.getById(uid);
 
@@ -39,6 +34,11 @@ export default class user {
             return user;
         return null;
 
+    }
+
+    async updatebyId(user) {
+        const userdb = await this.dao.updateById(user._id, user);
+        return userdb;
     }
 }
 
