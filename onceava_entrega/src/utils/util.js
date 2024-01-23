@@ -70,7 +70,7 @@ export const tokenGenerator = (user, email, type) => {
   }
 
   if (type === 'recovery')
-    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1m' });
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '5m' });
 }
@@ -80,9 +80,7 @@ export const jwtAuth = (req, res, next) => {
   const token = req.signedCookies["access_token"];
 
   if (!token) {
-
     res.redirect('/login');
-
     //return res.status(401).json({ message: 'unauthorized' });
   }
 
@@ -99,6 +97,30 @@ export const jwtAuth = (req, res, next) => {
   });
 }
 
+
+export const jwtAuthUrl = (token) => {
+
+  if (!token) {
+    res.redirect('/login');
+  }
+
+  let user;
+
+  jwt.verify(token, JWT_SECRET, (error, payload) => {
+    if (error) {
+      return res.status(404).json({
+        success: false,
+        code: 'invalid token',
+        message: 'Invalid token'
+      });
+    }
+     user = payload;
+   
+  });
+
+  return user;
+}
+
 export const isSuperAdmin = (user) => {
 
   if (user.email === 'adminCoder@coder.com' && user.rol === 'administrador') {
@@ -109,7 +131,7 @@ export const isSuperAdmin = (user) => {
 
 export const authenticationMiddleware = (strategy) => (req, res, next) => {
 
-  passport.authenticate("jwt", { session: false }, (error, payload, info) => {
+  passport.authenticate(strategy, { session: false }, (error, payload, info) => {
     if (error) {
       return next(error);
     }

@@ -3,6 +3,7 @@ import { Router } from "express";
 import { createHash, isValidPassword, tokenGenerator, jwtAuth } from '../../utils/util.js';
 import EmailService from '../../services/emailServices.js'
 import UserController from '../../controllers/user.controller.js'
+import { authenticationMiddleware, jwtAuthUrl } from "../../utils/util.js";
 
 
 
@@ -64,8 +65,17 @@ router.post('/recovery-password/email/:email', async (req, res, next) => {
   }
 });
 
-router.get('/reset/:token', async (req, res, next) => {
-  res.render('recovery');
+router.get('/reset/:token', authenticationMiddleware('jwt'), async (req, res, next) => {
+
+  const { token } = req.params
+  const userToken = jwtAuthUrl(token);
+  if (req.user.type === userToken.type)
+      res.render('recovery');
+  else
+  {
+    res.render('login');
+  }    
+
 })
 
 router.post('/restablecerPassword/', async (req, res, next) => {
