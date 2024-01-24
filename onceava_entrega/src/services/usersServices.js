@@ -73,4 +73,28 @@ export default class UsersServicies {
             return true;
     }
 
+
+    static async changesRole(uid) {
+
+        let user = await userRepository.getById(uid);
+        if (!user) {
+            throw new NotFoundException(`User not exists ${uid} 😱`);
+        }
+
+        let role = user.role
+
+        if (role.toUpperCase() === "USER")
+            user.role = "PREMIUM";
+        else if (role.toUpperCase() === "PREMIUM") {
+            user.role = "USER";
+        }
+
+
+        const userActualizado = userRepository.updatebyId(user);
+
+        if (userActualizado)
+            return true;
+    }
+
+
 }

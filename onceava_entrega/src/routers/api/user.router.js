@@ -3,7 +3,7 @@ import { Router } from "express";
 import { createHash, isValidPassword, tokenGenerator, jwtAuth } from '../../utils/util.js';
 import EmailService from '../../services/emailServices.js'
 import UserController from '../../controllers/user.controller.js'
-import { authenticationMiddleware, jwtAuthUrl } from "../../utils/util.js";
+import { authenticationMiddleware, jwtAuthUrl, authorizarionMiddeleware } from "../../utils/util.js";
 
 
 
@@ -17,6 +17,25 @@ router.post('/register', passport.authenticate('register', { failureRedirect: '/
     next(error);
   }
 })
+
+
+router.post('/premium/:uid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
+  try {
+
+    const { uid } = req.params;
+    const cambioRoleUser = await UserController.changesRole(uid);
+
+    if (cambioRoleUser)
+      res.status(200).json({ message: 'Rol Cambiado Existosamente 😁' });
+
+
+  } catch (error) {
+    next(error);
+  }
+})
+
+
+
 router.post('/login', passport.authenticate('login', { failureRedirect: '/login' }), async (req, res) => {
   try {
     const user = req.user;
@@ -51,30 +70,26 @@ router.post('/recovery-password/email/:email', async (req, res, next) => {
     const emailService = EmailService.getInstance();
     await emailService.sendRecoveryPasswordEmail(email, token);
 
-    res.cookie('access_token', token, {
-      maxAge: 6000000,
-      signed: true,
-      httpOnly: true
-    });
+    // res.cookie('access_token', token, {
+    //   maxAge: 6000000,
+    //   signed: true,
+    //   httpOnly: true
+    // });
 
     res.status(200).json({ message: 'correo enviado correctamente 😁' });
-
-
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/reset/:token', authenticationMiddleware('jwt'), async (req, res, next) => {
-
+router.get('/reset/:token', async (req, res, next) => {
   const { token } = req.params
   const userToken = jwtAuthUrl(token);
-  if (req.user.type === userToken.type)
-      res.render('recovery');
-  else
-  {
-    res.render('login');
-  }    
+  if (userToken)
+    res.render('recovery');
+  else {
+    res.rnder('login');
+  }
 
 })
 

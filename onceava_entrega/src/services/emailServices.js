@@ -33,7 +33,7 @@ export default class EmailService {
     return this.sendEmail(
       email,
       `Recovery password`,
-      `<h1>Ingrese este link para recuperar password: ${url}</h1>`
+      `<h1>Ingrese este link para recuperar password: <a href=${url}>Presione Aqui para Reset Password</a> </h1>`
     );
   }
 

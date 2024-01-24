@@ -17,6 +17,7 @@ export default class user {
         const user = await this.dao.get(email);
 
         if (user) {
+            
             const userMapping = new UserDTO(user)
             return userMapping;
         }

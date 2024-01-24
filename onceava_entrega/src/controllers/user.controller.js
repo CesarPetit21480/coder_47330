@@ -32,4 +32,11 @@ export default class UserController {
     static async IsvalidatePassword(email, password, recoveryPassword) {
         return await UserServices.validatePassword(email, password, recoveryPassword);
     }
+
+    static async changesRole(uid) {
+        return await UserServices.changesRole(uid);
+    }
+
+
+    
 }

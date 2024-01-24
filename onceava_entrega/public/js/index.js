@@ -92,7 +92,7 @@ function reruperarCorreo(event) {
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({
-        title: `Mail Enviado Correntamente`,
+        title: `Mail Enviado Correctamente`,
         imageUrl: result.value.avatar_url
       });
     }

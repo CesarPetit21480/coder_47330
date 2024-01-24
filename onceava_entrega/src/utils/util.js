@@ -70,7 +70,7 @@ export const tokenGenerator = (user, email, type) => {
   }
 
   if (type === 'recovery')
-    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1m' });
 
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '5m' });
 }
@@ -100,22 +100,20 @@ export const jwtAuth = (req, res, next) => {
 
 export const jwtAuthUrl = (token) => {
 
+
   if (!token) {
-    res.redirect('/login');
+
+    // res.redirect('/login');
   }
 
   let user;
 
   jwt.verify(token, JWT_SECRET, (error, payload) => {
     if (error) {
-      return res.status(404).json({
-        success: false,
-        code: 'invalid token',
-        message: 'Invalid token'
-      });
+      return undefined;
     }
-     user = payload;
-   
+    user = payload;
+
   });
 
   return user;
