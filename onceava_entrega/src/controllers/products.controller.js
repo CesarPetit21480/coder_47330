@@ -1,4 +1,5 @@
 import ProductServices from '../services/productServices.js';
+import UserServices from '../services/usersServices.js';
 
 
 export default class ProductController {
@@ -42,8 +43,13 @@ export default class ProductController {
     static async deleteById(pid) {
 
         await ProductServices.deleteById(pid);
-   }
+    }
 
+    static async isOWnerPremium(owner) {
+        const user = await UserServices.isOWnerPremium(owner);
+
+      
+    }
 }
 
 

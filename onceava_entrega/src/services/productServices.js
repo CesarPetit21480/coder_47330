@@ -32,6 +32,11 @@ export default class ProductServices {
         await productRepository.deleteById(pid);
 
     }
+    static async isOWnerPremium(pid) {
+        await productRepository.deleteById(pid);
+
+    }
+
 
 
 }

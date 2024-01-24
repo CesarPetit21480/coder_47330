@@ -52,6 +52,9 @@ router.get('/products/:pid', async (req, res) => {
 
 router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
 
+  let esOwnerPremiun;
+
+
   try {
 
 
@@ -62,8 +65,24 @@ router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddelewa
       code,
       stock,
       category,
-      thumbnails
+      thumbnails,
+      owner = undefined,
     } = req.body;
+
+
+    const producto = {
+      title,
+      description,
+      price,
+      code,
+      stock,
+      category,
+      thumbnails,
+      owner
+    }
+
+    if (producto.owner)
+      esOwnerPremiun = await productsControllers.isOWnerPremium(producto.owner)
 
     if (
       !title ||
@@ -96,9 +115,6 @@ router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddelewa
   } catch (error) {
     res.status(error.statusCode || 500).json({ message: error.message });
   }
-
-
-
 });
 
 router.put('/products/:pid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {

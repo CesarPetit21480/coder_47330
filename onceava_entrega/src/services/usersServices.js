@@ -96,5 +96,14 @@ export default class UsersServicies {
             return true;
     }
 
+    static async isOWnerPremium(email) {
 
+        let user = await this.getByEmail(email);
+        if (!user) {
+            throw new NotFoundException(`User not exists ${uid} 😱`);
+        }
+        let role = user.role
+        if (role.toUpperCase() !== "PREMIUM" && role.toUpperCase() !== "ADMIN")
+            throw new InvalidDataException(`User not is PREMIUN OR ADMIN' 😱`);
+    }
 }
