@@ -70,7 +70,7 @@ export const tokenGenerator = (user, email, type) => {
   }
 
   if (type === 'recovery')
-    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1m' });
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: '60m' });
 
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '5m' });
 }

@@ -40,9 +40,9 @@ export default class ProductController {
         return product;
     }
 
-    static async deleteById(pid) {
+    static async deleteById(pid,email,role) {
 
-        await ProductServices.deleteById(pid);
+        await ProductServices.deleteById(pid,email,role);
     }
 
     static async isOWnerPremium(owner) {

@@ -1,5 +1,6 @@
 import ProductDao from '../dao/product.dao.js';
 import { productRepository } from '../repositories/index.js';
+import { InvalidDataException, NotFoundException } from '../utils/util.js';
 
 
 export default class ProductServices {
@@ -28,8 +29,21 @@ export default class ProductServices {
         return product;
     }
 
-    static async deleteById(pid) {
-        await productRepository.deleteById(pid);
+    static async deleteById(pid, email,role) {
+
+        const product = await productRepository.getById(pid);
+
+        if (!product) {
+
+            throw new NotFoundException(`product not exists ${pid} 😱`);
+        }
+        
+
+        if (product.owner === email || product.owner === "ADMIN" || role === "ADMIN") {
+            await productRepository.deleteById(pid);
+        } else {
+            throw new InvalidDataException(`el producto que quiere eliminar no pertenece al usuario o no tiene permisos para eliminar  ${email}' 😱`);
+        }
 
     }
     static async isOWnerPremium(pid) {

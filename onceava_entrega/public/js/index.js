@@ -2,6 +2,8 @@
 
 function handleEnviarClick(event) {
 
+  console.log("entre");
+
   event.preventDefault();
 
   // Obtiene el "id" del botón clicado

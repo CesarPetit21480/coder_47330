@@ -335,3 +335,96 @@
 [34minfo[39m: Producto creado correctamente 🚀🚀
 [34minfo[39m: Database connection established 🚀🚀🚀
 [34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: User not exists undefined 😱
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: User not exists undefined 😱
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: User not exists undefined 😱
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: correo o password Invalidos 😢
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Couldn't find products 😒
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Couldn't find products 😒
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: Cannot read properties of null (reading 'owner')
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Couldn't find products 😒
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: Cannot read properties of null (reading 'owner')
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Couldn't find products 😒
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: product not exists 65b15ed1262563b197ecadf1 😱
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: el producto que quiere eliminar no pertenece al usuario  cesar_petit@hotmail.com' 😱
+[31mfatal[39m: Couldn't find products 😒
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: product not exists 658cb9c69546de60f3055b80 😱
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: el producto que quiere eliminar no pertenece al usuario  cesar_petit@gmail.com' 😱
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: el producto que quiere eliminar no pertenece al usuario  cesar_petit@gmail.com' 😱
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Couldn't find products 😒
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: product not exists 65b15f20262563b197ecadf4 😱
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: el producto que quiere eliminar no pertenece al usuario o no tiene permisos para eliminar  cesar_petit@gmail.com' 😱
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: undefined
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀
+[31mfatal[39m: Ah ocurrido un error desconocido 😨: El usuario no puede comprar su propio producto 😱
+[34minfo[39m: Database connection established 🚀🚀🚀
+[34minfo[39m: Server running in http://localhost:8080 prod 🚀

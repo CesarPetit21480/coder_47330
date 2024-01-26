@@ -4,10 +4,11 @@ import RejectController from "../../controllers/reject.controller.js";
 import ProductsController from "../../controllers/products.controller.js";
 import passport from "passport";
 import userController from "../../controllers/user.controller.js";
-import { authenticationMiddleware, authorizarionMiddeleware } from '../../utils/util.js'
+import { authenticationMiddleware, authorizarionMiddeleware, InvalidDataException, NotFoundException } from '../../utils/util.js'
 import PurchaseController from "../../controllers/purchase.controller.js";
 import { generatorCartError } from '../../utils/causeMessageError.js'
 import { v4 as uuidv4 } from 'uuid';
+
 
 const router = Router();
 
@@ -60,7 +61,7 @@ router.get("/cart/id/:id", passport.authenticate('jwt', { session: false }), asy
         next(res.status(error.statusCode || 500).json({ message: error.message }));
     }
 });
-router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMiddeleware(["USER"]), async (req, res, next) => {
+router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMiddeleware(["USER", "PREMIUM"]), async (req, res, next) => {
 
     try {
         const carrito = await CartController.getActive();
@@ -77,7 +78,7 @@ router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMid
             !userId
         ) {
             CustomError.createError({
-                name: 'Error gegeranod cart',
+                name: 'Error generando cart',
                 cause: generatorCartError({
                     productId,
                     cantidad,
@@ -89,6 +90,13 @@ router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMid
         }
 
         const userBase = await userController.getByid(userId)
+
+        const product = await ProductsController.getById(productId);
+
+        if (product.owner === userBase.email) {
+            throw new InvalidDataException(`El usuario no puede comprar su propio producto 😱`);
+        }
+
 
         if (carrito) {
             const carrito = await CartController.updateById(cid, pid, quantity);
@@ -118,9 +126,7 @@ router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMid
         }
 
     } catch (error) {
-
-        next(res.status(error.statusCode || 500).json({ message: error.message }));
-
+        next(error);
     }
 })
 

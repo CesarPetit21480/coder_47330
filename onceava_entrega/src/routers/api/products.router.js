@@ -54,10 +54,7 @@ router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddelewa
 
   let esOwnerPremiun;
 
-
   try {
-
-
     const {
       title,
       description,
@@ -109,7 +106,7 @@ router.post('/products', authenticationMiddleware('jwt'), authorizarionMiddelewa
         code: EnumsError.BAD_REQUEST_ERROR,
       });
     }
-    const product = await productsControllers.create(req.body);
+    const product = await productsControllers.create(producto);
     res.status(201).send(product);
 
   } catch (error) {
@@ -141,13 +138,15 @@ router.put('/products/:pid', authenticationMiddleware('jwt'), authorizarionMidde
     next(res.status(error.statusCode || 500).json({ message: error.message }));
   }
 });
-router.delete('/products/:pid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res) => {
+router.delete('/products/:pid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN", "PREMIUM"]), async (req, res, next) => {
   try {
     const { params: { pid } } = req;
-    await productsControllers.deleteById(pid);
+    const email = req.user.email;
+    const role = req.user.role;
+    await productsControllers.deleteById(pid, email,role);
     res.status(204).end();
   } catch (error) {
-    res.status(error.statusCode || 500).json({ message: error.message });
+    next(error);
   }
 });
 

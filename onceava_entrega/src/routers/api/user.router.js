@@ -57,8 +57,6 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-const urlRecoveryPassStep2 = 'https://google.com';
-
 router.post('/recovery-password/email/:email', async (req, res, next) => {
 
   const { email } = req.params;
@@ -86,9 +84,9 @@ router.get('/reset/:token', async (req, res, next) => {
   const { token } = req.params
   const userToken = jwtAuthUrl(token);
   if (userToken)
-    res.render('recovery');
+    res.render('recovery', { email: userToken.email });
   else {
-    res.rnder('login');
+    res.render('login');
   }
 
 })

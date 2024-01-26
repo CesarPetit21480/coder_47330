@@ -4,7 +4,14 @@
       <header>
         <h1>{{title}}</h1>
       </header>
-      <input type="email" name="email" placeholder="Correo" required />
+      <input
+        type="email"
+        name="email"
+        value={{this.email}}
+        placeholder="Correo"
+        required
+        disabled
+      />
       <input
         type="password"
         name="password"
