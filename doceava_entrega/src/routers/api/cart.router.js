@@ -32,13 +32,15 @@ router.get("/", passport.authenticate('jwt', { session: false }), async (req, re
 router.get("/active", async (req, res, next) => {
     try {
         const carrito = await CartController.getActive();
-        return carrito;
+        res.json({
+            status: "success",
+            message: "Carrito Activo 🚀",
+            payload: carrito,
+        });
 
     } catch (error) {
-        next(res.status(error.statusCode || 500).json({ message: error.message }));
+        next(error);
     }
-
-
 })
 
 router.get("/id/:id", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
