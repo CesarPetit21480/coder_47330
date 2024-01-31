@@ -14,7 +14,7 @@ const router = Router();
 
 const listProductosCarrito = [];
 
-router.get("/cart", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+router.get("/", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
 
     try {
         const carrito = await CartController.get();
@@ -29,7 +29,7 @@ router.get("/cart", passport.authenticate('jwt', { session: false }), async (req
     }
 });
 
-router.get("/cart/active", async (req, res, next) => {
+router.get("/active", async (req, res, next) => {
     try {
         const carrito = await CartController.getActive();
         return carrito;
@@ -41,7 +41,7 @@ router.get("/cart/active", async (req, res, next) => {
 
 })
 
-router.get("/cart/id/:id", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+router.get("/id/:id", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
     const { id } = req.params;
     const carrito = [];
 
@@ -61,7 +61,7 @@ router.get("/cart/id/:id", passport.authenticate('jwt', { session: false }), asy
         next(res.status(error.statusCode || 500).json({ message: error.message }));
     }
 });
-router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMiddeleware(["USER", "PREMIUM"]), async (req, res, next) => {
+router.post("/manejador", authenticationMiddleware('jwt'), authorizarionMiddeleware(["USER", "PREMIUM"]), async (req, res, next) => {
 
     try {
         const carrito = await CartController.getActive();
@@ -130,7 +130,7 @@ router.post("/cart/manejador", authenticationMiddleware('jwt'), authorizarionMid
     }
 })
 
-router.post("/cart/create", passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.post("/create", passport.authenticate('jwt', { session: false }), async (req, res) => {
     const { body } = req;
 
     try {
@@ -157,7 +157,7 @@ router.post("/cart/create", passport.authenticate('jwt', { session: false }), as
     }
 });
 
-router.put("/cart/update", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+router.put("/update", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
 
     const { cid, pid } = req.query;
     const body = req.body;
@@ -185,7 +185,7 @@ router.put("/cart/update", passport.authenticate('jwt', { session: false }), asy
     }
 });
 
-router.delete("/cart/:cid/product/:pid", passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.delete("/:cid/product/:pid", passport.authenticate('jwt', { session: false }), async (req, res) => {
 
 
     const { cid, pid } = req.params;
@@ -212,7 +212,7 @@ router.delete("/cart/:cid/product/:pid", passport.authenticate('jwt', { session:
 
 });
 
-router.delete("/cart/:cid", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+router.delete("/:cid", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
 
     const { cid, pid } = req.params;
 
@@ -238,7 +238,7 @@ router.delete("/cart/:cid", passport.authenticate('jwt', { session: false }), as
 });
 
 
-router.delete("/cart/:cid", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+router.delete("/:cid", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
 
     const { cid } = req.params;
 
@@ -259,7 +259,7 @@ router.delete("/cart/:cid", passport.authenticate('jwt', { session: false }), as
 })
 
 
-router.post("/cart/:cid/purchase", async (req, res, next) => {
+router.post("/:cid/purchase", async (req, res, next) => {
 
     try {
 

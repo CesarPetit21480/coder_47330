@@ -1,0 +1,59 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Traer Carrito Activo Requiere TOKEN
+      
+      responses:
+        200:
+          description: Carrito Traido
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cart'
+        404:
+          description: Producto no encontrado.      
+        500 :
+          description: Error interno del servidor  
+
+components:
+  schemas:
+    ProductsItem:
+      type: object
+      properties:
+        product:
+          type: string
+          description: Id Producto
+        quantity:
+          type: number
+          description: Cantidad de Elementos en la cart
+      required:
+        - product
+        - quantity
+    Cart:
+      type: object
+      properties:
+        fecha:
+          type: string
+          description: Fecha de Carrito
+        status:
+          type: boolean
+          description: Estado Carto
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductsItem'
+          description: Lista de Productos en la cart
+        user:
+          type: string
+          description: id User Generador Carts
+      example:
+          fecha: '2024-01-31'
+          status: true
+          products:
+            - product: '60a6bcbbe4bfc0f2d2e3b2b5'
+              quantity: 2
+            - product: '60a6bcbbe4bfc0f2d2e3b2b6'
+              quantity: 1
+          user: 'admin o pp@gmail.com'

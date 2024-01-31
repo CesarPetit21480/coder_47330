@@ -47,7 +47,7 @@ app.use(passport.initialize());
 
 const swaggerOptions = {
   definition: {
-    openaqpi: '3.0.1',
+    openapi: '3.0.1',
     info: {
       title: 'Cesar Petit API',
       descripcion: 'Documentacion de la API CESAR PETIT para presentar 😊'
@@ -65,7 +65,7 @@ app.use('/', ProductRouterView);
 app.use('/', cartViewer);
 app.use('/api/user', userRouter);
 app.use('/api', messageViewRouter);
-app.use('/api', CartRoutes);
+app.use('/api/cart', CartRoutes);
 app.use('/api/products', productRouter);
 
 

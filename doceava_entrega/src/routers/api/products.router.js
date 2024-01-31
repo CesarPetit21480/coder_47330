@@ -110,7 +110,7 @@ router.post('/', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADM
     res.status(201).send(product);
 
   } catch (error) {
-    res.status(error.statusCode || 500).json({ message: error.message });
+    next(error);
   }
 });
 
