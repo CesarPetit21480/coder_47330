@@ -1,0 +1,210 @@
+paths:
+  /api/products/:
+    get:
+      summary: Traer productos
+      tags:
+       - Products
+      responses:
+        200 : 
+          description: Los Productos fueron Traidos con exito
+          context:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/product'
+        500 :
+          description: Error interno del servidor
+    post:
+      summary: Crea un Producto
+      tags:
+        - Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/createProduct'
+      responses:
+        200:
+          description: Producto Generado
+        400:
+          description: Error en los datos enviados
+        500:
+          description: Error interno del servidor
+
+  /api/products/{pid}:
+    get:
+      summary: Traer productos por id
+      tags:
+       - Products
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: Identificador del Producto.
+          schema:
+            type: string
+      responses:
+        200 : 
+          description: Los Productos fueron Traidos con exito
+          context:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/product'
+        404:
+          description: Producto no encontrado.
+        500 :
+          description: Error interno del servidor  
+    put:
+      summary: Permite actualizar un producto por su identificador.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: Identificador del producto.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/updateProduct'
+      responses:
+        200:
+          description: Usuario actualizado en la base de datos.
+          content:
+              pplication/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Producto no encontrado.
+        500:
+          description: Error interno del servidor.
+          
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID producto generado por mongo
+        title:
+          type: string
+          description: Titulo del Producto
+        description:
+          type: string
+          description: Descripcion del producto
+        price:
+          type: number
+          description: Valor del Productos generado
+        code:
+          type: string
+          description: Codigo Unico Producto
+        stock:
+          type: number
+          description: Cantidad de Productos en Stock
+        category:
+          type: string
+          description: Categoria VERDURAS O FRUTAS
+        thumbnails:
+          type: string         
+          description: Imagenes de Productos
+        owner:
+          type: string
+          description: Usuario que genero Producto si no existe default ADMIN
+      example:    
+        _id: 654f85ca34dccb61d0b0598d
+        title: KIWI
+        description: KIWI JUGOSO
+        price: 1200
+        code: FRUTA001
+        stock: 100
+        category : FRUTAS
+        thumbnails: KIWI JUGOSO
+        owner: user@example.com
+  requestBodies:
+    createProduct:
+      type: object
+      properties:          
+        title:
+          type: string
+          description: Titulo del Producto
+        description:
+          type: string
+          description: Descripcion del producto
+        price:
+          type: number
+          description: Valor del Productos generado
+        code:
+          type: string
+          description: Codigo Unico Producto
+        stock:
+          type: number
+          description: Cantidad de Productos en Stock
+        category:
+          type: string
+          description: Categoria VERDURAS O FRUTAS
+        thumbnails:
+          type: string         
+          description: Imagenes de Productos
+        owner:
+          type: string
+          description: Usuario que genero Producto si no existe default ADMIN
+      example:          
+        title: KIWI
+        description: KIWI JUGOSO
+        price: 1200
+        code: FRUTA001
+        stock: 100
+        category : FRUTAS
+        thumbnails: FRUTAS.jpg
+        owner: user@example.com
+    updateProduct:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID producto generado por mongo
+        title:
+          type: string
+          description: Titulo del Producto
+        description:
+          type: string
+          description: Descripcion del producto
+        price:
+          type: number
+          description: Valor del Productos generado
+        code:
+          type: string
+          description: Codigo Unico Producto
+        stock:
+          type: number
+          description: Cantidad de Productos en Stock
+        category:
+          type: string
+          description: Categoria VERDURAS O FRUTAS
+        thumbnails:
+          type: string         
+          description: Imagenes de Productos
+        owner:
+          type: string
+          description: Usuario que genero Producto si no existe default ADMIN
+      example:    
+        _id: 654f85ca34dccb61d0b0598d
+        title: KIWI
+        description: KIWI JUGOSO
+        price: 1200
+        code: FRUTA001
+        stock: 100
+        category : FRUTAS
+        thumbnails: FRUTAS.jpg
+        owner: user@example.com
+
+
