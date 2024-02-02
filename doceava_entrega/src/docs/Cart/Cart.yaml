@@ -60,6 +60,35 @@ paths:
           description: cart no encontrado o no activo.      
         500 :
           description: Error interno del servidor
+
+  /api/cart/{cid}/product/{pid}:
+    delete:
+      summary: Elimina Producto del Carrito
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Identificador del Carrito.
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: Identificador del Producto.
+          schema:
+            type: string
+      responses:
+        204:
+          description:  El Producto del carrito fue Eliminado en la base de datos.
+        401:
+          description: Token requerido.        
+        404:
+          description: Producto no encontrado.
+        500:
+          description: Error interno del servidor.
+
   /api/cart/manejador:
     post:
       summary: Crea o genero un update del carrito
@@ -67,7 +96,7 @@ paths:
         - handler Cart     
       responses:
         200 : 
-          description: El carrito fuero Traido con exito
+          description: El carrito Generado o Actualizado con exito
           content:
             application/json:
               schema:
@@ -75,9 +104,65 @@ paths:
                 items:
                   $ref: '#/components/requestBodies/createCart'
         404:
-          description: cart no encontrado o no activo.      
+          description: cart no encontrado o no activo.
+        401:
+          description: Token requerido.    
         500 :
-          description: Error interno del servidor 
+          description: Error interno del servidor
+  /api/cart/create:
+    post:
+      summary: Crea un nuevo carrito
+      tags:
+       - Cart
+      responses:
+        200 : 
+          description: El carrito fue Generado con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/requestBodies/createCart'
+        404:
+          description: cart generado.
+        401:
+          description: Token requerido.   
+        500 :
+          description: Error interno del servidor
+  /api/cart/update:
+    put:
+      summary: Update Carrito por id producto y carrito
+      tags:
+        - Cart
+      parameters:
+        - in: query
+          name: cid
+          required: true
+          description: Identificador del Carrito.
+          schema:
+            type: string
+        - in: query
+          name: pid
+          required: true
+          description: Identificador del propducto.
+          schema:
+            type: string
+      responses:
+        200 : 
+          description: El carrito fue Actualizado con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/requestBodies/updateCart'
+        404:
+          description: cart no encontrado o no activo.
+        401:
+          description: Token requerido.   
+        500 :
+          description: Error interno del servidor
+    
 
 components:
   schemas:
@@ -123,6 +208,35 @@ components:
     createCart:
       type: object
       properties:
+        fecha:
+          type: string
+          description: Fecha de Carrito
+        status:
+          type: boolean
+          description: Estado Carto
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductsItem'
+            description: Lista de Productos en la cart
+        user:
+          type: string
+          description: id User Generador Carts
+      example:
+          fecha: '2024-01-31'
+          status: true
+          products:
+            - product: '60a6bcbbe4bfc0f2d2e3b2b5'
+              quantity: 2
+            - product: '60a6bcbbe4bfc0f2d2e3b2b6'
+              quantity: 1
+          user: 'admin o pp@gmail.com'
+    updateCart:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID cart generado por mongo
         fecha:
           type: string
           description: Fecha de Carrito
