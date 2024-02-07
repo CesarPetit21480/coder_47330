@@ -6,17 +6,24 @@ import { createHash, isValidPassword, tokenGenerator, jwtAuth } from '../../util
 
 const router = Router();
 
-router.post('/sessions/register', passport.authenticate('register', { failureRedirect: '/register' }), async (req, res) => {
-    res.redirect('/login');
+router.post('/sessions/register', passport.authenticate('register', { failureRedirect: '/register' }), async (req, res, next) => {
+
+    try {
+        res.redirect('/login');
+    } catch (error) {
+        next(error);
+    }
+
 })
 router.post('/sessions/login', passport.authenticate('login', { failureRedirect: '/login' }), async (req, res) => {
-    
+
     const user = req.user;
     const token = tokenGenerator(user);
-    res.cookie('access_token', token, { 
-        maxAge: 20000, 
+    res.cookie('access_token', token, {
+        maxAge: 20000,
         signed: true,
-        httpOnly: true})
+        httpOnly: true
+    })
     res.redirect('/products');
 });
 
@@ -28,7 +35,7 @@ router.get('/sessions/github/callback', passport.authenticate('github', { failur
     const token = tokenGenerator(user);
     res.cookie('access_token', token, { maxAge: 20000, signed: true })
     res.redirect('/products');
-   
+
 });
 
 

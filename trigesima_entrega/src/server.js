@@ -5,11 +5,11 @@ import config from './config/config.js';
 import { logMessage } from "./config/logger.js"
 
 const server = http.createServer(app);
-const PORT = config.port;
+const PORT = config.port || 8081;
 
 await init();
 
 server.listen(PORT, () => {
-  logMessage(`Server running in http://localhost:${PORT} ${config.env} 🚀`,"info");
+  logMessage(`Server running in http://localhost:${PORT} ${config.env} 🚀`, "info");
 
 });

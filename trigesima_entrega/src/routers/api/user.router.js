@@ -12,7 +12,10 @@ const router = new Router();
 
 router.post('/register', passport.authenticate('register', { failureRedirect: '/register' }), async (req, res, next) => {
   try {
-    res.redirect('/login');
+
+    res.send({ status: "success", payload: req.user })
+
+    //res.redirect('/login');
   } catch (error) {
     next(error);
   }
