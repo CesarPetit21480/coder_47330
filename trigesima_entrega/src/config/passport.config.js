@@ -33,7 +33,30 @@ export const init = () => {
 
     passport.use('register', new LocalStrategy(opts, async (req, email, password, done) => {
 
+
+        const { first_name, last_name, age, provider } = req.body;
+
         try {
+            if (
+                !first_name ||
+                !last_name ||
+                !age ||            
+                !provider
+
+            ) {
+                CustomError.createError({
+                    name: 'Error creando el user',
+                    cause: generatorUserError({
+                        first_name,
+                        last_name,
+                        age,
+                        password,
+                        provider
+                    }),
+                    message: 'Ocurrio un error mientras intentamos generar un usuaerio.',
+                    code: EnumsError.BAD_REQUEST_ERROR,
+                });
+            }
             const newUser = await UserController.create(req.body, email, password);
             done(null, newUser);
 

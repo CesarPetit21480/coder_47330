@@ -12,7 +12,6 @@ const router = new Router();
 
 router.post('/register', passport.authenticate('register', { failureRedirect: '/register' }), async (req, res, next) => {
   try {
-
     res.send({ status: "success", payload: req.user })
 
     //res.redirect('/login');
