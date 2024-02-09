@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as GitHubStrategy } from "passport-github2";
-import { createHash, isValidPassword } from '../utils/util.js'
+import { createHash, isValidPassword, NotFoundException ,InvalidDataException} from '../utils/util.js'
+
 import UserModel from '../models/user.model.js';
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
@@ -40,28 +41,17 @@ export const init = () => {
             if (
                 !first_name ||
                 !last_name ||
-                !age ||            
+                !age ||
                 !provider
 
             ) {
-                CustomError.createError({
-                    name: 'Error creando el user',
-                    cause: generatorUserError({
-                        first_name,
-                        last_name,
-                        age,
-                        password,
-                        provider
-                    }),
-                    message: 'Ocurrio un error mientras intentamos generar un usuaerio.',
-                    code: EnumsError.BAD_REQUEST_ERROR,
-                });
+                throw new InvalidDataException(`Faltan DATOS USUARIO`);
             }
             const newUser = await UserController.create(req.body, email, password);
             done(null, newUser);
 
         } catch (error) {
-            done(new Error(`ocurrio un errror durante la autenticacion ${error.message} 😒)`));
+            done(error);
         }
     }));
 

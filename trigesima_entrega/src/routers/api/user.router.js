@@ -10,7 +10,7 @@ import { authenticationMiddleware, jwtAuthUrl, authorizarionMiddeleware } from "
 const router = new Router();
 
 
-router.post('/register', passport.authenticate('register', { failureRedirect: '/register' }), async (req, res, next) => {
+router.post('/register', passport.authenticate('register'), async (req, res, next) => {
   try {
     res.send({ status: "success", payload: req.user })
 

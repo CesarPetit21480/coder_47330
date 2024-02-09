@@ -25,8 +25,7 @@ describe('Ecommerce Cesar Petit', () => {
         });
 
         it('Dede responder un 400 cuando falta algun dato de usuario', async function () {
-            const UserMock = {
-                first_name: 'Juan',
+            const UserMock = {                
                 last_name: 'Rojas',
                 email: 'juan1@gmail.com',
                 age: 23,
@@ -38,7 +37,7 @@ describe('Ecommerce Cesar Petit', () => {
             console.log('ok: ', ok);
             console.log('_body: ', _body);
 
-            expect(statusCode).to.be.equal(302);
+            expect(statusCode).to.be.equal(400);
             expect(ok).to.be.not.ok;
 
 

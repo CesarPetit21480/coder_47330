@@ -70,9 +70,12 @@ app.use('/api/products', productRouter);
 
 
 app.use((error, req, res, next) => {
-  const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;
-  req.logger.fatal(message);
-  res.status(500).json({ status: 'error', message });
+  const message = error instanceof Error ?
+    error.message :
+    `Ah ocurrido un error desconocido 😨: ${error.message}`;
+  console.log(message);
+  res.status(error.statusCode || 500).json({ status: 'error', message });
 });
+
 
 export default app;
