@@ -22,12 +22,12 @@ describe('Pruebas de utilidades (Session).', function () {
 
     it('Deberia crear el campo name a partir de first_name y last_name', function () {
         const user = {
-            first_name: 'Ernesto',
-            last_name: 'Rojas',
+            first_name: 'Cesar',
+            last_name: 'Petit',
             role: 'admin',
             email: 'demo@mail.com',
         };
         const result = UserDTO.getUserTokenFrom(user);
-        expect(result.name).to.be.equals('Ernesto Rojas');
+        expect(result.name).to.be.equals('Cesar Petit');
     });
 });
