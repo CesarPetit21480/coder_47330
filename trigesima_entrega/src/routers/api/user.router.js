@@ -6,7 +6,6 @@ import UserController from '../../controllers/user.controller.js'
 import { authenticationMiddleware, jwtAuthUrl, authorizarionMiddeleware } from "../../utils/util.js";
 
 
-
 const router = new Router();
 
 
@@ -19,7 +18,6 @@ router.post('/register', passport.authenticate('register'), async (req, res, nex
     next(error);
   }
 })
-
 
 router.post('/premium/:uid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
@@ -36,7 +34,19 @@ router.post('/premium/:uid', authenticationMiddleware('jwt'), authorizarionMidde
   }
 })
 
+router.get('/:uid', async (req, res, next) => {
+  try {
 
+    const { uid } = req.params;
+    const user = await UserController.getByid(uid);
+
+    res.status(200).json({ payload: user });
+
+
+  } catch (error) {
+    next(error);
+  }
+})
 
 router.post('/login', passport.authenticate('login', { failureRedirect: '/login' }), async (req, res) => {
   try {
