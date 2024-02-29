@@ -1,0 +1,41 @@
+<div>
+        <div class="d-flex justify-content-center mb-5">
+            <h1>🛒 CARRITO DE COMPRAS 🛒</h1>
+            <a title="a Producto" href="/products"><img class="tamImgcarr" src="imagen/volver.png" alt="ir a producto" /></a>
+        </div>
+    
+    {{#each carrito}}
+    <p><strong>numero carrito: </strong>{{this._id}}</p>
+    <div style="border: solid 1px; margin: 2px; padding: 20px">
+        <table role="grid">
+              <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Cantidad</th>             
+                </tr>
+            </thead>
+        
+        <tbody>
+            {{#each this.products}}              
+                <tr>
+                
+                    <td>{{this.product._id}}</td>
+                    <td>{{this.product.title}}</td>
+                    <td>{{this.product.description}}</td>
+                    <td>{{this.product.price}}</td>
+                    <td>{{this.product.category}}</td>
+                    <td>{{this.quantity}}</td>
+                </tr>    
+          
+            {{/each}}
+    </tbody>
+          </table>
+    </div>
+</div>
+<hr>
+{{/each}}
+</div>

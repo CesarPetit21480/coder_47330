@@ -1,0 +1,19 @@
+<div>
+
+  <header>
+    <div class="product">
+       <h2 class="nombre">Bienvenido {{info.user.first_name}} {{info.user.last_name}} </h2> 
+      <a title="salir" href="api/sessions/logout"><img class="tamImg" src="imagen/logOut.png" alt="salir" /></a>
+    {{#if info.isAdministrator}}
+      <img class="tamImg" src="imagen/Admin-icon.png" alt="Admin" srcset="">    
+    {{/if}}
+ 
+    </div>
+
+
+     
+  </header>
+
+
+
+</div>
