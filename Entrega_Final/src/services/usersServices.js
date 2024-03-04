@@ -50,9 +50,9 @@ export default class UsersServicies {
         return user;
     }
 
-    static async updateConnected(pid,fecha) {
-        let user = await userRepository.updateConnected(pid,fecha);
-      
+    static async updateConnected(pid, fecha) {
+        let user = await userRepository.updateConnected(pid, fecha);
+
         return user;
     }
 
@@ -116,6 +116,19 @@ export default class UsersServicies {
         if (!users) {
             throw new NotFoundException(`Users dababase empty`);
         }
+        return users;
+    }
+
+    static async inactivesUsers() {
+        let users = await userRepository.inactivesUsers();
+        if (users.length === 0) {
+            throw new NotFoundException(`Users dababase inactives empty`);
+        }
+
+        
+
+
+
         return users;
     }
 }

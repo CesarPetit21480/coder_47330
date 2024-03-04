@@ -30,6 +30,17 @@ router.get('/all', authenticationMiddleware('jwt'), authorizarionMiddeleware(["A
   }
 })
 
+
+router.get('/delete/userInactivos', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
+
+  try {
+    const users = await UserController.inactivesUsers();
+    res.send({ status: "success", payload: users })
+  } catch (error) {
+    next(error);
+  }
+})
+
 router.post('/premium/:uid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
 

@@ -43,9 +43,19 @@ export default class user {
         let user = await this.dao.updateConnected(pid, fecha);
         return user;
     }
+
     async getAll() {
         const users = await this.dao.getAll();
         if (users) {
+            const userMappings = users.map(user => new UserDTO(user));
+            return userMappings;
+        }
+        return null;
+    }
+
+    async inactivesUsers() {
+        const users = await this.dao.getByInactive();
+        if (users ) {
             const userMappings = users.map(user => new UserDTO(user));
             return userMappings;
         }

@@ -39,11 +39,6 @@ export default class UserDao {
         return users;
     }
 
-
-
-
-
-
     async get_array(parametro) {
         let user;
         try {
@@ -55,16 +50,36 @@ export default class UserDao {
         return user;
     }
 
+    async get_search(parametro) {
+        let user;
+        try {
+            user = await UserModel.find(parametro);
+        } catch (error) {
+            throw new Error(error.message);
+        }
+
+        return user;
+    }
+
+    async getByInactive() {
+
+        const dosDiasAnteriores = new Date();
+        dosDiasAnteriores.setDate(dosDiasAnteriores.getDate() - 1);
+        const formattedDate = dosDiasAnteriores.toISOString();
+        const userPorFecha = await UserModel.find({ connectedTo: { $lt: formattedDate } });
+        return userPorFecha;
+    }
+
 
     async getById(uid) {
         const user = await UserModel.findById(uid);
         return user;
     }
 
+
     async update(id, doc) {
         return UserModel.findByIdAndUpdate(id, { $set: doc })
     }
-
 
     async updateById(uuid, user) {
         const userExists = UserModel.findById(uuid);

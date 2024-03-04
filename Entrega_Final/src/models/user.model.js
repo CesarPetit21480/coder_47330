@@ -10,8 +10,7 @@ const userSchema = new mongoose.Schema({
   provider: String,
   connectedTo: {
     type: Date,
-    default: Date.now,
-    get: v => new Date(v).toLocaleString("es-AR", { timeZone: "America/Argentina/Buenos_Aires" }) // Configuración de la zona horaria de Argentina
+    default: Date.now   
   }
 }, { timestamps: true });
 

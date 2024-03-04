@@ -30,6 +30,16 @@ export default class UserController {
         return users;
     }
 
+    
+    static async inactivesUsers() {
+        const users = await UserServices.inactivesUsers();
+        
+        return users;
+    }
+
+
+
+
     static async updateConnected(pid,fecha) {
         const users = await UserServices.updateConnected(pid,fecha);
         return users;
