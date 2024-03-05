@@ -40,9 +40,9 @@ router.get('/delete/userInactivos', authenticationMiddleware('jwt'), authorizari
 
 
     for (const user of users) {
-      // const token = tokenGenerator(undefined, user.email, "recovery-deleted");      
-      // await emailService.sendDeleteUserEmail(user.email, token);
-      const deletedUser = await  UserController.deleteByid(user.email);
+      const token = tokenGenerator(undefined, user.email, "recovery-deleted");
+      await emailService.sendDeleteUserEmail(user.email, token);
+      const deletedUser = await UserController.deleteByid(user.email);
     }
     res.send({
       status: "success",
