@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { publicRouters } from '../../utils/util.js';
+import { publicRouters, jwtAuthUrl } from '../../utils/util.js';
 
 
 const router = Router();
@@ -11,6 +11,13 @@ router.get('/login', publicRouters, (req, res) => {
 router.get('/register', publicRouters, (req, res) => {
   res.render('register', { title: 'REGISTRO USUARIO 👮‍♂️' });
 });
+
+router.get('/register/:token', async (req, res, next) => {
+  const { token } = req.params
+  const userToken = jwtAuthUrl(token);
+  if (userToken)
+    res.render('register', { title: 'REGISTRO USUARIO 👮‍♂️' });
+})
 
 router.get('/recovery-password', publicRouters, (req, res) => {
   res.render('recovery-password', { title: 'Recuperar Contraseña 🚀' });

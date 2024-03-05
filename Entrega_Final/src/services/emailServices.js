@@ -37,6 +37,24 @@ export default class EmailService {
     );
   }
 
+
+  sendDeleteUserEmail(email, token) {
+
+
+    const url = `http://localhost:8080/register/${token}`
+
+    return this.sendEmail(
+      email,
+      `Cuenta Suspendiada por Inactividad`,
+      `<h1>Su cuenta fue suspendida por inactividad vuelva a generar su usuaio si lo desea: <a href=${url}>${url}</a> </h1>`
+    );
+  }
+
+
+
+
+
+
   static getInstance() {
     if (!EmailService.#instance) {
       EmailService.#instance = new EmailService();

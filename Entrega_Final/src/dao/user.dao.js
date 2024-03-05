@@ -57,7 +57,6 @@ export default class UserDao {
         } catch (error) {
             throw new Error(error.message);
         }
-
         return user;
     }
 
@@ -70,6 +69,15 @@ export default class UserDao {
         return userPorFecha;
     }
 
+    async deleteById(uid) {
+        const user = await UserModel.findById(uid);
+        if (!user) {
+            throw new Exception('No existe el user 😨', 404);
+        }
+        const criteria = { _id: uid };
+        await UserModel.deleteOne(criteria);
+        console.log('User eliminado correctamente 😑');
+    }
 
     async getById(uid) {
         const user = await UserModel.findById(uid);

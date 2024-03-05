@@ -50,6 +50,14 @@ export default class UsersServicies {
         return user;
     }
 
+    static async deleteByid(email) {
+        let user = await userRepository.deletebyId(email);
+        if (!user) {
+            throw new Error('User not exists');
+        }
+        return user;
+    }
+
     static async updateConnected(pid, fecha) {
         let user = await userRepository.updateConnected(pid, fecha);
 
@@ -124,11 +132,6 @@ export default class UsersServicies {
         if (users.length === 0) {
             throw new NotFoundException(`Users dababase inactives empty`);
         }
-
-        
-
-
-
         return users;
     }
 }

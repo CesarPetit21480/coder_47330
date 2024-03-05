@@ -17,6 +17,11 @@ export default class UserController {
         return user;
     }
 
+    static async deleteByid(email) {
+        const user = await UserServices.deleteByid(email);
+        return user;
+    }
+
 
     static async getByLogin(email) {
         const user = await UserServices.getByLogin(email);
@@ -30,23 +35,16 @@ export default class UserController {
         return users;
     }
 
-    
+
     static async inactivesUsers() {
         const users = await UserServices.inactivesUsers();
-        
         return users;
     }
 
-
-
-
-    static async updateConnected(pid,fecha) {
-        const users = await UserServices.updateConnected(pid,fecha);
+    static async updateConnected(pid, fecha) {
+        const users = await UserServices.updateConnected(pid, fecha);
         return users;
     }
-
-
-
     static async getByEmail(email) {
         const user = await UserServices.getByEmail(email);
         return user;
@@ -61,5 +59,5 @@ export default class UserController {
     }
 
 
-    
+
 }

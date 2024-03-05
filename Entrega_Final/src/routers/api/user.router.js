@@ -35,7 +35,22 @@ router.get('/delete/userInactivos', authenticationMiddleware('jwt'), authorizari
 
   try {
     const users = await UserController.inactivesUsers();
-    res.send({ status: "success", payload: users })
+
+    const emailService = EmailService.getInstance();
+
+
+    for (const user of users) {
+      // const token = tokenGenerator(undefined, user.email, "recovery-deleted");      
+      // await emailService.sendDeleteUserEmail(user.email, token);
+      const deletedUser = await  UserController.deleteByid(user.email);
+    }
+    res.send({
+      status: "success",
+      message: 'Usuarios Eliminados',
+      payload: users,
+
+    })
+
   } catch (error) {
     next(error);
   }
@@ -97,8 +112,7 @@ router.post('/recovery-password/email/:email', async (req, res, next) => {
 
   try {
 
-    const token = tokenGenerator(undefined, email, "recovery");
-
+    const token = tokenGenerator(undefined, email, "recovery-deleted");
     const emailService = EmailService.getInstance();
     await emailService.sendRecoveryPasswordEmail(email, token);
     res.status(200).json({ message: 'correo enviado correctamente 😁' });
@@ -115,7 +129,6 @@ router.get('/reset/:token', async (req, res, next) => {
   else {
     res.render('login');
   }
-
 })
 
 router.post('/restablecerPassword/', async (req, res, next) => {

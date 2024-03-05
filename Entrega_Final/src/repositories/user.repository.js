@@ -38,6 +38,13 @@ export default class user {
         return userdb;
     }
 
+    async deletebyId(email) {
+        const user = await this.getbyLogin(email);
+        await this.dao.deleteById(user._id);
+      
+    }
+
+
 
     async updateConnected(pid, fecha) {
         let user = await this.dao.updateConnected(pid, fecha);
@@ -55,7 +62,7 @@ export default class user {
 
     async inactivesUsers() {
         const users = await this.dao.getByInactive();
-        if (users ) {
+        if (users) {
             const userMappings = users.map(user => new UserDTO(user));
             return userMappings;
         }

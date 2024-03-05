@@ -49,7 +49,6 @@ router.get('/:pid', async (req, res, next) => {
   }
 });
 
-
 router.post('/', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
 
   let esOwnerPremiun;
