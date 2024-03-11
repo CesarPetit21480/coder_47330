@@ -1,0 +1,59 @@
+<div>
+
+ <header>
+    <div class="product">
+       <h4 class="nombre">Bienvenido {{info.user.first_name}} {{info.user.last_name}} </h4> 
+      <input type="hidden" id="idUser" value="{{info.user.id}}">      
+      <a title="salir" href="api/user/logout"><img class="tamImg" src="imagen/logOut.png" alt="salir" /></a>
+    {{#if info.isAdministrator}}
+      <img class="tamImg" src="imagen/Admin-icon.png" alt="Admin" srcset="">    
+    {{/if}}
+    </div>  
+     
+  </header>
+    <div class="d-flex justify-content-center mb-5">
+    <h1>USER REGISTRADOS 😊 </h1>    
+    </div>
+
+  
+<table id="main" role="grid">
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>email</th>
+     <th>role</th>
+    <th style="width:10px">Eliminar</th>
+  </tr>
+  {{#each info.payload}}
+    <tr>
+      <td>{{this.first_name}}</td>
+      <td>{{this.last_name}}</td>
+      <td>{{this.email}}</td>
+   <td>
+    <div class="input-group">
+      <select class="form-select" id="selector-{{this._id}}" aria-label="SELECTOR">
+        <option selected>{{this.role}}</option>
+        {{#each ../info.roles}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
+      <button id="envio-role" data-id="{{this._id}}" type="button">Cambiar Role</button>
+    </div>
+  </td>
+      <form id="myForm{{this.id}}"method="post" >   
+        <input type="hidden" name="userId" value="{{this._id}}">       
+        <td >
+              <input id="envio-button" class="bg-transparent d-flex p-2 border border-0 mx-auto " type="image" data-id={{this._id}} name="eliminar" src="/imagen/quitar.png" alt="eliminar">
+                 </td>   
+      </form>
+    </tr>
+  {{/each}}
+  
+</table>
+<p>Página actual: {{info.page}}</p>
+<a href="{{info.prevLink}}" role="button" {{#unless info.hasPrevPage}}disabled{{/unless}} >Anterior</a>
+<a href="{{info.nextLink}}" role="button" {{#unless info.hasNextPage}}disabled{{/unless}} >Siguiente</a>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="/js/user.js"></script>
+
+</div>

@@ -17,14 +17,16 @@ export default class UserDao {
         return user;
     }
 
-    async getAll() {
-        let users;
+    async getAll(opts = {}, criteria = {},) {
+
         try {
-            users = await UserModel.find();
+            const users = await UserModel.paginate(criteria, opts);
+            return users;
+            // users = await UserModel.find();
         } catch (error) {
             throw new Error(error.message);
         }
-        return users;
+
     }
 
     async updateConnected(uid, fecha) {

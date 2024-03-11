@@ -7,6 +7,7 @@ import productRouter from './routers/api/products.router.js';
 import userRouter from './routers/api/user.router.js';
 // import { __dirname } from './utils/util.js';
 import ProductRouterView from './routers/views/products.router.js';
+import UserRouterViewer from './routers/views/user.router.js';
 import cartViewer from './routers/views/cart.router.js';
 import messageViewRouter from './routers/views/message.router.js';
 import CartRoutes from './routers/api/cart.router.js';
@@ -62,6 +63,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use('/', indexRouter)
 app.use('/', ProductRouterView);
+app.use('/', UserRouterViewer);
 app.use('/', cartViewer);
 app.use('/api/user', userRouter);
 app.use('/api', messageViewRouter);

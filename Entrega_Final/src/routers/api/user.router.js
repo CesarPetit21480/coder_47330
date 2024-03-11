@@ -56,11 +56,49 @@ router.get('/delete/userInactivos', authenticationMiddleware('jwt'), authorizari
   }
 })
 
+router.post('/delete', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
+
+  try {
+
+    const { uid } = req.body;
+    const user = await UserController.getByid(uid);
+    const deletedUser = await UserController.deleteByid(user.email);
+
+    res.send({
+      status: "success",
+      message: 'Usuario Eliminado'
+    })
+
+  } catch (error) {
+    next(error);
+  }
+})
+
+router.post('/updateRole', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
+
+  try {
+
+    const { uid, roleNew } = req.body;
+    const user = await UserController.getByid(uid);
+    const deletedUser = await UserController.changesRole(uid, roleNew)
+
+    res.send({
+      status: "success",
+      message: 'Role Actualizado correctamente'
+    })
+
+  } catch (error) {
+    next(error);
+  }
+})
+
+
+
 router.post('/premium/:uid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
 
     const { uid } = req.params;
-    const cambioRoleUser = await UserController.changesRole(uid);
+    const cambioRoleUser = await UserController.changesRole(uid, null);
 
     if (cambioRoleUser)
       res.status(200).json({ message: 'Rol Cambiado Existosamente 😁' });

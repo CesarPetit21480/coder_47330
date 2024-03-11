@@ -19,7 +19,7 @@ export default class UserController {
 
     static async deleteByid(email) {
         const user = await UserServices.deleteByid(email);
-        return user;
+    
     }
 
 
@@ -41,8 +41,8 @@ export default class UserController {
         return users;
     }
 
-    static async updateConnected(pid, fecha) {
-        const users = await UserServices.updateConnected(pid, fecha);
+    static async updateConnected(uid, fecha) {
+        const users = await UserServices.updateConnected(uid, fecha);
         return users;
     }
     static async getByEmail(email) {
@@ -54,8 +54,8 @@ export default class UserController {
         return await UserServices.validatePassword(email, password, recoveryPassword);
     }
 
-    static async changesRole(uid) {
-        return await UserServices.changesRole(uid);
+    static async changesRole(uid,nuevoRole) {
+        return await UserServices.changesRole(uid,nuevoRole);
     }
 
 

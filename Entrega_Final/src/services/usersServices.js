@@ -52,14 +52,10 @@ export default class UsersServicies {
 
     static async deleteByid(email) {
         let user = await userRepository.deletebyId(email);
-        if (!user) {
-            throw new Error('User not exists');
-        }
-        return user;
     }
 
-    static async updateConnected(pid, fecha) {
-        let user = await userRepository.updateConnected(pid, fecha);
+    static async updateConnected(uid, fecha) {
+        let user = await userRepository.updateConnected(uid, fecha);
 
         return user;
     }
@@ -86,22 +82,27 @@ export default class UsersServicies {
             return true;
     }
 
-    static async changesRole(uid) {
+    static async changesRole(uid,nuevoRole) {
 
         let user = await userRepository.getById(uid);
         if (!user) {
             throw new NotFoundException(`User not exists ${uid} 😱`);
         }
 
-        let role = user.role
+        if (!nuevoRole){
+            let role = user.role
 
-        if (role.toUpperCase() === "USER")
-            user.role = "PREMIUM";
-        else if (role.toUpperCase() === "PREMIUM") {
-            user.role = "USER";
+            if (role.toUpperCase() === "USER")
+                user.role = "PREMIUM";
+            else if (role.toUpperCase() === "PREMIUM") {
+                user.role = "USER";
+            }  
+        }
+        else{
+            user.role = nuevoRole;
         }
 
-
+    
         const userActualizado = userRepository.updatebyId(user);
 
         if (userActualizado)

@@ -1,5 +1,6 @@
 import UserLoginDTO from "../dto/user_login.DTO.js";
 import UserDTO from "../dto/userDTO.js";
+import { InvalidDataException } from "../utils/util.js";
 export default class user {
 
     constructor(dao) {
@@ -40,24 +41,27 @@ export default class user {
 
     async deletebyId(email) {
         const user = await this.getbyLogin(email);
+        if (!user)
+            throw new InvalidDataException(`User ${email} does not exist`);
+
         await this.dao.deleteById(user._id);
-      
+
     }
 
 
 
-    async updateConnected(pid, fecha) {
-        let user = await this.dao.updateConnected(pid, fecha);
+    async updateConnected(uid, fecha) {
+        let user = await this.dao.updateConnected(uid, fecha);
         return user;
     }
 
     async getAll() {
-        const users = await this.dao.getAll();
-        if (users) {
-            const userMappings = users.map(user => new UserDTO(user));
-            return userMappings;
-        }
-        return null;
+        return await this.dao.getAll();
+        // if (users) {
+        //     const userMappings = users.map(user => new UserDTO(user));
+        //     return userMappings;
+        // }
+        // return null;
     }
 
     async inactivesUsers() {
