@@ -25,7 +25,9 @@ export default class user {
     }
     async create(data) {
         const user = await this.dao.create(data);
-        return user;
+        let userMapping = new UserDTO(user)
+        userMapping = { ...userMapping, _id: user._id }
+        return userMapping;
     }
     async getById(uid) {
         const user = await this.dao.getById(uid);

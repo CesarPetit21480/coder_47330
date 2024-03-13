@@ -7,11 +7,11 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   age: Number,
   password: String,
-  role: { type: String, default: 'PUBLIC', enum: ['PUBLIC', 'USER', 'ADMIN','PREMIUN'] },
-  provider: String,
+  role: { type: String, default: 'PUBLIC', enum: ['PUBLIC', 'USER', 'ADMIN', 'PREMIUN'] },
+  provider: { type: String, default: 'LOCAL' },
   connectedTo: {
     type: Date,
-    default: Date.now   
+    default: Date.now
   }
 }, { timestamps: true });
 

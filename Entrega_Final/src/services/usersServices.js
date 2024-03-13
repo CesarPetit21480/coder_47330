@@ -82,27 +82,27 @@ export default class UsersServicies {
             return true;
     }
 
-    static async changesRole(uid,nuevoRole) {
+    static async changesRole(uid, nuevoRole) {
 
         let user = await userRepository.getById(uid);
         if (!user) {
             throw new NotFoundException(`User not exists ${uid} 😱`);
         }
 
-        if (!nuevoRole){
+        if (!nuevoRole) {
             let role = user.role
 
             if (role.toUpperCase() === "USER")
                 user.role = "PREMIUM";
             else if (role.toUpperCase() === "PREMIUM") {
                 user.role = "USER";
-            }  
+            }
         }
-        else{
+        else {
             user.role = nuevoRole;
         }
 
-    
+
         const userActualizado = userRepository.updatebyId(user);
 
         if (userActualizado)
@@ -117,7 +117,7 @@ export default class UsersServicies {
         }
         let role = user.role
         if (role.toUpperCase() !== "PREMIUM" && role.toUpperCase() !== "ADMIN")
-            throw new InvalidDataException(`User not is PREMIUN OR ADMIN' 😱`);
+            throw new InvalidDataException(`USER NOT IS PREMIUN OR ADMIN' 😱`);
     }
 
     static async getAll() {

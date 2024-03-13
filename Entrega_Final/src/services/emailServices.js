@@ -51,8 +51,13 @@ export default class EmailService {
   }
 
 
-
-
+  senNotificacionOwnerProductEmail(email, product) {
+    return this.sendEmail(
+      email,
+      `Producto Eliminado Stock`,
+      `<h1>El Producto ${product.title} fue quitado del Stock </a> </h1>`
+    );
+  }
 
 
   static getInstance() {

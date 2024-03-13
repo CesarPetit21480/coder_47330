@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as GitHubStrategy } from "passport-github2";
-import { createHash, isValidPassword, NotFoundException ,InvalidDataException} from '../utils/util.js'
+import { createHash, isValidPassword, NotFoundException, InvalidDataException } from '../utils/util.js'
 
 import UserModel from '../models/user.model.js';
 import { Strategy as LocalStrategy } from "passport-local";
@@ -41,11 +41,10 @@ export const init = () => {
             if (
                 !first_name ||
                 !last_name ||
-                !age ||
-                !provider
-
+                !email ||
+                !age
             ) {
-                throw new InvalidDataException(`Faltan DATOS USUARIO`);
+                throw new InvalidDataException(`FALTAN DATOS USUARIO`);
             }
             const newUser = await UserController.create(req.body, email, password);
             done(null, newUser);
@@ -73,9 +72,9 @@ export const init = () => {
 
             // actualiza fecha conected
 
-            const fecha =  new Date();
+            const fecha = new Date();
 
-            const nuevaFecha =  await UserController.updateConnected(user._id,fecha)
+            const nuevaFecha = await UserController.updateConnected(user._id, fecha)
 
 
             done(null, user);

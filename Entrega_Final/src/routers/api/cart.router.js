@@ -63,7 +63,7 @@ router.get("/id/:id", passport.authenticate('jwt', { session: false }), async (r
         next(res.status(error.statusCode || 500).json({ message: error.message }));
     }
 });
-router.post("/manejador", authenticationMiddleware('jwt'), authorizarionMiddeleware(["USER", "PREMIUM"]), async (req, res, next) => {
+router.post("/manejador", authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN", "PREMIUM"]), async (req, res, next) => {
 
     try {
         const carrito = await CartController.getActive();

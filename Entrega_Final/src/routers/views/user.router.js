@@ -19,18 +19,9 @@ router.get('/users', authenticationMiddleware('jwt'), authorizarionMiddeleware([
         const users = await UserController.getAll()
         let info = buildResponse({ ...users, sort });
         info.payload = info.payload.filter(user => user.email !== req.user.email);
-
-
-
         if (req.user.role === 'ADMIN')
             esAdministrador = true;
-
-
         let rolesArray = ['PUBLIC', 'USER', 'ADMIN', 'PREMIUN'];
-        //const index = rolesArray.indexOf(req.user.role);
-        // if (index !== -1) {
-        //     rolesArray.splice(index, 1);
-        // } 
 
         info = { ...info, title: 'Usuarios Registrados', user: req.user, isAdministrator: esAdministrador, roles: rolesArray }
         res.render('users', { info });
