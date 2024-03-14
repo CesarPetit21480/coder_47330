@@ -11,11 +11,12 @@ router.get("/cart", authenticationMiddleware("jwt"), async (req, res, next) => {
     try {
         const carrito = await CartController.get();
         class reporte {
-            constructor(producto, subtotal,cantidad,precioUnitario) {
+            constructor(producto, subtotal,cantidad,precioUnitario,_id) {
                 this.producto = producto;
                 this.subtotal = subtotal;
                 this.cantidad = cantidad;
                 this.precioUnitario = precioUnitario;
+                this._id = _id
              
             };
         }
@@ -37,7 +38,8 @@ router.get("/cart", authenticationMiddleware("jwt"), async (req, res, next) => {
                 element.product.title,
                 subtotal,
                 element.quantity,
-                element.product.price
+                element.product.price,
+                element.product._id
               
 
             )

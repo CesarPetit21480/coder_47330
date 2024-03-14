@@ -2,7 +2,6 @@
 
 function handleEnviarClick(event) {
 
-  console.log("entre");
 
   event.preventDefault();
 

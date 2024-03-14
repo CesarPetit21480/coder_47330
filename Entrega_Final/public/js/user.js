@@ -3,18 +3,13 @@
 function handleEnviarClick(event) {
 
   event.preventDefault();
-
-  // Obtiene el "id" del botón clicado
+ 
   var id = this.getAttribute("data-id");
-
-  // Crear un objeto con los datos a enviar
+ 
   const data = {
     uid: id
   };
 
-
-
-  // Realizar la solicitud POST utilizando fetch
   fetch('api/user/delete', {
     method: 'POST',
     headers: {
@@ -47,7 +42,6 @@ function handleEnviarClickRole(event) {
 
   event.preventDefault();
 
-  console.log('entre');
   var userId = this.getAttribute('data-id');
   var select = document.getElementById('selector-' + userId);
   var newRoleId = select.value;

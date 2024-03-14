@@ -187,10 +187,10 @@ router.put("/update", passport.authenticate('jwt', { session: false }), async (r
     }
 });
 
-router.delete("/:cid/product/:pid", passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.delete("/delete", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
 
 
-    const { cid, pid } = req.params;
+    const { cid, pid } = req.body;
     try {
 
         const carrito = await CartController.deleteProductCartByid(cid, pid);

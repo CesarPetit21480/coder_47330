@@ -3,12 +3,16 @@
             <h1>🛒 CARRITO DE COMPRAS 🛒</h1>
             <a title="a Producto" href="/products"><img class="tamImgcarr" src="imagen/volver.png" alt="ir a producto" /></a>
         </div>
+        <div class="d-flex justify-content-center mb-5">
+            <h3>Operacion Nro: {{idCarrito}}</h3>
+        </div>
 
- <h3>Numero Carrito: {{idCarrito}}</h3>
+
+
 <div> 
-    <div>        
-         <div>
-            <table class="table table-dark">
+    <div class="d-flex">        
+         <div class="px-5">
+            <table class="table">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Producto</th>
@@ -24,16 +28,15 @@
                             <td>{{this.producto}} </td>
                             <td>{{this.precioUnitario}} $</td>
                             <td>{{this.subtotal}} $</td>
-                            <td>{{this.cantidad}}</td>
-                            <form id="myForm{{this.id}}"method="post" >   
-                            <input type="hidden" name="userId" value="{{idCarrito}}">       
-                            <td >
-                            <input id="envio-pago" class="bg-transparent d-flex p-2 border border-0 mx-auto " type="image" data-id={{this._id}} name="eliminar" src="/imagen/quitar.png" alt="eliminar">
-                            </td>   
-                            </form>                            
-                        </tr>                 
+                            <td>{{this.cantidad}}</td>                            
+                            <form id="formCart{{this.id}}"method="delete" >                         
+                            <input type="hidden" id="productId" value="{{this._id}}">       
+                            <td class="borrar"><input id="quito-carrito" style="background-color: transparent; border:none" type="image" data-id="{{../idCarrito}}" name="enviar" src="/imagen/quitar.png" alt="carga"></td>   
+                            </form>
+                        </tr>                          
                 </tbody>
          {{/each}}
+
                         <tr>
                             <td>Total Factura </td>
                              <td> </td>
@@ -43,12 +46,35 @@
                         </tr>
             </table>
         </div>
+          <div>
+           <form>
+                 <div class="form-group">
+                    <label for="exampleInputEmail1">Email Direccion</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">Ingrese Mail de Facturacion</small>
+                </div>
+                 <div class="form-group">
+                    <label for="domiciluoi">Direccion</label>
+                    <input type="email" class="form-control" id="imputDireccion" aria-describedby="direccionHelp" placeholder="Enter Direccion">
+                    <small id="direccionHelp" class="form-text text-muted">Ingrese su Domicilio</small>
+                </div>
+                <div class="form-group">
+                    <label for="totalImport">Total</label>
+                       <label for="totalImport">{{total}} $</label>
+                   
+                </div>
+                
+                  <button id="pagar">Efectuar Pago</button></a>
+            </form>
+        </div>
        
     </div>
 </div>
 
-  <button id="pagar">Efectuar Pago</button></a>
 
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="/js/cart.js"></script>
 
 </div>
 
