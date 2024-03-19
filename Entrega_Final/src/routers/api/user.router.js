@@ -92,8 +92,6 @@ router.post('/updateRole', authenticationMiddleware('jwt'), authorizarionMiddele
   }
 })
 
-
-
 router.post('/premium/:uid', authenticationMiddleware('jwt'), authorizarionMiddeleware(["ADMIN"]), async (req, res, next) => {
   try {
 

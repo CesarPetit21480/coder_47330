@@ -260,6 +260,18 @@ router.delete("/:cid", passport.authenticate('jwt', { session: false }), async (
 
 })
 
+router.post("/facturar", async (req, res, next) => {
+
+        console.log(req.body);
+    
+    res.json({
+        status: "success",
+        code: 200,
+        message: " Carrito Eliminado correctamente 🚀"
+    });
+   
+});
+
 
 router.post("/:cid/purchase", async (req, res, next) => {
 

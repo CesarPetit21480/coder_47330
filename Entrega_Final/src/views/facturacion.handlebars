@@ -47,27 +47,38 @@
             </table>
         </div>
           <div>
-           <form>
+              <form action="/api/cart/facturar" method="post"></form>
                  <div class="form-group">
                     <label for="exampleInputEmail1">Email Direccion</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
                     <small id="emailHelp" class="form-text text-muted">Ingrese Mail de Facturacion</small>
                 </div>
                  <div class="form-group">
-                    <label for="domiciluoi">Direccion</label>
-                    <input type="email" class="form-control" id="imputDireccion" aria-describedby="direccionHelp" placeholder="Enter Direccion">
+                    <label for="domicilio">Direccion</label>
+                    <input type="text" class="form-control" id="direccion" aria-describedby="direccionHelp" placeholder="Ingrese Direccion" required>
                     <small id="direccionHelp" class="form-text text-muted">Ingrese su Domicilio</small>
                 </div>
-                <div class="form-group">
-                    <label for="totalImport">Total</label>
-                       <label for="totalImport">{{total}} $</label>
-                   
+               <div class="form-group">
+                    <label for="envio">Costo Envio</label>
+                    <input type="text" class="form-control" readonly id="costoEnvio" aria-describedby="cosotEnvioHelp" placeholder="Costo de Envio" value="0"  oninput="sumar()">
+                    <small id="envioHelp" class="form-text text-muted">Costo de Envio</small>
+                    <button onclick="calcularCostoEnvio()">Calcular Costo Envio</button>
                 </div>
-                
-                  <button id="pagar">Efectuar Pago</button></a>
+                 <div class="form-group">
+                    <label for="subtotal">Sub Total</label>
+                    <input type="text" class="form-control" id="subtotal" value="{{total}}"  aria-describedby="direccionHelp" placeholder="subtotal" readonly oninput="sumar()">
+                    <small id="subtotal" class="form-text text-muted">subtotal Operacion</small>
+                </div>
+
+                 <div class="form-group">
+                    <label for="total">Total Factura</label>
+                    <input type="text" class="form-control" id="total" aria-describedby="totalHelp" placeholder="Total Operacion">
+                    <small id="totalHelp" class="form-text text-muted">Total Operacion</small>
+                </div>
+                     {{!-- <button onclick="facturar()">Facturar</button> --}}
+                <button type="button" onclick="facturar()">Facturar</button>
             </form>
-        </div>
-       
+        </div>       
     </div>
 </div>
 
