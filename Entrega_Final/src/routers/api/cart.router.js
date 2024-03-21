@@ -257,19 +257,45 @@ router.delete("/:cid", passport.authenticate('jwt', { session: false }), async (
     } catch (error) {
         next(error)
     }
-
 })
 
 router.post("/facturar", async (req, res, next) => {
 
-        console.log(req.body);
-    
-    res.json({
-        status: "success",
-        code: 200,
-        message: " Carrito Eliminado correctamente 🚀"
-    });
-   
+
+    try {
+        const { email, direccion, total, id_carrito } = req.body;
+        let montoTotal = 0;
+        const carrito = await CartController.get();
+        const productos = carrito[0].products;
+        let arrayItem = [];
+        class producto {
+            constructor(producto, subtotal, cantidad, precioUnitario, _id) {
+                this.producto = producto;
+                this.subtotal = subtotal;
+                this.cantidad = cantidad;
+                this.precioUnitario = precioUnitario;
+                this._id = _id
+
+            };
+        }
+
+        const factura = {
+            fecha: new Date(),
+            email: email,
+            direccion: direccion,
+            total: total,
+            products: productos
+        };
+        await CartController.facturar(factura);
+        await CartController.deleteCart(id_carrito)
+        res.json({
+            status: "success",
+            code: 200,
+            message: "Facturacion Exitosa 🚀"
+        });
+    } catch (error) {
+        next(error);
+    }
 });
 
 

@@ -10,14 +10,18 @@ router.get("/cart", authenticationMiddleware("jwt"), async (req, res, next) => {
 
     try {
         const carrito = await CartController.get();
+
+        if (carrito.length === 0) {
+            return res.status(400).json({ message: "no existe carrito activo", code: 400 });
+        }
         class reporte {
-            constructor(producto, subtotal,cantidad,precioUnitario,_id) {
+            constructor(producto, subtotal, cantidad, precioUnitario, _id) {
                 this.producto = producto;
                 this.subtotal = subtotal;
                 this.cantidad = cantidad;
                 this.precioUnitario = precioUnitario;
                 this._id = _id
-             
+
             };
         }
 
@@ -40,15 +44,13 @@ router.get("/cart", authenticationMiddleware("jwt"), async (req, res, next) => {
                 element.quantity,
                 element.product.price,
                 element.product._id
-              
+
 
             )
             arrayItem.push(item);
         });
+        res.render('facturacion', { idCarrito: carrito[0]._id, facturacion: arrayItem, total: montoTotal, totalItems: totalProductos });
 
-
-
-        res.render('facturacion', { idCarrito: carrito[0]._id, facturacion: arrayItem, total: montoTotal, totalItems:totalProductos });
     } catch (error) {
         next(res.status(error.statusCode || 500).json({ message: error.message }));
     }

@@ -28,6 +28,11 @@ export default class Cart {
         return cart;
     }
 
+    async facturar(data) {
+        const factura = await this.dao.facturar(data);
+        return factura;
+    }
+
     async updateById(sid, pid, quantity) {
         const cart = await this.dao.updateById(sid, pid, quantity);   
         return cart;

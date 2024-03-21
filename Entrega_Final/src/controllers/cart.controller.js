@@ -27,6 +27,11 @@ export default class CartController {
         return carrito;
     }
 
+    static async facturar(data) {
+        const factura = await cartServices.facturar(data);
+        return factura;
+    }
+
 
     static async deleteProductCartByid(cid,pid) {
         const carrito = await cartServices.deleteProductCartByid(cid, pid);

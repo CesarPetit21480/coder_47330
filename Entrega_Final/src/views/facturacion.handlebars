@@ -47,10 +47,10 @@
             </table>
         </div>
           <div>
-              <form action="/api/cart/facturar" method="post"></form>
+            
                  <div class="form-group">
                     <label for="exampleInputEmail1">Email Direccion</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
                     <small id="emailHelp" class="form-text text-muted">Ingrese Mail de Facturacion</small>
                 </div>
                  <div class="form-group">
@@ -76,8 +76,9 @@
                     <small id="totalHelp" class="form-text text-muted">Total Operacion</small>
                 </div>
                      {{!-- <button onclick="facturar()">Facturar</button> --}}
+                     <input type="hidden" id="idCarrito" value="{{idCarrito}}">       
                 <button type="button" onclick="facturar()">Facturar</button>
-            </form>
+          
         </div>       
     </div>
 </div>

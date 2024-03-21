@@ -1,4 +1,5 @@
 import cartModel from "../models/cart.model.js";
+import facturacionModel from "../models/facturacion.model.js";
 import { Exception } from '../utils/util.js';
 import mongoose from "mongoose";
 import { logMessage } from '../config/logger.js';
@@ -37,6 +38,13 @@ export default class CartDao {
     async create(data) {
         const message = await cartModel.create(data);
         logMessage("Cart creado correctamente 🚀🚀", "info");
+        return message;
+    }
+
+
+    async facturar(data) {
+        const message = await facturacionModel.create(data);
+        logMessage("Facturar creado Correctamente 🚀🚀", "info");
         return message;
     }
 

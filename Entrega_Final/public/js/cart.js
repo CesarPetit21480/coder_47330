@@ -1,5 +1,3 @@
-
-
 function quitarDelCarrito(event) {
 
     event.preventDefault();
@@ -48,7 +46,10 @@ for (var i = 0; i < quitoCarrito.length; i++) {
 
 
 function sumar() {
-   
+
+
+    
+
     let costoEnv = parseFloat(document.getElementById("costoEnvio").value);
     let subtotal = parseFloat(document.getElementById("subtotal").value);
     let total = subtotal + costoEnv;
@@ -61,52 +62,68 @@ function sumar() {
 
 
 function calcularCostoEnvio() {
-    event.preventDefault();
+
+
     let costoEnv = Math.floor(Math.random() * 5000) + 1;
     document.getElementById("costoEnvio").value = costoEnv;
     sumar();
 }
-function facturar(event) {
+function facturar() {
 
-   
 
 
     const b_total = document.getElementById("total").value;
     const b_direccion = document.getElementById("direccion").value;
     const b_email = document.getElementById("email").value;
+    const b_idCarrito = document.getElementById("idCarrito").value;
+    const b_costoEnvio = (document.getElementById("costoEnvio").value);
+    const envioNumber = Number(b_costoEnvio);
 
-  
-alert(b_total);
 
-    const data = {
-        total: b_total,
-        direccion: b_direccion,
-        email: b_email
-    };
 
-    fetch('/api/cart/facturar', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            if (response.ok) {      
-                Swal.fire({
-                    text: "Se Efectuo la compra Satifactoriamente 😊",
-                    toast: true,
-                    position: 'top-right'
-                });
-                setTimeout(function () {
-                    window.location.href = "http://localhost:8080/products";
-                    //location.reload(); // Recargar la página
-                }, 1000);
-            } else {
-                console.error("Error al enviar el mensaje");
-            }
-        })
-        .catch(error => {
-            console.error("Error en la solicitud:", error);
+    if (b_direccion.trim() === '' || b_email.trim() === '' || envioNumber === 0 ) {
+        Swal.fire({
+            text: "Falta campo Dirreccion, mail o falta calcular costo envio 😊",
+            toast: true,
+            position: 'top-right'
         });
+    }
+    else {
+
+
+        const data = {
+            total: b_total,
+            direccion: b_direccion,
+            email: b_email,
+            id_carrito: b_idCarrito
+        };
+
+        fetch('/api/cart/facturar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        text: "Se Efectuo la compra Satifactoriamente 😊",
+                        toast: true,
+                        position: 'top-right'
+                    });
+                    setTimeout(function () {
+                        window.location.href = "http://localhost:8080/products";
+                        //location.reload(); // Recargar la página
+                    }, 1000);
+                } else {
+                    console.error("Error al enviar el mensaje");
+                }
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+            });
+
+    }
+
 }
